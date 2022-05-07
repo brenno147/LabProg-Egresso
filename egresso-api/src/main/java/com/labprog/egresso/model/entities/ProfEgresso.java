@@ -1,0 +1,32 @@
+package com.labprog.egresso.model.entities;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
+import java.time.LocalDate;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@Entity
+@Table(name = "prof_egresso")
+public class ProfEgresso {
+
+    @Id
+    @GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
+    @Column(name = "id_prof_egresso")
+    private Long idProfEgresso;
+
+    @Column(name = "empresa")
+    private String empresa;
+
+    @Column(name = "descricao")
+    private String descricao;
+
+    @Column(name = "data_registro")
+    private LocalDate dataRegistro;
+}
