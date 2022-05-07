@@ -21,6 +21,18 @@ public class ProfEgresso {
     @Column(name = "id_prof_egresso")
     private Long idProfEgresso;
 
+    @ManyToOne
+    @JoinColumn(name = "egresso_id")
+    private Egresso egresso;
+
+    @ManyToOne
+    @JoinColumn(name = "cargo_id")
+    private Cargo cargo;
+
+    @ManyToOne
+    @JoinColumn(name = "faixa_salario_id")
+    private FaixaSalario faixaSalario;
+
     @Column(name = "empresa")
     private String empresa;
 
