@@ -2,10 +2,7 @@ package com.labprog.egresso.model.entities;
 
 import java.time.LocalDate;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -23,6 +20,10 @@ public class Depoimento {
   @Id
   @GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
   private int id_depoimento;
+
+  @ManyToOne
+  @JoinColumn(name = "egresso_id")
+  private Egresso egresso;
 
   private String texto;
 

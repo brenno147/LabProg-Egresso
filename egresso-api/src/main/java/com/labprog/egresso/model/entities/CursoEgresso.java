@@ -2,11 +2,7 @@ package com.labprog.egresso.model.entities;
 
 import java.time.LocalDate;
 
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -21,14 +17,17 @@ import lombok.NoArgsConstructor;
 @Table(name = "curso_egresso")
 public class CursoEgresso {
 
+
   @EmbeddedId
   CursoEgressoPK id;
 
   @ManyToOne
-  @JoinColumn(name="egresso_id")
+  @MapsId("egresso_id")
+  @JoinColumn(name="id_egresso")
   private Egresso egresso;
 
   @ManyToOne
+  @MapsId("curso_id")
   @JoinColumn(name="curso_id")
   private Curso curso;
 

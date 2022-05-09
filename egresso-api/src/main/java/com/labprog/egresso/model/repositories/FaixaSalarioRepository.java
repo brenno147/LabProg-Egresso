@@ -5,5 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface FaixaSalarioRepositorie extends JpaRepository<FaixaSalario, Long> {
+public interface FaixaSalarioRepository extends JpaRepository<FaixaSalario, Long> {
 }

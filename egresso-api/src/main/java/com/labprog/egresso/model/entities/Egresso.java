@@ -32,6 +32,6 @@ public class Egresso {
     @Column(name = "resumo")
     private String resumo;
 
-    @Column(name = "foto")
+    @Column(name = "url_foto")
     private String urlFoto;
 }

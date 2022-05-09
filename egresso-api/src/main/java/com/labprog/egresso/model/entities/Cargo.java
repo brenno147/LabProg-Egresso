@@ -13,19 +13,22 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "Cargo")
+@Table(name = "cargo")
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 
 public class Cargo {
+
     @Id
     @Column(name="id_cargo")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Column(name="nome")
     private String nome;
+
     @Column(name="descricao")
     private String descricao;
 }
