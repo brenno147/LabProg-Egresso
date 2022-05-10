@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.util.Optional;
+
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 public class EgressoRepositoryTest {
@@ -35,4 +37,12 @@ public class EgressoRepositoryTest {
         Assertions.assertEquals(salvo.getResumo(), egresso.getResumo());
         Assertions.assertEquals(salvo.getUrlFoto(), egresso.getUrlFoto());
     }
+
+    @Test
+    public void testeBuscarEgressoPorId() {
+        Optional<Egresso> egresso= repository.findById(1L);
+        
+        Assertions.assertTrue(egresso.isPresent());
+    }
+
 }
