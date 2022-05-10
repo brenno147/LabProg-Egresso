@@ -22,6 +22,6 @@ public class CursoEgressoPK implements Serializable {
   int egresso_id;
 
   @Column(name="curso_id")
-  int curso;
+  int curso_id;
   
 }

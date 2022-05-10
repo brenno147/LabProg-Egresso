@@ -1,10 +1,12 @@
 package com.labprog.egresso.model.repositories;
 
 
+import com.labprog.egresso.model.entities.ContatoEgresso;
+import com.labprog.egresso.model.entities.ContatoEgressoPK;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ContatoEgressoRepository extends JpaRepository<ContatoEgressoRepository, Long>{
+public interface ContatoEgressoRepository extends JpaRepository<ContatoEgresso, ContatoEgressoPK>{
 
 }
