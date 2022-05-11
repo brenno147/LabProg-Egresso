@@ -2,50 +2,52 @@ package com.labprog.egresso.model.repositories;
 
 import java.util.List;
 
+import com.labprog.egresso.model.entities.Contato;
 import com.labprog.egresso.model.entities.ContatoEgresso;
 
 
+import com.labprog.egresso.model.entities.ContatoEgressoPK;
+import com.labprog.egresso.model.entities.Egresso;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import lombok.extern.log4j.Log4j2;
 
-
-
+@ActiveProfiles("test")
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
-@Log4j2
 public class ContatoEgressoRepositoryTest {
     
     @Autowired
-    ContatoEgressoRepository repository;
-    
+    private ContatoEgressoRepository contatoEgressoRepository;
+
+    @Autowired
+    private EgressoRepository egressoRepository;
+
+    @Autowired
+    private ContatoRepository contatoRepository;
 
     @Test
-    public void deveRetornarTodasAsOcorrenciasDeContatoEgresso(){
+    public void deveSalvarContatoEgresso(){
 
-        // Ação receber todos as ocorrencias da tabela
-        List<ContatoEgresso> contEgres = repository.findAll();
+        Egresso egressoSalvo = egressoRepository.save(Egresso.builder().nome("Abc").email("a@a").cpf("1234567").build());
+        Contato contatoSalvo = contatoRepository.save(Contato.builder().nome("Celular").url_logo("1234567").build());
 
-        log.info(contEgres);
+        ContatoEgresso contato = ContatoEgresso.builder()
+                .id(ContatoEgressoPK.builder()
+                        .contato_id(contatoSalvo.getId())
+                        .egresso_id(egressoSalvo.getIdEgresso())
+                        .build())
+                .contato(contatoSalvo)
+                .egresso(egressoSalvo)
+                .build();
 
-        // Verificação: Saber se o tamanho da lista retornada é maior que 0
-        Assertions.assertTrue(contEgres.size()>0);
-    }
+        ContatoEgresso salvo = contatoEgressoRepository.save(contato);
 
-    @Test
-    public void deveDeletarTodosOsContatosDeUmEgresso(){
-
-        // Ação deletar todas as ocorrencias da tabela 
-        repository.deleteAll();
-
-        //Verificação: Se a quantidade de linhas é igual a 0
-        log.info(repository.count());
-
-        Assertions.assertTrue(repository.count()==0);
+        Assertions.assertNotNull(salvo);
     }
 }

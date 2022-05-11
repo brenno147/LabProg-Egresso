@@ -17,8 +17,8 @@ import java.io.Serializable;
 public class ContatoEgressoPK implements Serializable {
 
     @Column(name="egresso_id")
-    private Integer egresso_id;
+    private Long egresso_id;
 
     @Column(name="contato_id")
-    private Integer contato_id;
+    private Long contato_id;
 }
