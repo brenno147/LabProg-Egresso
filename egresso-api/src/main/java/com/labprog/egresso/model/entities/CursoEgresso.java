@@ -31,7 +31,9 @@ public class CursoEgresso {
   @JoinColumn(name="curso_id")
   private Curso curso;
 
+  @Column(name = "data_inicio")
   private LocalDate data_inicio;
 
+  @Column(name = "data_conclusao")
   private LocalDate data_conclusao;
 }

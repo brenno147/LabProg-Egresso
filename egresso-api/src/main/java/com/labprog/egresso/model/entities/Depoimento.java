@@ -19,14 +19,16 @@ public class Depoimento {
   
   @Id
   @GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
-  private int id_depoimento;
+  private Long id_depoimento;
 
   @ManyToOne
   @JoinColumn(name = "egresso_id")
   private Egresso egresso;
 
+  @Column(name = "texto")
   private String texto;
 
+  @Column(name = "data")
   private LocalDate data;
   
 }

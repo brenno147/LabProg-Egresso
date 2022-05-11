@@ -1,5 +1,6 @@
 package com.labprog.egresso.model.entities;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -20,10 +21,13 @@ public class Curso {
   
   @Id
   @GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
-  private int id_curso;
+  @Column(name = "id_curso")
+  private Long id_curso;
 
+  @Column(name = "nome")
   private String nome;
 
+  @Column(name = "nivel")
   private String nivel;
 
 }
