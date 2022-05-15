@@ -53,22 +53,26 @@ public class CursoEgressoRepositoryTest {
     Curso cursoSalvo = cursoRepository.save(curso);
 
     CursoEgressoPK cursoEgressoPk = CursoEgressoPK.builder()
-        .egresso_id(egressoSalvo.getIdEgresso())
-        .curso_id(cursoSalvo.getId_curso())
+        .egresso_id(egresso.getIdEgresso())
+        .curso_id(curso.getId_curso())
         .build();
   
 
     CursoEgresso cursoEgresso = CursoEgresso.builder()
           .id(cursoEgressoPk)
-          .curso(cursoSalvo)
-          .egresso(egressoSalvo)
+          .curso(curso)
+          .egresso(egresso)
           .data_inicio(LocalDate.now())
           .data_conclusao(LocalDate.now())
           .build();
   
     CursoEgresso salvo = cursoEgressoRepository.save(cursoEgresso);
 
-    Assertions.assertEquals(salvo, cursoEgresso);
+    Assertions.assertNotNull(salvo);
+    Assertions.assertEquals(cursoEgresso.getId().getCurso_id(),salvo.getId().getCurso_id());
+    Assertions.assertEquals(cursoEgresso.getId().getEgresso_id(),salvo.getId().getEgresso_id());
+    Assertions.assertEquals(cursoEgresso.getData_conclusao(), salvo.getData_conclusao());
+    Assertions.assertEquals(cursoEgresso.getData_inicio(), salvo.getData_inicio());
 
   }
 

@@ -45,5 +45,7 @@ public class Egresso {
     private Set<Contato> contatos;
 
     @OneToMany(mappedBy = "egresso")
-    private List<CursoEgresso> datas_inicio_fim_cursos = new ArrayList<>();
+    private Set<CursoEgresso> datasCursos;
+
+
 }

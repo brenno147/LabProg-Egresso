@@ -32,6 +32,6 @@ public class Curso {
   private String nivel;
 
   @OneToMany(mappedBy = "curso")
-  private List<CursoEgresso> datas_inicio_fim_egressos = new ArrayList<>();
+  private Set<CursoEgresso> datas_inicio_fim_egressos;
 
 }
