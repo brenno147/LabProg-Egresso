@@ -1,7 +1,8 @@
 package com.labprog.egresso.model.repositories;
 
-import com.labprog.egresso.model.entities.ContatoEgresso;
-import com.labprog.egresso.model.entities.ContatoEgressoPK;
+import com.labprog.egresso.model.entities.Contato;
+import com.labprog.egresso.model.entities.Curso;
+import com.labprog.egresso.model.entities.CursoEgresso;
 import com.labprog.egresso.model.entities.Egresso;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -11,8 +12,12 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+
 @ActiveProfiles("test")
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
@@ -20,6 +25,12 @@ public class EgressoRepositoryTest {
 
     @Autowired
     private EgressoRepository repository;
+
+    @Autowired
+    private ContatoRepository contatoRepository;
+
+    @Autowired
+    private CursoRepository cursoRepository;
 
     @Test
     public void testeSalvarEgresso() {
@@ -40,6 +51,32 @@ public class EgressoRepositoryTest {
         Assertions.assertEquals(salvo.getCpf(), egresso.getCpf());
         Assertions.assertEquals(salvo.getResumo(), egresso.getResumo());
         Assertions.assertEquals(salvo.getUrlFoto(), egresso.getUrlFoto());
+    }
+
+    @Test
+    public void testeSalvarEgressoContato() {
+
+        Contato contatoSalvo = contatoRepository.save(Contato.builder().nome("Alexandre").url_logo("urlFoto").build());
+
+        Egresso egresso = Egresso.builder()
+                .nome("Egresso")
+                .email("teste@teste")
+                .cpf("123456789")
+                .resumo("Resumo")
+                .urlFoto("UrlFoto")
+                .contatos(Set.of(contatoSalvo))
+                .build();
+
+        Egresso salvo = repository.save(egresso);
+
+        Assertions.assertNotNull(salvo);
+        Assertions.assertEquals(salvo.getIdEgresso(), egresso.getIdEgresso());
+        Assertions.assertEquals(salvo.getNome(), egresso.getNome());
+        Assertions.assertEquals(salvo.getEmail(), egresso.getEmail());
+        Assertions.assertEquals(salvo.getCpf(), egresso.getCpf());
+        Assertions.assertEquals(salvo.getResumo(), egresso.getResumo());
+        Assertions.assertEquals(salvo.getUrlFoto(), egresso.getUrlFoto());
+        Assertions.assertEquals(salvo.getContatos(), egresso.getContatos());
     }
 
     @Test

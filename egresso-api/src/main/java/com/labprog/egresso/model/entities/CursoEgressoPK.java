@@ -19,9 +19,9 @@ import lombok.NoArgsConstructor;
 public class CursoEgressoPK implements Serializable {
   
   @Column(name="egresso_id")
-  int egresso_id;
+  Long egresso_id;
 
   @Column(name="curso_id")
-  int curso_id;
+  Long curso_id;
   
 }

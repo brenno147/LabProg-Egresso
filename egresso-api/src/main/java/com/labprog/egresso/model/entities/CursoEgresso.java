@@ -21,17 +21,19 @@ public class CursoEgresso {
   @EmbeddedId
   CursoEgressoPK id;
 
-  @ManyToOne
+  @ManyToOne(fetch = FetchType.LAZY)
   @MapsId("egresso_id")
   @JoinColumn(name="id_egresso")
   private Egresso egresso;
 
-  @ManyToOne
+  @ManyToOne(fetch = FetchType.LAZY)
   @MapsId("curso_id")
   @JoinColumn(name="curso_id")
   private Curso curso;
 
+  @Column(name = "data_inicio")
   private LocalDate data_inicio;
 
+  @Column(name = "data_conclusao")
   private LocalDate data_conclusao;
 }
