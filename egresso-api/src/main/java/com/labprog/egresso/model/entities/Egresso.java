@@ -44,7 +44,10 @@ public class Egresso {
             inverseJoinColumns = @JoinColumn(name = "contato_id"))
     private Set<Contato> contatos;
 
-    @OneToMany(mappedBy = "egresso")
+    @OneToMany(mappedBy = "egresso", cascade = CascadeType.ALL)
+    private List<ProfEgresso> profissao;
+
+    @OneToMany(mappedBy = "egresso", cascade = CascadeType.ALL)
     private Set<CursoEgresso> datasCursos;
 
 
