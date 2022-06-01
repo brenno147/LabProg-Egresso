@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
-
+import com.labprog.egresso.model.dto.CargoNumEgresso;
 import com.labprog.egresso.model.entities.Cargo;
 import com.labprog.egresso.model.entities.Egresso;
 import com.labprog.egresso.model.entities.FaixaSalario;
@@ -113,7 +113,7 @@ public class CargoServiceTest {
     }
 
     @Test
-    // Quantidade de egressos em um cargo
+    // Quantidade de egressos em cada cargo
     public void deveRetornarAQuantidadeDeEgressosEmUmCargo(){
 
         // Cenário: Criar cargos, egressos, faixa_salario, profEgresso 
@@ -201,18 +201,18 @@ public class CargoServiceTest {
         ProfEgresso pfeg_salvo2 = pfEgreRep.save(profEgresso2);
         ProfEgresso pfeg_salvo3 = pfEgreRep.save(profEgresso3);
 
-        // Ação: Saber Quantos egressos estão no cargo 1
-        int quant_egre_cargo = service.quantEgressoPorCargo(c_salvo2);
+        // Ação: Saber quantos estão em cada cargo
+        List<CargoNumEgresso> quant_egre_cargo = service.quantEgressoPorCargo();
         
 
-        // Verificação: verificar se tem alguém no cargo 1
+        // Verificação: verificar se retornou a lista de cargos com a quantidade de egressos
         Assertions.assertNotNull(quant_egre_cargo);
     }
 
     
     @Test
-    // Quais egressos estão em um cargo
-    public void deveRetornarQuaisEgressosEstaoEmUmCargo(){
+    // Consultar por egresso os cargos que ele está
+    public void deveRetornarQuaisCargosUmEgressoEsta(){
 
         // Cenário: Criar cargos, egressos, faixa_salario, profEgresso 
         Cargo cargo1 = Cargo.builder()
@@ -299,11 +299,10 @@ public class CargoServiceTest {
         ProfEgresso pfeg_salvo2 = pfEgreRep.save(profEgresso2);
         ProfEgresso pfeg_salvo3 = pfEgreRep.save(profEgresso3);
 
-        // Ação: Saber quais egressos estão no cargo 1
-        List<Egresso> quant_egre_cargo = service.consultarCargoPorEgresso(c_salvo1);
-        
+        // Ação: Saber quais cargos o egresso 1 está
+        List<Cargo> quant_egre_cargo = service.consultarCargoPorEgresso(egresso1);
 
-        // Verificação: verificar se tem alguém no cargo 1
+        // Verificação: verificar se o egresso possui algum cargo
         Assertions.assertTrue(quant_egre_cargo.size() > 0);
     }
 

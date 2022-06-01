@@ -19,7 +19,7 @@ public class EgressoService {
 
 
     public Egresso salvar(Egresso egresso){
-
+        return salvar(egresso);
     }
 
     public Egresso findById(Long id) {
