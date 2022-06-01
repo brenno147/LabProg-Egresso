@@ -72,6 +72,5 @@ public class CargoService {
             throw new RegraNegocioRunTime("O nome do cargo não está preenchido corretamente");
         if((cargo.getDescricao() == null) || (cargo.getDescricao().equals(' ')))
             throw new RegraNegocioRunTime("A descrição do cargo não está preenchida corretamente");
-
     }
 }
