@@ -12,14 +12,11 @@ import org.springframework.stereotype.Service;
 public class EgressoService {
     @Autowired
     EgressoRepository egressoRepository;
-    @Autowired
-    CursoEgressoRepository cursoEgressoRepository;
-    @Autowired
-    ProfEgressoRepository profEgressoRepository;
+
 
 
     public Egresso salvar(Egresso egresso){
-        return salvar(egresso);
+        return egressoRepository.save(egresso);
     }
 
     public Egresso findById(Long id) {

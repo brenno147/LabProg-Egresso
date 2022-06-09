@@ -7,9 +7,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 
 @Data
@@ -30,8 +27,5 @@ public class Curso {
 
   @Column(name = "nivel")
   private String nivel;
-
-  @OneToMany(mappedBy = "curso")
-  private Set<CursoEgresso> datas_inicio_fim_egressos;
 
 }

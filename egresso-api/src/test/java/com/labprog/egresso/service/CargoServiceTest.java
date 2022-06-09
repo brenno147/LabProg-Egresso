@@ -207,6 +207,9 @@ public class CargoServiceTest {
 
         // Verificação: verificar se retornou a lista de cargos com a quantidade de egressos
         Assertions.assertNotNull(quant_egre_cargo);
+        Assertions.assertTrue(quant_egre_cargo.size()==2);
+        Assertions.assertTrue(quant_egre_cargo.get(0).getNumEgresso()==2);
+        Assertions.assertTrue(quant_egre_cargo.get(1).getNumEgresso()==1);
     }
 
     

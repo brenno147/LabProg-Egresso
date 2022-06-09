@@ -50,5 +50,15 @@ public class Egresso {
     @OneToMany(mappedBy = "egresso", cascade = CascadeType.ALL)
     private Set<CursoEgresso> datasCursos;
 
+    public void addProfissao(ProfEgresso profissao){
+        profissao.setEgresso(this);
+        this.getProfissao().add(profissao);
+    }
+
+
+    public void addCurso(CursoEgresso cursoEgresso){
+        cursoEgresso.setEgresso(this);
+        this.getDatasCursos().add(cursoEgresso);
+    }
 
 }
