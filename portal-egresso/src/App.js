@@ -1,23 +1,14 @@
-import logo from './logo.svg';
-import './App.css';
+import CardEgresso from "./components/CardEgresso";
+import DepoimentosCarousel from "./components/DepoimentosCarousel";
+import Charts from "./components/Charts";
+import "./dependencies";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <CardEgresso />
+      <DepoimentosCarousel />
+      <Charts />
     </div>
   );
 }
