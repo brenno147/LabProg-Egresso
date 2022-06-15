@@ -56,5 +56,9 @@ const data = {
 };
 
 export default function Charts() {
-  return <Bar options={options} data={data} />;
+  return (
+    <div className="w-75">
+      <Bar options={options} data={data} />
+    </div>
+  );
 }

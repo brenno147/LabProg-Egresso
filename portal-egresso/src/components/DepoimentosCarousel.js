@@ -5,7 +5,7 @@ export default function DepoimentosCarousel() {
   return (
     <div
       id="carouselExampleControls"
-      className="carousel slide"
+      className="carousel slide w-75"
       data-ride="carousel"
     >
       <div className="carousel-inner">
