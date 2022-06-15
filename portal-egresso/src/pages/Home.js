@@ -17,6 +17,7 @@ export default function Home() {
   return (
     <div>
       <Header />
+
       <div
         className="d-flex flex-column align-items-center pt-3 pb-5"
         style={{ backgroundColor: "rgba(189, 205, 236, 1)" }}
@@ -67,6 +68,7 @@ export default function Home() {
           Ver mais
         </button>
       </div>
+
       <Footer />
     </div>
   );
