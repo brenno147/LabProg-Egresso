@@ -1,10 +1,10 @@
 import React from "react";
-import Header from "./../components/Header";
+// import Header from "./../components/Header";
 import CardEgresso from "./../components/CardEgresso";
 import DepoimentosCarousel from "./../components/DepoimentosCarousel";
 import Charts from "./../components/Charts";
 import Footer from "./../components/Footer";
-
+import NavbarComponent from "../components/NavbarComponent";
 export default function Home() {
   const styles = {
     button: {
@@ -16,8 +16,7 @@ export default function Home() {
 
   return (
     <div>
-      <Header />
-
+      <NavbarComponent />
       <div
         className="d-flex flex-column align-items-center pt-3 pb-5"
         style={{ backgroundColor: "rgba(189, 205, 236, 1)" }}

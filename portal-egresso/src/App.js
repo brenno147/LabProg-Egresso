@@ -8,8 +8,8 @@ import Cadastro from "./pages/Cadastro";
 function App() {
   return (
     <div>
-      {/* <Home /> */}
-      <EgressoModal />
+      <Home />
+      {/* <EgressoModal /> */}
     </div>
     // <Cadastro/>
   );
