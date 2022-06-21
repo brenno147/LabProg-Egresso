@@ -1,5 +1,5 @@
 import React from "react";
-import logo from '../images/logo_size.jpg'
+import logo from '../imgs/logo_size.jpg'
 function LogoComponent(){
     return(
         <div className="logo">

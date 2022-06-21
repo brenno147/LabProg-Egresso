@@ -2,7 +2,7 @@ import React from 'react';
 import {Navbar,Nav,Container} from 'react-bootstrap';
 import ButtonComponent from './ButtonComponent';
 import logo from '../imgs/log.png';
-
+import '../css/style.css';
 
 function NavbarComponent(){
     return(
