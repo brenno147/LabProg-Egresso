@@ -21,7 +21,7 @@ export default function Home() {
         className="d-flex flex-column align-items-center pt-3 pb-5"
         style={{ backgroundColor: "rgba(189, 205, 236, 1)" }}
       >
-        <p className="h1">Egressos</p>
+        <p className="h1" style={{marginTop:"30px",marginBottom:"50px"}}>Egressos</p>
         <div className="d-flex w-75 justify-content-between mt-3 mb-2">
           <CardEgresso />
           <CardEgresso />
