@@ -64,7 +64,7 @@ public class EgressoRepositoryTest {
                 .cpf("123456789")
                 .resumo("Resumo")
                 .urlFoto("UrlFoto")
-                .contatos(Set.of(contatoSalvo))
+                .contatos(List.of(contatoSalvo))
                 .build();
 
         Egresso salvo = repository.save(egresso);

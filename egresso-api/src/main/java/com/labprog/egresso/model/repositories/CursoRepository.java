@@ -15,13 +15,13 @@ import java.util.List;
 @Repository
 public interface CursoRepository extends JpaRepository<Curso, Long>{
 
-    @Query("select p.curso.id " +
+    @Query("select ce.curso.id " +
             "from CursoEgresso ce join ce.egresso e "+
             "where ce.egresso = :egresso ")
     List<Long> cursoPorEgresso(@Param("egresso") Egresso egresso);
 
     @Query("select new com.labprog.egresso.model.dto.CursoNumEgresso(ce.curso.id, count(ce.egresso))" +
             "from CursoEgresso ce " +
-            "group by ce.cargo.id")
+            "group by ce.curso.id")
     List<CursoNumEgresso> numEgressoPorCurso();
 }

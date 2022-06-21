@@ -42,13 +42,13 @@ public class Egresso {
     @JoinTable(name = "contato_egresso",
             joinColumns = @JoinColumn(name = "egresso_id"),
             inverseJoinColumns = @JoinColumn(name = "contato_id"))
-    private Set<Contato> contatos;
+    private List<Contato> contatos = new ArrayList<>();
 
     @OneToMany(mappedBy = "egresso", cascade = CascadeType.ALL)
-    private List<ProfEgresso> profissao;
+    private List<ProfEgresso> profissao = new ArrayList<>();
 
     @OneToMany(mappedBy = "egresso", cascade = CascadeType.ALL)
-    private Set<CursoEgresso> datasCursos;
+    private List<CursoEgresso> datasCursos = new ArrayList<>();
 
     public void addProfissao(ProfEgresso profissao){
         profissao.setEgresso(this);

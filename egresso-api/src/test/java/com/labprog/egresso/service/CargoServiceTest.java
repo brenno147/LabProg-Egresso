@@ -303,7 +303,7 @@ public class CargoServiceTest {
         ProfEgresso pfeg_salvo3 = pfEgreRep.save(profEgresso3);
 
         // Ação: Saber quais cargos o egresso 1 está
-        List<Cargo> quant_egre_cargo = service.consultarCargoPorEgresso(egresso1);
+        List<Cargo> quant_egre_cargo = service.consultarCargoPorEgresso(egresso1.getIdEgresso());
 
         // Verificação: verificar se o egresso possui algum cargo
         Assertions.assertTrue(quant_egre_cargo.size() > 0);
