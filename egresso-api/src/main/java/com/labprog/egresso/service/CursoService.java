@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CursoService {
@@ -20,6 +21,14 @@ public class CursoService {
 
     @Autowired
     private EgressoService egressoService;
+
+    public Curso salvar(Curso curso) {
+        return cursoRepository.save(curso);
+    }
+
+    public void remover(Long cursoId) {
+        cursoRepository.deleteById(cursoId);
+    }
 
     public List<Curso> consultarCursoPorEgresso(Long id){
         Egresso egresso = egressoService.findById(id);
@@ -35,4 +44,7 @@ public class CursoService {
         return quantEgressosCurso;
     }
 
+    public Curso buscarPorId(Long id) {
+        return cursoRepository.findById(id).orElseThrow(() -> new RegraNegocioException("Curso não encontrado"));
+    }
 }

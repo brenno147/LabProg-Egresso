@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -16,42 +17,50 @@ public class EgressoService {
     EgressoRepository egressoRepository;
 
     @Autowired
-    CursoRepository cursoRepository;
+    ProfEgressoRepository profEgressoRepository;
 
     @Autowired
-    ContatoRepository contatoRepository;
-
-    @Autowired
-    CargoRepository cargoRepository;
-
-    @Autowired
-    FaixaSalarioRepository faixaSalarioRepository;
+    CursoEgressoRepository cursoEgressoRepository;
 
 
     @Transactional
     public Egresso salvar(Egresso egresso) {
 
-        egresso.setContatos(egresso.getContatos());
+        Egresso egressoSalvo = egressoRepository.save(egresso);
 
-        for(CursoEgresso cursoEgresso : egresso.getDatasCursos()){
-            egresso.addCurso(cursoEgresso);
-
-            cursoRepository.save(cursoEgresso.getCurso());
+        for (ProfEgresso profissoes: egresso.getProfissao()) {
+            profEgressoRepository.save(profissoes);
         }
 
-        for(ProfEgresso profEgresso : egresso.getProfissao()){
-
-            egresso.addProfissao(profEgresso);
-
-            cargoRepository.save(profEgresso.getCargo());
-            faixaSalarioRepository.save(profEgresso.getFaixaSalario());
+        for (CursoEgresso cursos: egresso.getDatasCursos()) {
+            cursoEgressoRepository.save(cursos);
         }
 
-        return egressoRepository.save(egresso);
+        return egressoSalvo;
+    }
+
+    @Transactional
+    public void remover(Long egressoId) {
+        Egresso egresso = egressoRepository.findById(egressoId)
+                .orElseThrow(() -> new RegraNegocioException("Egresso não encontrado"));
+
+        for (ProfEgresso profissoes: egresso.getProfissao()) {
+            profEgressoRepository.delete(profissoes);
+        }
+
+        for (CursoEgresso cursos: egresso.getDatasCursos()) {
+            cursoEgressoRepository.delete(cursos);
+        }
+
+        egressoRepository.delete(egresso);
     }
 
     public Egresso findById(Long id) {
         return egressoRepository.findById(id)
                 .orElseThrow(() -> new RegraNegocioException("Egresso não encontrado"));
+    }
+
+    public Egresso egressoPorNome(String nome) {
+        return egressoRepository.findByNome(nome);
     }
 }

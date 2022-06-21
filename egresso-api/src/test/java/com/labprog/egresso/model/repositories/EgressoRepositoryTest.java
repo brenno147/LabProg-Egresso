@@ -64,7 +64,7 @@ public class EgressoRepositoryTest {
                 .cpf("123456789")
                 .resumo("Resumo")
                 .urlFoto("UrlFoto")
-                .contatos(List.of(contatoSalvo))
+                .contatos(Set.of(contatoSalvo))
                 .build();
 
         Egresso salvo = repository.save(egresso);
@@ -135,6 +135,23 @@ public class EgressoRepositoryTest {
 
         Assertions.assertFalse(egressoBuscado.isPresent());
 
+    }
+
+    @Test
+    public void buscarEgressoPorNome() {
+        Egresso egresso = Egresso.builder()
+                .nome("Egresso")
+                .email("teste@teste")
+                .cpf("123456789")
+                .resumo("Resumo")
+                .urlFoto("UrlFoto")
+                .build();
+
+        Egresso salvo = repository.save(egresso);
+
+        Egresso egressoBuscado = repository.findByNome(egresso.getNome());
+
+        Assertions.assertEquals(egressoBuscado.getNome(), egresso.getNome());
     }
 
 }

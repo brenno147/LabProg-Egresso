@@ -1,16 +1,15 @@
 package com.labprog.egresso.model.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-@Data
+@Setter
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -38,17 +37,20 @@ public class Egresso {
     @Column(name = "url_foto")
     private String urlFoto;
 
+    @Builder.Default
     @ManyToMany
     @JoinTable(name = "contato_egresso",
             joinColumns = @JoinColumn(name = "egresso_id"),
             inverseJoinColumns = @JoinColumn(name = "contato_id"))
-    private List<Contato> contatos = new ArrayList<>();
+    private Set<Contato> contatos = new HashSet<>();
 
-    @OneToMany(mappedBy = "egresso", cascade = CascadeType.ALL)
-    private List<ProfEgresso> profissao = new ArrayList<>();
+    @Builder.Default
+    @OneToMany(mappedBy = "egresso")
+    private Set<ProfEgresso> profissao = new HashSet<>();
 
-    @OneToMany(mappedBy = "egresso", cascade = CascadeType.ALL)
-    private List<CursoEgresso> datasCursos = new ArrayList<>();
+    @Builder.Default
+    @OneToMany(mappedBy = "egresso")
+    private Set<CursoEgresso> datasCursos = new HashSet<>();
 
     public void addProfissao(ProfEgresso profissao){
         profissao.setEgresso(this);
