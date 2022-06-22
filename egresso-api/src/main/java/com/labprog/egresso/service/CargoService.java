@@ -5,6 +5,7 @@ import java.util.List;
 import com.labprog.egresso.model.dto.CargoNumEgresso;
 import com.labprog.egresso.model.entities.Cargo;
 import com.labprog.egresso.model.entities.Egresso;
+import com.labprog.egresso.model.entities.FaixaSalario;
 import com.labprog.egresso.model.repositories.CargoRepository;
 import com.labprog.egresso.model.repositories.EgressoRepository;
 import com.labprog.egresso.service.exceptions.RegraNegocioException;
@@ -73,5 +74,10 @@ public class CargoService {
             throw new RegraNegocioException("O nome do cargo não está preenchido corretamente");
         if((cargo.getDescricao() == null) || (cargo.getDescricao().equals(' ')))
             throw new RegraNegocioException("A descrição do cargo não está preenchida corretamente");
+    }
+
+    public Cargo buscarPorId(Long idFaixaSalario) {
+        return cargRep.findById(idFaixaSalario)
+                .orElseThrow(() -> new RegraNegocioException("Faixa de salário não encontrada"));
     }
 }
