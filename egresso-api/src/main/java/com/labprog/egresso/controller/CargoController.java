@@ -47,7 +47,7 @@ public class CargoController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Cargo> editar(@PathVariable Long id, @RequestBody CargoDto dto) {
+    public ResponseEntity editar(@PathVariable Long id, @RequestBody CargoDto dto) {
         if (!cargoRepository.existsById(id)) {
             return ResponseEntity.notFound().build();
         }

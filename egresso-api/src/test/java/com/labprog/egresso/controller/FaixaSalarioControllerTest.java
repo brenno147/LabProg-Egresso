@@ -40,7 +40,7 @@ public class FaixaSalarioControllerTest {
         salEgr.add(new SalarioNumEgresso(3L, 1L));
 
         Mockito.when(
-            service.quantEgressoPorCurso()
+            service.quantEgressoPorSalario()
         ).thenReturn(salEgr);
 
         MockHttpServletRequestBuilder request = MockMvcRequestBuilders.get(API).accept(MediaType.APPLICATION_JSON);
