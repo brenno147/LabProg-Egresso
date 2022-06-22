@@ -21,15 +21,15 @@ public class ProfEgresso {
     @Column(name = "id_prof_egresso")
     private Long idProfEgresso;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "egresso_id")
     private Egresso egresso;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cargo_id")
     private Cargo cargo;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "faixa_salario_id")
     private FaixaSalario faixaSalario;
 

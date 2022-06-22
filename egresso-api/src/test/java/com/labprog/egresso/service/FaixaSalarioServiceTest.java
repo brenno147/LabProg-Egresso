@@ -129,18 +129,14 @@ public class FaixaSalarioServiceTest {
         egresso2.addProfissao(profEgresso2);
         egresso3.addProfissao(profEgresso3);
 
-        egressoService.salvar(egresso1);
-        egressoService.salvar(egresso2);
-        egressoService.salvar(egresso3);
-
         cargoService.salvar(cargo);
 
         faixaSalarioService.salvar(faixaSalario);
         faixaSalarioService.salvar(faixaSalario1);
 
-        profEgressoRepository.save(profEgresso1);
-        profEgressoRepository.save(profEgresso2);
-        profEgressoRepository.save(profEgresso3);
+        egressoService.salvar(egresso1);
+        egressoService.salvar(egresso2);
+        egressoService.salvar(egresso3);
 
         List<SalarioNumEgresso> salarioNumEgressos = faixaSalarioService.quantEgressoPorSalario();
 
