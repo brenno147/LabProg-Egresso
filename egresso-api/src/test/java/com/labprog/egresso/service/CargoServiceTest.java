@@ -14,6 +14,7 @@ import com.labprog.egresso.model.repositories.EgressoRepository;
 import com.labprog.egresso.model.repositories.FaixaSalarioRepository;
 import com.labprog.egresso.model.repositories.ProfEgressoRepository;
 
+import com.labprog.egresso.service.exceptions.RegraNegocioException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -303,7 +304,7 @@ public class CargoServiceTest {
         ProfEgresso pfeg_salvo3 = pfEgreRep.save(profEgresso3);
 
         // Ação: Saber quais cargos o egresso 1 está
-        List<Cargo> quant_egre_cargo = service.consultarCargoPorEgresso(egresso1);
+        List<Cargo> quant_egre_cargo = service.consultarCargoPorEgresso(egresso1.getIdEgresso());
 
         // Verificação: verificar se o egresso possui algum cargo
         Assertions.assertTrue(quant_egre_cargo.size() > 0);
@@ -322,13 +323,11 @@ public class CargoServiceTest {
             .build();
         
         // Ação: salvar um cargo
-        Cargo salvo = service.salvar(cargo);
 
-        // Verificação: verificar se o cargo criado foi salvo
-        Assertions.assertNotNull(salvo);
-        Assertions.assertEquals(cargo.getNome(),salvo.getNome());
-        Assertions.assertEquals(cargo.getDescricao(), salvo.getDescricao());
-        Assertions.assertNotNull(salvo.getId());
+        Assertions.assertThrows(RegraNegocioException.class, () -> {
+            service.salvar(cargo);
+        });
+
     }
 
     @Test
@@ -343,11 +342,11 @@ public class CargoServiceTest {
         // modificar 
         cargo.setDescricao("Criação de aplicações para melhor a UX");
 
-        // Ação: Editar
-        Cargo editado = service.editar(cargo);
+        Assertions.assertThrows(RegraNegocioException.class, () -> {
+            service.editar(cargo);
+        });
         
-        // Verificação: verificar se o cargo foi modificado
-        Assertions.assertNotNull(editado);
+
     }
     
 

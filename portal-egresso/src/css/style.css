@@ -2,16 +2,6 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100&display=swap');
 
-.footer{
-    position: absolute;
-    width: 100%;
-    height: 7%;
-    bottom: 0%;
-    margin-bottom: 0%;
-    padding-bottom: 0%;
-    background-color: #2E3E5C; 
-}
-
 
 .nav-login{
     height: 60px;
@@ -20,16 +10,6 @@
     top: 0px;
     left: 0;
     right: 0;
-}
-
-.text-footer{
-    position: relative;
-    font-family: 'Poppins', sans-serif;
-    font-style: normal;
-    font-size: 12px;
-    line-height: 50px;
-    text-align: center;
-    color: #FFFFFF;
 }
 
 .button-nav{
@@ -77,6 +57,7 @@
 .textInput{
     font-size: 0.8em;
     color: rgb(96, 94, 94);
+    background-color: transparent;
 }
 
 .input-text-1{
@@ -85,12 +66,13 @@
     width: 100%;
     font-size: 12px;
     margin-bottom: 20px;
+    background-color: transparent;
 }
 
 .input{
     align-items: flex-start;
     display: flex;
-    background-color: white;
+    background-color: transparent;
 }
 
 
@@ -117,12 +99,12 @@
 }
 
 .depoimento{
-    display: inline-block;
-    width: 35%;
     height: 100px;
+    width: 100%;
     font-size: 12px;
     word-wrap: break-word;
     overflow-wrap: break-word;
+    margin-bottom: 20px;
 }
 
 
@@ -147,10 +129,6 @@
     width: 100px;
     margin-top: -50px; 
     margin-bottom: 10px;
-}
-
-.fundo-nav{
-    background-color: #5b7bb5;
 }
 
 .text-nav{
@@ -187,95 +165,13 @@
     margin-top: 20px;
 }
 
-
-/* .cadastro{
-    position: absolute;
-    left: 50%;
-    top: 20%;
-    display: flex;
+.perfil{
+    background-color: #c0c0c7;
+    border-radius: 100%;
+    width: 100%;
+    height: 100%;
 }
 
-.cargo{
-    position: absolute;
-    left: 50%;
-    top: 55%;
-    display: flex;
+.icon-perfil{
+    height: 20px;
 }
-
-.h1-text{
-    display: block;
-    position: relative;
-    top:auto;
-    left: auto;
-    right: auto;
-    font-size: 1.5em;
-}
-
-.cadastro-text{
-    display: flex;
-    position: absolute;
-    top: 30%;
-    left: 30%;
-    width: 700px;
-    justify-content: center;
-    flex-direction: column;
-    margin-top: 20px;
-}
-
-.cargo-text{
-    display: flex;
-    position: absolute;
-    top: 60%;
-    left: 35%;
-    width: 600px;
-    justify-content: center;
-    flex-direction: column;
-    margin-top: 20px;
-}
-
-.buttonAdd-1{
-    display: flex;
-    position: absolute;
-    top: 65%;
-    left: 45%;
-    margin-top: 20px;
-    width: 300px;
-}
-
-
-.curso{
-    position: absolute;
-    left: 50%;
-    top: 78%;
-    display: flex;
-}
-
-.curso-text{
-    display: flex;
-    position: absolute;
-    top: 82%;
-    left: 35%;
-    width: 600px;
-    justify-content: center;
-    flex-direction: column;
-    margin-top: 20px;
-}
-
-
-.buttonAdd-2{
-    display: flex;
-    position: absolute;
-    top: 87%;
-    left: 45%;
-    margin-top: 20px;
-    width: 300px;
-}
-
-
-.redes{
-    position: absolute;
-    left: 50%;
-    top: 98%;
-    display: flex;
-} */
-

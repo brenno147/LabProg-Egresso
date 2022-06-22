@@ -33,7 +33,8 @@ public class DepoimentoService {
         return depoimentoRepository.findByOrderByDataDesc();
     }
 
-    public List<Depoimento> buscarDepoimentoEgresso(Egresso egresso){
+    public List<Depoimento> buscarDepoimentoEgresso(Long idEgresso){
+        Egresso egresso = egressoService.findById(idEgresso);
         return depoimentoRepository.findByEgresso(egresso);
     }
 

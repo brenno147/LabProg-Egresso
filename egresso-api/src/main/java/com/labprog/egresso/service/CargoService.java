@@ -46,7 +46,8 @@ public class CargoService {
     }
     
     //consultar cargo por egresso
-    public List<Cargo> consultarCargoPorEgresso(Egresso egresso){
+    public List<Cargo> consultarCargoPorEgresso(Long id){
+        Egresso egresso = egRep.findById(id).orElseThrow(() -> new RegraNegocioException("Egresso não encontrado"));
         List<Long> cargo_ids = cargRep.cargoPorEgresso(egresso);
         List<Cargo> cargos = cargRep.findAllById(cargo_ids);
         return cargos;

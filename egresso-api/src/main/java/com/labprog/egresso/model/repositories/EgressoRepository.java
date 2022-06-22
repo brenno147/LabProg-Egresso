@@ -6,4 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface EgressoRepository extends JpaRepository<Egresso, Long> {
+
+    Egresso findByNome(String nome);
 }

@@ -6,7 +6,7 @@ import '../css/style.css';
 
 function NavbarComponent(){
     return(
-        <Navbar expand="lg" className='fundo-nav'>
+        <Navbar expand="lg" style={{backgroundColor: "#5b7bb5"}}>
             <Container>
                 <Navbar.Brand href="#home">
                     <div className="logo-nav">
