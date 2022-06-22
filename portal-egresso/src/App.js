@@ -1,15 +1,18 @@
-import Home from "./pages/Home";
-import EgressoModal from "./components/EgressoModal";
 import "./dependencies";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./css/style.css";
-import Cadastro from "./pages/Cadastro";
+import Home from "./pages/Home";
+import Egresso from "./pages/Egresso";
+// import Cadastro from "./pages/Cadastro";
+import Login from "./pages/Login";
 
 function App() {
   return (
     <div>
+      {/* <Login /> */}
       {/* <Home /> */}
-      <EgressoModal />
+      {/* <Egresso /> */}
+      <Egresso />
     </div>
     // <Cadastro/>
   );

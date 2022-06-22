@@ -14,6 +14,7 @@ export default function EgressoModal() {
         backgroundColor: "rgba(46, 62, 92, 1)",
         borderRadius: "2%",
         width: "60%",
+        display: "none",
       }}
     >
       <div className="d-flex flex-column justify-content-center text-white mr-5 mb-3">

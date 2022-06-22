@@ -1,11 +1,16 @@
 import React from "react";
-import CardEgresso from "./CardEgresso";
-import Header from "./Header";
+import CardEgresso from "./../components/CardEgresso";
+import Header from "./../components/Header";
+import EgressoModal from "./../components/EgressoModal";
 
 const egressoPage = () => {
   return (
     <>
+      <div id="modal" style={{ position: "absolute" }}>
+        <EgressoModal />
+      </div>
       <Header />
+      <p className="h1 text-center">Egressos</p>
       <div className="container mt-5 mb-5">
         <div className="row mt-1">
           <div className="col-md-4">
