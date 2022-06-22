@@ -2,11 +2,11 @@ import React from "react";
 import {faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-function DepoimentoTextComponent(){
+function DepoimentoTextComponent(props){
     return(
-        <div className="">
+        <div style={{alignItems: "flex-start", display: "flex", backgroundColor: "transparent", width:"40%"}}>
             <textarea wrap="hard" className="depoimento"></textarea>
-            <button class="depoimento-btn"><FontAwesomeIcon icon={faTrash} className="icon"/></button>
+            <button className="depoimento-btn" style={{alignSelf:"end"}}><FontAwesomeIcon icon={faTrash} className="icon"/></button>
         </div>
     );
 }
