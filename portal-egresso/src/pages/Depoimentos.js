@@ -2,7 +2,7 @@ import React from "react";
 import Depoimento from "../components/Depoimento";
 import NavbarComponent from '../components/NavbarComponent';
 import Footer from '../components/Footer';
-import EgressoPage from "../components/EgressoPage";
+import PageComponent from "../components/PageComponent";
 
 function Depoimentos(){
     return (
@@ -15,8 +15,11 @@ function Depoimentos(){
                 <Depoimento/>
                 <Depoimento/>
                 <Depoimento/>
-                <EgressoPage/>
             </div>
+            <div className="m-5">
+                <PageComponent/>
+            </div>
+            
             <Footer />
         </div>
     );

@@ -1,5 +1,5 @@
 import React from "react";
-import EgressoPage from "../components/EgressoPage";
+import EgressoPage from "./EgressoPage";
 import CardEgresso from "../components/CardEgresso";
 import NavbarComponent from "../components/NavbarComponent";
 import Footer from "../components/Footer";
@@ -25,7 +25,7 @@ function Egresso() {
           <CardEgresso />
           <CardEgresso />
         </div>
-        <EgressoPage />
+        {/* <EgressoPage /> */}
       </div>
       <Footer />
     </div>
