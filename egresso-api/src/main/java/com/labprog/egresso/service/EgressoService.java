@@ -22,17 +22,17 @@ public class EgressoService {
     @Autowired
     CursoEgressoRepository cursoEgressoRepository;
 
-
     @Transactional
     public Egresso salvar(Egresso egresso) {
 
         Egresso egressoSalvo = egressoRepository.save(egresso);
 
-        for (ProfEgresso profissoes: egresso.getProfissao()) {
+        verificarEgresso(egresso);
+        for (ProfEgresso profissoes : egresso.getProfissao()) {
             profEgressoRepository.save(profissoes);
         }
 
-        for (CursoEgresso cursos: egresso.getDatasCursos()) {
+        for (CursoEgresso cursos : egresso.getDatasCursos()) {
             cursoEgressoRepository.save(cursos);
         }
 
@@ -44,11 +44,11 @@ public class EgressoService {
         Egresso egresso = egressoRepository.findById(egressoId)
                 .orElseThrow(() -> new RegraNegocioException("Egresso não encontrado"));
 
-        for (ProfEgresso profissoes: egresso.getProfissao()) {
+        for (ProfEgresso profissoes : egresso.getProfissao()) {
             profEgressoRepository.delete(profissoes);
         }
 
-        for (CursoEgresso cursos: egresso.getDatasCursos()) {
+        for (CursoEgresso cursos : egresso.getDatasCursos()) {
             cursoEgressoRepository.delete(cursos);
         }
 
@@ -62,5 +62,31 @@ public class EgressoService {
 
     public Egresso egressoPorNome(String nome) {
         return egressoRepository.findByNome(nome);
+    }
+
+    private void verificarEgresso(Egresso egresso) {
+        if (egresso == null) {
+            throw new RegraNegocioException("Egresso inválido");
+        }
+
+        if ((egresso.getNome() == null) || egresso.getNome().equals(' ')) {
+            throw new RegraNegocioException("O nome do egresso não está preenchido corretamente");
+        }
+
+        if ((egresso.getEmail() == null) || egresso.getEmail().equals(' ')) {
+            throw new RegraNegocioException("O email do egresso não está preenchido corretamente");
+        }
+
+        if ((egresso.getCpf() == null) || egresso.getCpf().equals(' ')) {
+            throw new RegraNegocioException("O cpf do egresso não está preenchido corretamente");
+        }
+
+        if ((egresso.getResumo() == null) || egresso.getResumo().equals(' ')) {
+            throw new RegraNegocioException("O resumo do egresso não está preenchido corretamente");
+        }
+
+        if ((egresso.getUrlFoto() == null) || egresso.getUrlFoto().equals(' ')) {
+            throw new RegraNegocioException("A url da foto do egresso não está preenchido corretamente");
+        }
     }
 }

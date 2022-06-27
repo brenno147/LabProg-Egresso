@@ -16,6 +16,7 @@ public class FaixaSalarioService {
     private FaixaSalarioRepository faixaSalarioRepository;
 
     public FaixaSalario salvar(FaixaSalario faixaSalario) {
+        verificarFaixaSalario(faixaSalario);
         return faixaSalarioRepository.save(faixaSalario);
     }
 
@@ -23,7 +24,7 @@ public class FaixaSalarioService {
         faixaSalarioRepository.deleteById(faixaSalarioId);
     }
 
-    public List<SalarioNumEgresso> quantEgressoPorSalario(){
+    public List<SalarioNumEgresso> quantEgressoPorSalario() {
         List<SalarioNumEgresso> quantEgressosSalario = faixaSalarioRepository.numEgressoPorSalario();
         return quantEgressosSalario;
     }
@@ -31,5 +32,17 @@ public class FaixaSalarioService {
     public FaixaSalario buscarPorId(Long idFaixaSalario) {
         return faixaSalarioRepository.findById(idFaixaSalario)
                 .orElseThrow(() -> new RegraNegocioException("Faixa de salário não encontrada"));
+    }
+
+    private void verificarFaixaSalario(FaixaSalario faixaSalario) {
+        if ((faixaSalario.getDescricao() == null) || (faixaSalario.getDescricao().equals(' '))) {
+            throw new RegraNegocioException("A descrição da faixa salário não está preenchida corretamente");
+        }
+    }
+
+    private void verificarId(Long faixaSalarioId) {
+        if (faixaSalarioId == null) {
+            throw new RegraNegocioException("Posicao sem id");
+        }
     }
 }
