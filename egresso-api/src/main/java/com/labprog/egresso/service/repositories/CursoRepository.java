@@ -1,4 +1,4 @@
-package com.labprog.egresso.model.repositories;
+package com.labprog.egresso.service.repositories;
 
 import com.labprog.egresso.model.dto.CargoNumEgresso;
 import com.labprog.egresso.model.dto.CursoNumEgresso;

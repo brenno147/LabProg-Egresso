@@ -3,13 +3,13 @@ package com.labprog.egresso.service;
 import com.labprog.egresso.model.entities.*;
 import com.labprog.egresso.model.repositories.*;
 import com.labprog.egresso.service.exceptions.RegraNegocioException;
+import com.labprog.egresso.service.repositories.CursoEgressoRepository;
+import com.labprog.egresso.service.repositories.EgressoRepository;
+import com.labprog.egresso.service.repositories.ProfEgressoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
 
 @Service
 public class EgressoService {

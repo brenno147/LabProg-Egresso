@@ -1,9 +1,8 @@
 package com.labprog.egresso.controller;
 
 import com.labprog.egresso.controller.dto.DepoimentoDto;
-import com.labprog.egresso.model.entities.Cargo;
 import com.labprog.egresso.model.entities.Depoimento;
-import com.labprog.egresso.model.repositories.DepoimentoRepository;
+import com.labprog.egresso.service.repositories.DepoimentoRepository;
 import com.labprog.egresso.service.DepoimentoService;
 import com.labprog.egresso.service.EgressoService;
 import com.labprog.egresso.service.exceptions.RegraNegocioException;

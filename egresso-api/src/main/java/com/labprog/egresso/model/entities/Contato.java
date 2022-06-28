@@ -28,6 +28,4 @@ public class Contato {
     @Column(name="url_logo")
     private String url_logo;
 
-    @ManyToMany(mappedBy = "contatos")
-    private Set<Egresso> egressos;
 }

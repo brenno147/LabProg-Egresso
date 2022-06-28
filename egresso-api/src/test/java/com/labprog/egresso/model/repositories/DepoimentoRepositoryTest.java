@@ -7,6 +7,8 @@ import java.util.Optional;
 import com.labprog.egresso.model.entities.Depoimento;
 import com.labprog.egresso.model.entities.Egresso;
 
+import com.labprog.egresso.service.repositories.DepoimentoRepository;
+import com.labprog.egresso.service.repositories.EgressoRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

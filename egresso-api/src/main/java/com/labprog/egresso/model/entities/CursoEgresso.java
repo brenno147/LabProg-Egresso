@@ -23,7 +23,7 @@ public class CursoEgresso {
 
   @ManyToOne(fetch = FetchType.LAZY)
   @MapsId("egresso_id")
-  @JoinColumn(name="id_egresso")
+  @JoinColumn(name="egresso_id")
   private Egresso egresso;
 
   @ManyToOne(fetch = FetchType.LAZY)

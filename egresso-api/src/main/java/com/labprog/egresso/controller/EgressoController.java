@@ -5,7 +5,7 @@ import com.labprog.egresso.controller.dto.CursoEgressoDto;
 import com.labprog.egresso.controller.dto.EgressoDto;
 import com.labprog.egresso.controller.dto.ProfEgressoDto;
 import com.labprog.egresso.model.entities.*;
-import com.labprog.egresso.model.repositories.EgressoRepository;
+import com.labprog.egresso.service.repositories.EgressoRepository;
 import com.labprog.egresso.service.CargoService;
 import com.labprog.egresso.service.CursoService;
 import com.labprog.egresso.service.EgressoService;
@@ -16,7 +16,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashSet;
 import java.util.List;
 
 @RestController

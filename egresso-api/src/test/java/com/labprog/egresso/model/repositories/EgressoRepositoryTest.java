@@ -1,9 +1,10 @@
 package com.labprog.egresso.model.repositories;
 
 import com.labprog.egresso.model.entities.Contato;
-import com.labprog.egresso.model.entities.Curso;
-import com.labprog.egresso.model.entities.CursoEgresso;
 import com.labprog.egresso.model.entities.Egresso;
+import com.labprog.egresso.service.repositories.ContatoRepository;
+import com.labprog.egresso.service.repositories.CursoRepository;
+import com.labprog.egresso.service.repositories.EgressoRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -12,8 +13,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;

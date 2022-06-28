@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import com.labprog.egresso.model.entities.Curso;
 
+import com.labprog.egresso.service.repositories.CursoRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
