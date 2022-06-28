@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-
 @Service
 public class DepoimentoService {
     @Autowired
@@ -17,33 +16,42 @@ public class DepoimentoService {
     @Autowired
     private EgressoService egressoService;
 
-    // salvar
-    public Depoimento salvar(Depoimento depoimento){
-        Egresso egresso = egressoService.findById(depoimento.getEgresso().getIdEgresso());
+    public Depoimento salvar(Depoimento depoimento) {
 
+        Egresso egresso = egressoService.findById(depoimento.getEgresso().getIdEgresso());
+        verificarDepoimento(depoimento);
         depoimento.setEgresso(egresso);
 
         return depoimentoRepository.save(depoimento);
     }
 
-    // deletar
-    public void remover(Long depoimentoId){
+    public void remover(Long depoimentoId) {
+        verificarId(depoimentoId);
         depoimentoRepository.deleteById(depoimentoId);
     }
 
-    // consultar depoimentos ordenados pelo mais recente
-    public List<Depoimento> buscarDepoimentosRecentes(){
+    public List<Depoimento> buscarDepoimentosRecentes() {
         return depoimentoRepository.findByOrderByDataDesc();
     }
 
-    // consultar depoimentos por egresso
-    public List<Depoimento> buscarDepoimentoEgresso(Long idEgresso){
+    public List<Depoimento> buscarDepoimentoEgresso(Long idEgresso) {
         Egresso egresso = egressoService.findById(idEgresso);
         return depoimentoRepository.findByEgresso(egresso);
     }
 
-    public Depoimento findById(Long id){
+    public Depoimento findById(Long id) {
         return depoimentoRepository.findById(id)
                 .orElseThrow(() -> new RegraNegocioException("Depoimento não encontrado"));
+    }
+
+    private void verificarDepoimento(Depoimento depoimento) {
+        if ((depoimento.getTexto() == null) || (depoimento.getTexto().length() == 0)) {
+            throw new RegraNegocioException("Depoimento não está preenchido corretamente.");
+        }
+    }
+
+    private void verificarId(Long depoimentoId) {
+        if (depoimentoId == null)
+            throw new RegraNegocioException("Posicao sem id");
     }
 }
