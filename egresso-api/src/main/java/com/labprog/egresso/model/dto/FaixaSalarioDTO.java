@@ -1,13 +1,14 @@
-package com.labprog.egresso.controller.dto;
+package com.labprog.egresso.model.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Builder
 @AllArgsConstructor
-public class FaixaSalarioDto {
-
+@NoArgsConstructor
+public class FaixaSalarioDTO {
     private String descricao;
 }

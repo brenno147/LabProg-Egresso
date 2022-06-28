@@ -17,6 +17,7 @@ public class DepoimentoService {
     @Autowired
     private EgressoService egressoService;
 
+    // salvar
     public Depoimento salvar(Depoimento depoimento){
         Egresso egresso = egressoService.findById(depoimento.getEgresso().getIdEgresso());
 
@@ -25,14 +26,17 @@ public class DepoimentoService {
         return depoimentoRepository.save(depoimento);
     }
 
+    // deletar
     public void remover(Long depoimentoId){
         depoimentoRepository.deleteById(depoimentoId);
     }
 
+    // consultar depoimentos ordenados pelo mais recente
     public List<Depoimento> buscarDepoimentosRecentes(){
         return depoimentoRepository.findByOrderByDataDesc();
     }
 
+    // consultar depoimentos por egresso
     public List<Depoimento> buscarDepoimentoEgresso(Long idEgresso){
         Egresso egresso = egressoService.findById(idEgresso);
         return depoimentoRepository.findByEgresso(egresso);

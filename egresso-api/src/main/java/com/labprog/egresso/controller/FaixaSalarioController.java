@@ -2,9 +2,6 @@ package com.labprog.egresso.controller;
 
 import java.util.List;
 
-import com.labprog.egresso.controller.dto.CargoDto;
-import com.labprog.egresso.controller.dto.FaixaSalarioDto;
-import com.labprog.egresso.model.entities.Cargo;
 import com.labprog.egresso.model.entities.FaixaSalario;
 import com.labprog.egresso.model.repositories.FaixaSalarioRepository;
 import com.labprog.egresso.service.exceptions.RegraNegocioException;
@@ -13,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import com.labprog.egresso.model.dto.FaixaSalarioDTO;
 import com.labprog.egresso.model.dto.SalarioNumEgresso;
 import com.labprog.egresso.service.FaixaSalarioService;
 
@@ -32,7 +30,7 @@ public class FaixaSalarioController {
     }
 
     @PostMapping
-    public ResponseEntity salvar(@RequestBody FaixaSalarioDto dto){
+    public ResponseEntity salvar(@RequestBody FaixaSalarioDTO dto){
         FaixaSalario faixaSalario = FaixaSalario.builder()
                 .descricao(dto.getDescricao())
                 .build();

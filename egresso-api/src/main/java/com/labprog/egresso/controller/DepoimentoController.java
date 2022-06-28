@@ -1,6 +1,7 @@
 package com.labprog.egresso.controller;
 
-import com.labprog.egresso.controller.dto.DepoimentoDto;
+
+import com.labprog.egresso.model.dto.DepoimentoDTO;
 import com.labprog.egresso.model.entities.Cargo;
 import com.labprog.egresso.model.entities.Depoimento;
 import com.labprog.egresso.model.repositories.DepoimentoRepository;
@@ -32,14 +33,13 @@ public class DepoimentoController {
     }
 
     @PostMapping
-    public ResponseEntity salvar(@RequestBody DepoimentoDto dto) {
+    public ResponseEntity salvar(@RequestBody DepoimentoDTO dto) {
 
         Depoimento depoimento = Depoimento.builder()
-                .texto(dto.getTexto())
-                .egresso(egressoService.findById(dto.getIdEgresso()))
-                .texto(dto.getTexto())
-                .data(dto.getData())
-                .build();
+            .egresso(egressoService.findById(dto.getIdEgresso()))
+            .texto(dto.getTexto())
+            .data(dto.getData())
+            .build();
 
 
         try {
@@ -51,7 +51,7 @@ public class DepoimentoController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Depoimento> editar(@PathVariable Long id, @RequestBody DepoimentoDto dto) {
+    public ResponseEntity<Depoimento> editar(@PathVariable Long id, @RequestBody DepoimentoDTO dto) {
         if (!depoimentoRepository.existsById(id)) {
             return ResponseEntity.notFound().build();
         }
@@ -86,11 +86,13 @@ public class DepoimentoController {
         }
     }
 
+    // Não está retornando nada
     @GetMapping("/depoimentos-recentes")
     public List<Depoimento> buscarDepoimentosRecentes(){
         return depoimentoService.buscarDepoimentosRecentes();
     }
 
+    // Não está retornando nada
     @GetMapping("/depoimentos-por-egresso/{id}")
     public List<Depoimento> buscarDepoimentosPorEgresso(@PathVariable Long id){
         return depoimentoService.buscarDepoimentoEgresso(id);

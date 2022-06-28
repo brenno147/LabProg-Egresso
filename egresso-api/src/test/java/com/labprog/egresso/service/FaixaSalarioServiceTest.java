@@ -7,6 +7,9 @@ import com.labprog.egresso.model.entities.FaixaSalario;
 import com.labprog.egresso.model.entities.ProfEgresso;
 import com.labprog.egresso.model.repositories.ProfEgressoRepository;
 import com.labprog.egresso.service.exceptions.RegraNegocioException;
+
+import lombok.extern.log4j.Log4j2;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -18,6 +21,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import java.time.LocalDate;
 import java.util.List;
 
+@Log4j2
 @ActiveProfiles("test")
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
@@ -139,7 +143,7 @@ public class FaixaSalarioServiceTest {
         egressoService.salvar(egresso3);
 
         List<SalarioNumEgresso> salarioNumEgressos = faixaSalarioService.quantEgressoPorSalario();
-
+        log.info(salarioNumEgressos);
         Assertions.assertEquals(2, salarioNumEgressos.size());
         Assertions.assertEquals(1, salarioNumEgressos.get(0).getNumEgresso());
         Assertions.assertEquals(2, salarioNumEgressos.get(1).getNumEgresso());

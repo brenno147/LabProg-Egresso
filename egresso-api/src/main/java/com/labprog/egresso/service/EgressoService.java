@@ -25,7 +25,7 @@ public class EgressoService {
 
     @Transactional
     public Egresso salvar(Egresso egresso) {
-
+        // OBS.: deve validar o usuário antes de salvar
         Egresso egressoSalvo = egressoRepository.save(egresso);
 
         for (ProfEgresso profissoes: egresso.getProfissao()) {
@@ -63,4 +63,8 @@ public class EgressoService {
     public Egresso egressoPorNome(String nome) {
         return egressoRepository.findByNome(nome);
     }
+
+    // validação da senha
+    // editar (com contato, curso, cargo e faixa salarial)
+    // consultar egresso obtendo juntamente contato, curso, cargo, faixa salarial
 }

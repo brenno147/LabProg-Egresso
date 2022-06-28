@@ -23,6 +23,7 @@ public class FaixaSalarioService {
         faixaSalarioRepository.deleteById(faixaSalarioId);
     }
 
+    // quantitativo de egressos por faixa salarial
     public List<SalarioNumEgresso> quantEgressoPorSalario(){
         List<SalarioNumEgresso> quantEgressosSalario = faixaSalarioRepository.numEgressoPorSalario();
         return quantEgressosSalario;

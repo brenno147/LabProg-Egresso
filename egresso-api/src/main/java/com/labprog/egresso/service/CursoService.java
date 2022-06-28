@@ -30,6 +30,7 @@ public class CursoService {
         cursoRepository.deleteById(cursoId);
     }
 
+    // consultar egressos por curso
     public List<Curso> consultarCursoPorEgresso(Long id){
         Egresso egresso = egressoService.findById(id);
         List<Long> curso_ids = cursoRepository.cursoPorEgresso(egresso);

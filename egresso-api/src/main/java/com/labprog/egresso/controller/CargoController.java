@@ -1,13 +1,11 @@
 package com.labprog.egresso.controller;
 
-import com.labprog.egresso.controller.dto.CargoDto;
+
+import com.labprog.egresso.model.dto.CargoDTO;
 import com.labprog.egresso.model.dto.CargoNumEgresso;
 import com.labprog.egresso.model.entities.Cargo;
-import com.labprog.egresso.model.entities.Depoimento;
 import com.labprog.egresso.model.repositories.CargoRepository;
-import com.labprog.egresso.model.repositories.DepoimentoRepository;
 import com.labprog.egresso.service.CargoService;
-import com.labprog.egresso.service.DepoimentoService;
 import com.labprog.egresso.service.exceptions.RegraNegocioException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -32,7 +30,7 @@ public class CargoController {
     }
 
     @PostMapping
-    public ResponseEntity salvar(@RequestBody CargoDto dto) {
+    public ResponseEntity salvar(@RequestBody CargoDTO dto) {
         Cargo cargo = Cargo.builder()
                 .nome(dto.getNome())
                 .descricao(dto.getDescricao())
@@ -47,7 +45,7 @@ public class CargoController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity editar(@PathVariable Long id, @RequestBody CargoDto dto) {
+    public ResponseEntity editar(@PathVariable Long id, @RequestBody CargoDTO dto) {
         if (!cargoRepository.existsById(id)) {
             return ResponseEntity.notFound().build();
         }

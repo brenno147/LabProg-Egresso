@@ -3,6 +3,9 @@ package com.labprog.egresso.model.entities;
 import lombok.*;
 
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -24,6 +27,10 @@ public class Egresso {
 
     @Column(name = "nome")
     private String nome;
+
+    @JsonIgnore
+    @Column(name = "senha")
+    private String senha;
 
     @Column(name = "email")
     private String email;
