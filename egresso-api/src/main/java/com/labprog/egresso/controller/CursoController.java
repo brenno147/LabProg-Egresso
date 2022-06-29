@@ -1,6 +1,7 @@
 package com.labprog.egresso.controller;
 
-import com.labprog.egresso.controller.dto.CursoDto;
+
+import com.labprog.egresso.model.dto.CursoDTO;
 import com.labprog.egresso.model.dto.CursoNumEgresso;
 import com.labprog.egresso.model.entities.Curso;
 import com.labprog.egresso.model.repositories.CursoRepository;
@@ -29,7 +30,7 @@ public class CursoController {
     }
 
     @PostMapping
-    public ResponseEntity salvar(@RequestBody CursoDto dto){
+    public ResponseEntity salvar(@RequestBody CursoDTO dto){
         Curso curso = Curso.builder()
                 .nome(dto.getNome())
                 .nivel(dto.getNivel())
@@ -44,7 +45,7 @@ public class CursoController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity editar(@PathVariable Long id, @RequestBody CursoDto dto){
+    public ResponseEntity editar(@PathVariable Long id, @RequestBody CursoDTO dto){
         if (!cursoRepository.existsById(id)) {
             return ResponseEntity.notFound().build();
         }
@@ -77,12 +78,14 @@ public class CursoController {
         }
     }
 
+    // Não está passando
     @GetMapping("/lista-cursos-por-egresso/{id}")
     public List<Curso> listaCargosPorEgresso(@PathVariable Long id) {
         return cursoService.consultarCursoPorEgresso(id);
     }
-
-    @GetMapping("/quant-egresso-por-cargo")
+    
+    // Não está passando
+    @GetMapping("/quant-egresso-por-curso")
     public List<CursoNumEgresso> quantEgressoPorCurso(){
         return cursoService.quantEgressoPorCurso();
     }

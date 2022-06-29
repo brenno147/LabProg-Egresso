@@ -7,6 +7,8 @@ import ButtonComponent from '../components/ButtonComponent';
 import ButtonSubmitComponent from '../components/ButtonSubmitComponent';
 import DepoimentoTextComponent from '../components/DepoimentoTextComponent';
 import PerfilComponent from '../components/PerfilComponent';
+import Curso from '../components/Curso';
+import Cargo from '../components/Cargo';
 
 
 function Perfil(){
@@ -32,14 +34,16 @@ function Perfil(){
                 <div  className="h3" style={{marginBottom:"20px", marginTop:"30px"}}>
                     Curso
                 </div>
-                <ProfComponents value="Nome do seu curso de formação"/>
+                <div className='w-70 mb-5'>
+                    <Curso curso="curso" nivel="nivel"/>
+                </div>
                 <div style={{width:"30%"}}>
                     <ButtonSubmitComponent value="+ adicionar"/>
                 </div>
                 <div  className="h3" style={{marginBottom:"20px", marginTop:"30px"}}>
                     Cargo
                 </div>
-                <ProfComponents value="Nome do seu cargo"/>
+                <Cargo cargo="nome" descricao="breve descrição do seu cargo"/>
                 <div style={{width:"30%"}}>
                     <ButtonSubmitComponent value="+ adicionar"/>
                 </div>
@@ -61,8 +65,8 @@ function Perfil(){
                 <div style={{width:"30%", marginBottom:"30px"}}>
                     <ButtonSubmitComponent value="+ adicionar"/>
                 </div>
-                <div style={{alignSelf:"end", display:"flex", flexDirection:"row", marginTop:"20px", marginBottom:"30px", marginRight:"60px"}}>
-                    <ButtonComponent value="Salvar"/>
+                <div style={{alignSelf:"end", marginTop:"20px", marginBottom:"30px", marginRight:"60px"}}>
+                    <ButtonComponent nome="Salvar"/>
                 </div>
             </div>
             

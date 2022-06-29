@@ -1,26 +1,14 @@
 import "./dependencies";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./css/style.css";
-import Cadastro from "./pages/Cadastro";
-import Login from "./pages/Login";
-import Perfil from "./pages/Perfil";
-import Egresso from "./pages/Egresso";
-import Estatisticas from "./pages/Estatisticas";
-import Depoimentos from "./pages/Depoimentos";
-
+import Rotas from "./Rotas";
+import EgressoModal from "./components/EgressoModal";
 function App() {
   return (
-    <div>
-      {/* <Login /> */}
-      {/* <Home /> */}
-      {/* <EgressoModal /> */}
-      {/* <Cadastro/> */}
-      {/* <Login/> */}
-      {/* <Perfil/> */}
-      {/* <Egresso/> */}
-      {/* <Estatisticas/> */}
-      <Depoimentos />
-    </div>
+    <>
+      {/* <EgressoModal/> */}
+      <Rotas/>
+    </>
   );
 }
 export default App;

@@ -8,7 +8,7 @@ function NavbarComponent(){
     return(
         <Navbar expand="lg" style={{backgroundColor: "#5b7bb5"}}>
             <Container>
-                <Navbar.Brand href="#home">
+                <Navbar.Brand href="#/home">
                     <div className="logo-nav">
                         <img src={logo} alt="logo"/>
                     </div>
@@ -16,16 +16,16 @@ function NavbarComponent(){
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="justify-content-center flex-grow-1 pe-3 text-nav-hover">
-                    <a className="text-nav" href="#home">Home</a>
-                    <a className="text-nav" href="#egresso">Egressos</a>
-                    <a className="text-nav" href="#dep">Depoimentos</a>
-                    <a className="text-nav" href="#est">Estatísticas</a>
+                    <a className="text-nav" href="#/home">Home</a>
+                    <a className="text-nav" href="#/egresso">Egressos</a>
+                    <a className="text-nav" href="#/depoimento">Depoimentos</a>
+                    <a className="text-nav" href="#/estatisticas">Estatísticas</a>
                 </Nav>
                 <div className="button-nav">
-                    <ButtonComponent value={'Cadastre-se'}/>
+                    <ButtonComponent nome={'Cadastre-se'}/>
                 </div>
                 <div className="button-nav">
-                    <ButtonComponent value={'Login'}/>
+                    <ButtonComponent nome={'Login'}/>
                 </div>
                 </Navbar.Collapse>
             </Container>   

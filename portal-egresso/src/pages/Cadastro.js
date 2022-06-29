@@ -6,6 +6,9 @@ import ProfComponents from '../components/ProfComponents';
 import ButtonComponent from '../components/ButtonComponent';
 import ButtonSubmitComponent from '../components/ButtonSubmitComponent';
 import DepoimentoTextComponent from '../components/DepoimentoTextComponent';
+import Curso from '../components/Curso';
+import Cargo from '../components/Cargo';
+import CriarContato from '../components/CriarContato';
 
 function Cadastro(){
     return(
@@ -19,41 +22,41 @@ function Cadastro(){
                     <TextInputComponent value="Nome:"/>
                     <TextInputComponent value="Email:"/>
                     <TextInputComponent value="Cpf:"/>
+                    <input type="text" className="input-text mt-3" placeholder={"Resumo sobre suas habilidades"}/>
                 </div>
-                <div  className="h3" style={{marginBottom:"20px", marginTop:"30px"}}>
+                <div  className="h3" style={{marginBottom:"50px", marginTop:"50px"}}>
                     Curso
                 </div>
-                <ProfComponents value="Nome do seu curso de formação"/>
+                <div className='w-70 mb-5'>
+                    <Curso curso="curso" nivel="nivel"/>
+                </div>
                 <div style={{width:"30%"}}>
                     <ButtonSubmitComponent value="+ adicionar"/>
                 </div>
-                <div  className="h3" style={{marginBottom:"20px", marginTop:"30px"}}>
+                <div  className="h3" style={{marginBottom:"50px", marginTop:"50px"}}>
                     Cargo
                 </div>
-                <ProfComponents value="Nome do seu cargo"/>
-                <div style={{width:"30%"}}>
+                    <Cargo cargo="nome" descricao="breve descrição do seu cargo"/>
+                <div  className='mt-5' style={{width:"30%"}}>
                     <ButtonSubmitComponent value="+ adicionar"/>
                 </div>
-                <div  className="h3" style={{marginBottom:"20px", marginTop:"30px"}}>
-                    Redes Sociais
+                <div  className="h3 " style={{marginBottom:"50px", marginTop:"50px"}}>
+                   Contatos
                 </div>
                 <div className='w-50'>
                     <TextInputComponent value="Instagram:"/>
                     <TextInputComponent value="Twitter:"/>
                     <TextInputComponent value="GitHub:"/>
                 </div>
-                <div style={{width:"30%"}}>
-                    <ButtonSubmitComponent value="+ adicionar"/>
-                </div>
-                <div  className="h3" style={{marginBottom:"20px", marginTop:"30px"}}>
+                <div  className="h3" style={{marginBottom:"50px", marginTop:"50px"}}>
                     Depoimento
                 </div>
-                <DepoimentoTextComponent/>
+                    <DepoimentoTextComponent/>
                 <div style={{width:"30%", marginBottom:"30px"}}>
                     <ButtonSubmitComponent value="+ adicionar"/>
                 </div>
                 <div style={{alignSelf:"end", display:"flex", flexDirection:"row", marginTop:"20px", marginBottom:"30px", marginRight:"60px"}}>
-                    <ButtonComponent value="Cadastrar"/>
+                    <ButtonComponent nome="Cadastrar"/>
                 </div>
             </div>
             

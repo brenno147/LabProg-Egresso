@@ -1,13 +1,16 @@
-package com.labprog.egresso.controller.dto;
+package com.labprog.egresso.model.dto;
+
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Builder
 @AllArgsConstructor
-public class ContatoDto {
+@NoArgsConstructor
+public class ContatoDTO {
     private String nome;
     private String url_logo;
 }

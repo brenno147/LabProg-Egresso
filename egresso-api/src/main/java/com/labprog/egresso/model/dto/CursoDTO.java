@@ -1,17 +1,15 @@
-package com.labprog.egresso.controller.dto;
+package com.labprog.egresso.model.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import javax.validation.constraints.NotBlank;
+import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
 @Builder
-public class CursoDto {
-
-    @NotBlank
+@NoArgsConstructor
+public class CursoDTO {
     private String nome;
-    @NotBlank
     private String nivel;
 }

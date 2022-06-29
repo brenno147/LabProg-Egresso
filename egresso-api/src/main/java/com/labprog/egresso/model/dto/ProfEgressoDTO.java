@@ -1,4 +1,5 @@
-package com.labprog.egresso.controller.dto;
+package com.labprog.egresso.model.dto;
+
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +10,8 @@ import java.time.LocalDate;
 @Data
 @AllArgsConstructor
 @Builder
-public class ProfEgressoDto {
+
+public class ProfEgressoDTO {
     private Long cargoId;
     private Long faixaSalarioId;
     private String empresa;

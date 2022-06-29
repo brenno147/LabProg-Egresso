@@ -1,4 +1,4 @@
-package com.labprog.egresso.controller.dto;
+package com.labprog.egresso.model.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +9,8 @@ import java.time.LocalDate;
 @Data
 @Builder
 @AllArgsConstructor
-public class CursoEgressoDto {
+
+public class CursoEgressoDTO {
     private Long cursoId;
     private LocalDate dataInicio;
     private LocalDate dataConclusao;

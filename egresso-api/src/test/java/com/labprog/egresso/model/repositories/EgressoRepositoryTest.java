@@ -36,6 +36,7 @@ public class EgressoRepositoryTest {
                 .cpf("123456789")
                 .resumo("Resumo")
                 .urlFoto("UrlFoto")
+                .senha("123")
                 .build();
 
         Egresso salvo = repository.save(egresso);
@@ -61,6 +62,7 @@ public class EgressoRepositoryTest {
                 .resumo("Resumo")
                 .urlFoto("UrlFoto")
                 .contatos(Set.of(contatoSalvo))
+                .senha("123")
                 .build();
 
         Egresso salvo = repository.save(egresso);
@@ -83,6 +85,7 @@ public class EgressoRepositoryTest {
                 .cpf("123456789")
                 .resumo("Resumo")
                 .urlFoto("UrlFoto")
+                .senha("123")
                 .build();
 
         Egresso salvo = repository.save(egresso);
@@ -100,6 +103,7 @@ public class EgressoRepositoryTest {
                 .cpf("123456789")
                 .resumo("Resumo")
                 .urlFoto("UrlFoto")
+                .senha("123")
                 .build();
 
         Egresso salvo = repository.save(egresso);
@@ -117,6 +121,7 @@ public class EgressoRepositoryTest {
                 .cpf("123456789")
                 .resumo("Resumo")
                 .urlFoto("UrlFoto")
+                .senha("123")
                 .build();
 
         Egresso salvo = repository.save(egresso);
@@ -141,6 +146,7 @@ public class EgressoRepositoryTest {
                 .cpf("123456789")
                 .resumo("Resumo")
                 .urlFoto("UrlFoto")
+                .senha("123")
                 .build();
 
         Egresso salvo = repository.save(egresso);

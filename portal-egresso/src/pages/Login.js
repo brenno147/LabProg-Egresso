@@ -5,8 +5,6 @@ import Footer from "../components/Footer";
 import InputLoginComponent from "../components/InputLoginComponent";
 import ButtonComponent from "../components/ButtonComponent";
 
-
-
 function Login(){
     return(
         <div>
@@ -20,7 +18,7 @@ function Login(){
                     <InputLoginComponent value="Senha"/>
                 </div>
                 <div style={{width:"20%", marginTop:"50px", marginBottom:"50px"}}>
-                    <ButtonComponent value="Login"/>
+                    <ButtonComponent nome="Login"/>
                 </div>
             </div>
             <Footer/>

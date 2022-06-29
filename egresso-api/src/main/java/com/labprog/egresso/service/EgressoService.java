@@ -23,7 +23,7 @@ public class EgressoService {
 
     @Transactional
     public Egresso salvar(Egresso egresso) {
-
+        // OBS.: deve validar o usuário antes de salvar
         Egresso egressoSalvo = egressoRepository.save(egresso);
 
         verificarEgresso(egresso);

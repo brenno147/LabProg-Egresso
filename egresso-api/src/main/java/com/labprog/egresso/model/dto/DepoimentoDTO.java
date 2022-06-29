@@ -1,17 +1,19 @@
-package com.labprog.egresso.controller.dto;
+package com.labprog.egresso.model.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 
 @Data
 @Builder
 @AllArgsConstructor
-public class DepoimentoDto {
-
+@NoArgsConstructor
+public class DepoimentoDTO {
     private Long idEgresso;
     private String texto;
     private LocalDate data;
+
 }

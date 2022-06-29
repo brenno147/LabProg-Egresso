@@ -7,6 +7,9 @@ import com.labprog.egresso.model.entities.CursoEgressoPK;
 import com.labprog.egresso.model.entities.Egresso;
 import com.labprog.egresso.model.repositories.CursoEgressoRepository;
 import com.labprog.egresso.service.exceptions.RegraNegocioException;
+
+import lombok.extern.log4j.Log4j2;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -17,7 +20,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.time.LocalDate;
 import java.util.List;
-
+@Log4j2
 @ActiveProfiles("test")
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
@@ -156,6 +159,8 @@ public class CursoServiceTest {
         List<Curso> cursos = cursoService.consultarCursoPorEgresso(egressoResultado.getIdEgresso());
         List<Curso> cursos2 = cursoService.consultarCursoPorEgresso(egressoResultado2.getIdEgresso());
 
+        log.info("\n\nCursos",cursos);
+        log.info("\n\nCursos2",cursos2);
         Assertions.assertEquals(2, cursos.size());
         Assertions.assertEquals(1, cursos2.size());
     }
@@ -240,7 +245,7 @@ public class CursoServiceTest {
         cursoEgressoRepository.save(cursoEgresso3);
 
         List<CursoNumEgresso> cursos = cursoService.quantEgressoPorCurso();
-
+        log.info("\n\nCursos",cursos.size());
         Assertions.assertEquals(2, cursos.size());
         Assertions.assertEquals(2, cursos.get(0).getNumEgresso());
         Assertions.assertEquals(1, cursos.get(1).getNumEgresso());

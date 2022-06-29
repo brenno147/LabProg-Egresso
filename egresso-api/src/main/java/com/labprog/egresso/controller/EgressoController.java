@@ -1,9 +1,10 @@
 package com.labprog.egresso.controller;
 
-import com.labprog.egresso.controller.dto.ContatoDto;
-import com.labprog.egresso.controller.dto.CursoEgressoDto;
-import com.labprog.egresso.controller.dto.EgressoDto;
-import com.labprog.egresso.controller.dto.ProfEgressoDto;
+
+import com.labprog.egresso.model.dto.ContatoDTO;
+import com.labprog.egresso.model.dto.CursoEgressoDTO;
+import com.labprog.egresso.model.dto.EgressoDTO;
+import com.labprog.egresso.model.dto.ProfEgressoDTO;
 import com.labprog.egresso.model.entities.*;
 import com.labprog.egresso.model.repositories.EgressoRepository;
 import com.labprog.egresso.service.CargoService;
@@ -11,6 +12,9 @@ import com.labprog.egresso.service.CursoService;
 import com.labprog.egresso.service.EgressoService;
 import com.labprog.egresso.service.FaixaSalarioService;
 import com.labprog.egresso.service.exceptions.RegraNegocioException;
+
+import lombok.extern.log4j.Log4j2;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +22,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Log4j2
 @RestController
 @RequestMapping("/api/egressos")
 public class EgressoController {
@@ -43,25 +48,26 @@ public class EgressoController {
     }
 
     @PostMapping
-    public ResponseEntity salvar(@RequestBody EgressoDto dto){
+    public ResponseEntity salvar(@RequestBody EgressoDTO dto){
         Egresso egresso = Egresso.builder()
                 .nome(dto.getNome())
                 .email(dto.getEmail())
                 .cpf(dto.getCpf())
                 .urlFoto(dto.getUrlFoto())
                 .resumo(dto.getResumo())
+                .senha(dto.getSenha())
                 .build();
-
-        for (ContatoDto contatoDto : dto.getContatos()) {
+        // Não está inserirndo os contatos
+        for (ContatoDTO contatoDto : dto.getContatos()) {
             Contato contato = Contato.builder()
                     .nome(contatoDto.getNome())
                     .url_logo(contatoDto.getUrl_logo())
                     .build();
-
+            log.info(contato);
             egresso.getContatos().add(contato);
         }
 
-        for (CursoEgressoDto cursoEgressoDto : dto.getCursos()) {
+        for (CursoEgressoDTO cursoEgressoDto : dto.getCursos()) {
             Curso curso = cursoService.buscarPorId(cursoEgressoDto.getCursoId());
 
             CursoEgresso cursoEgresso = CursoEgresso.builder()
@@ -73,7 +79,7 @@ public class EgressoController {
             egresso.addCurso(cursoEgresso);
         }
 
-        for (ProfEgressoDto profEgressoDto : dto.getProfissoes()) {
+        for (ProfEgressoDTO profEgressoDto : dto.getProfissoes()) {
             Cargo cargo = cargoService.buscarPorId(profEgressoDto.getCargoId());
             FaixaSalario faixaSalario = faixaSalarioService.buscarPorId(profEgressoDto.getFaixaSalarioId());
 
@@ -92,7 +98,7 @@ public class EgressoController {
             Egresso salvo = egressoService.salvar(egresso);
             return new ResponseEntity(salvo, HttpStatus.CREATED);
         } catch (RegraNegocioException e) {
-            return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
+            return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
 
