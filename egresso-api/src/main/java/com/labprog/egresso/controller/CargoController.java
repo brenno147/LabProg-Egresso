@@ -3,7 +3,7 @@ package com.labprog.egresso.controller;
 import com.labprog.egresso.controller.dto.CargoDto;
 import com.labprog.egresso.model.dto.CargoNumEgresso;
 import com.labprog.egresso.model.entities.Cargo;
-import com.labprog.egresso.service.repositories.CargoRepository;
+import com.labprog.egresso.model.repositories.CargoRepository;
 import com.labprog.egresso.service.CargoService;
 import com.labprog.egresso.service.exceptions.RegraNegocioException;
 import org.springframework.beans.factory.annotation.Autowired;

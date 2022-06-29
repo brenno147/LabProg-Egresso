@@ -2,9 +2,6 @@ package com.labprog.egresso.model.repositories;
 
 import com.labprog.egresso.model.entities.Contato;
 import com.labprog.egresso.model.entities.Egresso;
-import com.labprog.egresso.service.repositories.ContatoRepository;
-import com.labprog.egresso.service.repositories.CursoRepository;
-import com.labprog.egresso.service.repositories.EgressoRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

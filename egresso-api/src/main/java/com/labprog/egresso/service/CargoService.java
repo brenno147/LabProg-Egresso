@@ -5,8 +5,8 @@ import java.util.List;
 import com.labprog.egresso.model.dto.CargoNumEgresso;
 import com.labprog.egresso.model.entities.Cargo;
 import com.labprog.egresso.model.entities.Egresso;
-import com.labprog.egresso.service.repositories.CargoRepository;
-import com.labprog.egresso.service.repositories.EgressoRepository;
+import com.labprog.egresso.model.repositories.CargoRepository;
+import com.labprog.egresso.model.repositories.EgressoRepository;
 import com.labprog.egresso.service.exceptions.RegraNegocioException;
 
 

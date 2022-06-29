@@ -3,7 +3,7 @@ package com.labprog.egresso.controller;
 import com.labprog.egresso.controller.dto.CursoDto;
 import com.labprog.egresso.model.dto.CursoNumEgresso;
 import com.labprog.egresso.model.entities.Curso;
-import com.labprog.egresso.service.repositories.CursoRepository;
+import com.labprog.egresso.model.repositories.CursoRepository;
 import com.labprog.egresso.service.CursoService;
 import com.labprog.egresso.service.exceptions.RegraNegocioException;
 import org.springframework.beans.factory.annotation.Autowired;

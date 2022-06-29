@@ -5,7 +5,6 @@ import java.util.Optional;
 
 import com.labprog.egresso.model.entities.Cargo;
 
-import com.labprog.egresso.service.repositories.CargoRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

@@ -5,7 +5,7 @@ import com.labprog.egresso.model.entities.Cargo;
 import com.labprog.egresso.model.entities.Egresso;
 import com.labprog.egresso.model.entities.FaixaSalario;
 import com.labprog.egresso.model.entities.ProfEgresso;
-import com.labprog.egresso.service.repositories.ProfEgressoRepository;
+import com.labprog.egresso.model.repositories.ProfEgressoRepository;
 import com.labprog.egresso.service.exceptions.RegraNegocioException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

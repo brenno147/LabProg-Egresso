@@ -2,7 +2,7 @@ package com.labprog.egresso.service;
 
 import com.labprog.egresso.model.entities.Depoimento;
 import com.labprog.egresso.model.entities.Egresso;
-import com.labprog.egresso.service.repositories.DepoimentoRepository;
+import com.labprog.egresso.model.repositories.DepoimentoRepository;
 import com.labprog.egresso.service.exceptions.RegraNegocioException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

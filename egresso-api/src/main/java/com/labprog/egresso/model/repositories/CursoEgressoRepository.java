@@ -1,4 +1,4 @@
-package com.labprog.egresso.service.repositories;
+package com.labprog.egresso.model.repositories;
 
 import com.labprog.egresso.model.entities.CursoEgresso;
 

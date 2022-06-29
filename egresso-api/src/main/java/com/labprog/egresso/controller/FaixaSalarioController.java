@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.labprog.egresso.controller.dto.FaixaSalarioDto;
 import com.labprog.egresso.model.entities.FaixaSalario;
-import com.labprog.egresso.service.repositories.FaixaSalarioRepository;
+import com.labprog.egresso.model.repositories.FaixaSalarioRepository;
 import com.labprog.egresso.service.exceptions.RegraNegocioException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

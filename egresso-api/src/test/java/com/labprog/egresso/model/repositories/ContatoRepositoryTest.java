@@ -6,7 +6,6 @@ import java.util.Optional;
 import com.labprog.egresso.model.entities.Contato;
 
 
-import com.labprog.egresso.service.repositories.ContatoRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
