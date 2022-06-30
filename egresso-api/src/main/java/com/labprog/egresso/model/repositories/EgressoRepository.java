@@ -8,4 +8,6 @@ import org.springframework.stereotype.Repository;
 public interface EgressoRepository extends JpaRepository<Egresso, Long> {
 
     Egresso findByNome(String nome);
+
+    Egresso findByEmail(String email);
 }

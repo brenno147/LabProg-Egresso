@@ -63,14 +63,20 @@ public class EgressoController {
                     .nome(contatoDto.getNome())
                     .url_logo(contatoDto.getUrl_logo())
                     .build();
-            log.info(contato);
+
             egresso.getContatos().add(contato);
         }
 
         for (CursoEgressoDTO cursoEgressoDto : dto.getCursos()) {
             Curso curso = cursoService.buscarPorId(cursoEgressoDto.getCursoId());
 
+            CursoEgressoPK pk = CursoEgressoPK.builder()
+                    .egresso_id(egresso.getIdEgresso())
+                    .curso_id(curso.getId_curso())
+                    .build();
+
             CursoEgresso cursoEgresso = CursoEgresso.builder()
+                    .id(pk)
                     .curso(curso)
                     .data_inicio(cursoEgressoDto.getDataInicio())
                     .data_conclusao(cursoEgressoDto.getDataConclusao())

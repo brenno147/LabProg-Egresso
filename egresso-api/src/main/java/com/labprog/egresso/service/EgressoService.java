@@ -1,6 +1,7 @@
 package com.labprog.egresso.service;
 
 import com.labprog.egresso.model.entities.*;
+import com.labprog.egresso.model.repositories.ContatoRepository;
 import com.labprog.egresso.service.exceptions.RegraNegocioException;
 import com.labprog.egresso.model.repositories.CursoEgressoRepository;
 import com.labprog.egresso.model.repositories.EgressoRepository;
@@ -21,12 +22,19 @@ public class EgressoService {
     @Autowired
     CursoEgressoRepository cursoEgressoRepository;
 
+    @Autowired
+    ContatoRepository contatoRepository;
+
     @Transactional
     public Egresso salvar(Egresso egresso) {
-        // OBS.: deve validar o usuário antes de salvar
+        verificarEgresso(egresso);
+
+        for (Contato contato : egresso.getContatos()){
+            contatoRepository.save(contato);
+        }
+
         Egresso egressoSalvo = egressoRepository.save(egresso);
 
-        verificarEgresso(egresso);
         for (ProfEgresso profissoes : egresso.getProfissao()) {
             profEgressoRepository.save(profissoes);
         }

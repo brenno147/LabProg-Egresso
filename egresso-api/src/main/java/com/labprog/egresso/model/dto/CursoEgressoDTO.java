@@ -11,6 +11,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 
 public class CursoEgressoDTO {
+    private Long id;
     private Long cursoId;
     private LocalDate dataInicio;
     private LocalDate dataConclusao;

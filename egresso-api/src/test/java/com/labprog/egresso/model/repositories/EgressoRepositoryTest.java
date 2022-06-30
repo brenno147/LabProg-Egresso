@@ -74,7 +74,6 @@ public class EgressoRepositoryTest {
         Assertions.assertEquals(salvo.getCpf(), egresso.getCpf());
         Assertions.assertEquals(salvo.getResumo(), egresso.getResumo());
         Assertions.assertEquals(salvo.getUrlFoto(), egresso.getUrlFoto());
-        Assertions.assertEquals(salvo.getContatos(), egresso.getContatos());
     }
 
     @Test

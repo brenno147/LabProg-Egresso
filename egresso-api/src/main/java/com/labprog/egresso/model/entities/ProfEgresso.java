@@ -1,5 +1,8 @@
 package com.labprog.egresso.model.entities;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -21,7 +24,9 @@ public class ProfEgresso {
     @Column(name = "id_prof_egresso")
     private Long idProfEgresso;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "idEgresso")
+    @JsonIdentityReference(alwaysAsId = true)
     @JoinColumn(name = "egresso_id")
     private Egresso egresso;
 
