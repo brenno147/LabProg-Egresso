@@ -6,6 +6,7 @@ import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -20,7 +21,6 @@ import lombok.NoArgsConstructor;
 @Table(name = "curso_egresso")
 public class CursoEgresso {
 
-
   @EmbeddedId
   CursoEgressoPK id;
 
@@ -31,7 +31,7 @@ public class CursoEgresso {
   @JoinColumn(name="egresso_id")
   private Egresso egresso;
 
-  @ManyToOne(fetch = FetchType.LAZY)
+  @ManyToOne
   @MapsId("curso_id")
   @JoinColumn(name="curso_id")
   private Curso curso;

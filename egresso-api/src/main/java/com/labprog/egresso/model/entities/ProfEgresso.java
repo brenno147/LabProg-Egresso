@@ -30,11 +30,11 @@ public class ProfEgresso {
     @JoinColumn(name = "egresso_id")
     private Egresso egresso;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "cargo_id")
     private Cargo cargo;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "faixa_salario_id")
     private FaixaSalario faixaSalario;
 

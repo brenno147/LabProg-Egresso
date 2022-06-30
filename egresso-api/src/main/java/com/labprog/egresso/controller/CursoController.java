@@ -78,13 +78,11 @@ public class CursoController {
         }
     }
 
-    // Não está passando
     @GetMapping("/lista-cursos-por-egresso/{id}")
     public List<Curso> listaCargosPorEgresso(@PathVariable Long id) {
         return cursoService.consultarCursoPorEgresso(id);
     }
-    
-    // Não está passando
+
     @GetMapping("/quant-egresso-por-curso")
     public List<CursoNumEgresso> quantEgressoPorCurso(){
         return cursoService.quantEgressoPorCurso();
