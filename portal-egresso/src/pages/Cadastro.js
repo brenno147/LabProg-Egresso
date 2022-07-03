@@ -9,6 +9,7 @@ import DepoimentoTextComponent from '../components/DepoimentoTextComponent';
 import Curso from '../components/Curso';
 import Cargo from '../components/Cargo';
 import CriarContato from '../components/CriarContato';
+import SelectInput from '../components/SelectInput';
 
 function Cadastro(){
     return(
@@ -27,8 +28,13 @@ function Cadastro(){
                 <div  className="h3" style={{marginBottom:"50px", marginTop:"50px"}}>
                     Curso
                 </div>
-                <div className='w-70 mb-5'>
-                    <Curso curso="curso" nivel="nivel"/>
+                <div className='d-flex flex-row w-70 mb-5'>
+                    <SelectInput value = "Curso:" options = {[{ value: 'chocolate', label: 'Chocolate' },
+                                            { value: 'strawberry', label: 'Strawberry' },
+                                            { value: 'vanilla', label: 'Vanilla' }]}/>
+                    <SelectInput value = "Nível:" options = {[{ value: 'chocolate', label: 'Chocolate' },
+                                            { value: 'strawberry', label: 'Strawberry' },
+                                            { value: 'vanilla', label: 'Vanilla' }]}/>
                 </div>
                 <div style={{width:"30%"}}>
                     <ButtonSubmitComponent value="+ adicionar"/>
