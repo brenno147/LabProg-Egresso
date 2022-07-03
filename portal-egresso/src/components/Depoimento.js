@@ -14,7 +14,7 @@ const Depoimento = () => {
     };
 
     return ( 
-        <div class="m-4">
+        <div className="m-4">
             <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
                 <AccordionSummary
                     expandIcon={<ExpandMoreIcon />}

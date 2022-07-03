@@ -130,4 +130,14 @@ public class EgressoController {
             return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
+
+    @PostMapping("/login")
+    public ResponseEntity autenticar(@RequestBody EgressoDTO dto) {
+        try {
+            egressoService.efetuarLogin(dto.getEmail(), dto.getSenha());
+            return ResponseEntity.ok(true);
+        } catch(RegraNegocioException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    } 
 }

@@ -5,7 +5,12 @@ import DepoimentosCarousel from "./../components/DepoimentosCarousel";
 import Charts from "./../components/Charts";
 import Footer from "./../components/Footer";
 import NavbarComponent from "../components/NavbarComponent";
+import {useNavigate} from 'react-router-dom'
+
+
+
 export default function Home() {
+  const navigate = useNavigate();
   const styles = {
     button: {
       border: "none",
@@ -36,6 +41,7 @@ export default function Home() {
           type="button"
           className="pr-3 pl-3 pt-1 pb-1 text-light"
           style={styles.button}
+          onClick={() => navigate("/egresso")}
         >
           Ver mais
         </button>
@@ -48,6 +54,7 @@ export default function Home() {
           type="button"
           className="pr-3 pl-3 pt-1 pb-1 text-light mt-4"
           style={styles.button}
+          onClick={() => navigate("/depoimento")}
         >
           Ver mais
         </button>
@@ -63,6 +70,7 @@ export default function Home() {
           type="button"
           className="pr-3 pl-3 pt-1 pb-1 text-light mt-4"
           style={styles.button}
+          onClick={() => navigate("/estatisticas")}
         >
           Ver mais
         </button>
