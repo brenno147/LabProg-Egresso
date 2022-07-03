@@ -2,7 +2,9 @@ import React from 'react';
 function ButtonComponent(props) {
   return (
     <div className='button-style-hover'>
-      <button  className="button-style" type="button">{props.nome}</button>
+      <a href={props.route}>
+        <button  className="button-style" onClick={props.nav} type="button">{props.nome}</button>
+      </a>
     </div>
   );
 }

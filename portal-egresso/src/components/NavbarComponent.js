@@ -5,6 +5,7 @@ import logo from '../imgs/log.png';
 import '../css/style.css';
 
 function NavbarComponent(){
+
     return(
         <Navbar expand="lg" style={{backgroundColor: "#5b7bb5"}}>
             <Container>
@@ -22,7 +23,7 @@ function NavbarComponent(){
                     <a className="text-nav" href="#/estatisticas">Estatísticas</a>
                 </Nav>
                 <div className="button-nav">
-                    <ButtonComponent nome={'Cadastre-se'}/>
+                    <ButtonComponent nome={'Cadastre-se'} route={'#/cadastro'}/>
                 </div>
                 <div className="button-nav">
                     <ButtonComponent nome={'Login'}/>
