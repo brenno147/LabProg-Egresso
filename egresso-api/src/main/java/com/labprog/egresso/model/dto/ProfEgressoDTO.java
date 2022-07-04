@@ -12,6 +12,10 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Builder
 @NoArgsConstructor
+<<<<<<< HEAD
+=======
+
+>>>>>>> 9ea5707fd710713931c976de2fa56ef858878e91
 public class ProfEgressoDTO {
     private Long cargoId;
     private Long faixaSalarioId;

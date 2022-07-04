@@ -11,6 +11,10 @@ import java.time.LocalDate;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+<<<<<<< HEAD
+=======
+
+>>>>>>> 9ea5707fd710713931c976de2fa56ef858878e91
 public class CursoEgressoDTO {
     private Long id;
     private Long cursoId;
