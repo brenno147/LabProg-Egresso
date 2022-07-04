@@ -128,6 +128,16 @@ const addCurso = () => {
             inputChange={(e) => handleChange(e)}
             inputName="cpf"
           />
+          <div className='mr-2' style={{alignItems: "flex-start",display: "in-line", backgroundColor: "transparent", width:"100%"}}>
+            <label className="textInput">Senha:</label>
+            <input 
+              type="password" 
+              className="input-text"
+              placeholder="Digite sua senha" 
+              value={egresso.senha} 
+              onChange={(e)=> handleChange(e)}
+              name="senha"/>
+          </div>
           <input
             name="resumo"
             value={egresso.resumo}
