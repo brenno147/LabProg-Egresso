@@ -15,21 +15,16 @@ function Cadastro() {
     cpf: "",
     senha: "",
     resumo: "",
-    urlFoto: "",
-    contatos: [
-      //{
-      //     nome: '',
-      //     urlLogo: '',
-      // }
-    ],
+    urlFoto: "teste",
+    contatos: [],
     profissoes: [],
-    cursos: [
-      //{
-      //cursoId: '',
-      //dataInicio: '',
-      //dataConclusao: ''
-      //}
-    ],
+    cursos: [],
+  });
+
+  const [contatos, setContatos] = useState({
+    contatoInsta: "",
+    contatoLinke: "",
+    contatoGit: "",
   });
 
   const [curso, setCurso] = useState({
@@ -65,6 +60,12 @@ function Cadastro() {
     console.log(curso);
   };
 
+  const handleChangeContato = (e) => {
+    const value = e.target.value;
+    setContatos((prevState) => ({ ...prevState, [e.target.name]: value }));
+    console.log(contatos);
+  };
+
   const handleChangeCurso = (e) => {
     const value = e.target.value;
     setCurso((prevState) => ({ ...prevState, [e.target.name]: value }));
@@ -77,6 +78,14 @@ function Cadastro() {
     console.log(profissao);
   };
 
+  const addContatos = () => {
+    setEgresso((prevState) => ({ ...prevState, contatos: [{nome: "Instagram", urlLogo: contatos.contatoInsta}, 
+                                                          {nome: "Linkedin", urlLogo: contatos.contatoLinke},
+                                                          {nome: "Github", urlLogo: contatos.contatoGit},] 
+    }));
+    console.log(egresso)
+};
+
 const addCurso = () => {
     setEgresso((prevState) => ({ ...prevState, cursos: [...egresso.cursos, curso] }));
     console.log(egresso)
@@ -88,6 +97,7 @@ const addCurso = () => {
   };
 
   const handleClickCadastrar = () => {
+    addContatos()
     addProf()
     addCurso()
   }
@@ -208,9 +218,21 @@ const addCurso = () => {
           Contatos
         </div>
         <div className="w-50">
-          <TextInputComponent value="Instagram:" />
-          <TextInputComponent value="Twitter:" />
-          <TextInputComponent value="GitHub:" />
+          <TextInputComponent 
+            value="Instagram:" 
+            inputValue={contatos.contatoInsta}
+            inputChange={(e) => handleChangeContato(e)}
+            inputName="contatoInsta"/>
+          <TextInputComponent 
+            value="Linkedin:" 
+            inputValue={contatos.contatoLinke}
+            inputChange={(e) => handleChangeContato(e)}
+            inputName="contatoLinke"/>
+          <TextInputComponent 
+            value="GitHub:" 
+            inputValue={contatos.contatoGit}
+            inputChange={(e) => handleChangeContato(e)}
+            inputName="contatoGit"/>
         </div>
         <div className="h3" style={{ marginBottom: "50px", marginTop: "50px" }}>
           Depoimento
