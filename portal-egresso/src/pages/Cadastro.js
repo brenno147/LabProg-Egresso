@@ -1,17 +1,66 @@
-import React from 'react'
+import React, { useState } from 'react'
 import TextInputComponent from '../components/TextInputComponent';
 import NavbarComponentLogin from '../components/NavbarComponentLogin';
 import Footer from '../components/Footer';
-import ProfComponents from '../components/ProfComponents';
 import ButtonComponent from '../components/ButtonComponent';
 import ButtonSubmitComponent from '../components/ButtonSubmitComponent';
 import DepoimentoTextComponent from '../components/DepoimentoTextComponent';
-import Curso from '../components/Curso';
-import Cargo from '../components/Cargo';
-import CriarContato from '../components/CriarContato';
 import SelectInput from '../components/SelectInput';
+import DateInput from '../components/DateInput';
 
 function Cadastro(){
+
+    const [egresso, setEgresso] = useState({
+        nome: '',
+        email: '',
+        cpf: '',
+        senha: '',
+        resumo: '',
+        urlFoto: '',
+        contatos: [{
+            nome: '',
+            urlLogo: '',
+        }],
+        profissoes: [],
+        cursos: [{
+            cursoId: '',
+            dataInicio: '',
+            dataConclusao: ''
+        }]
+    })
+
+    const [profissao, setProfissao] = useState({
+        cargoId: '',
+        faixaSalarioId: '',
+        empresa: '',
+        descricao: '',
+        dataRegistro: ''
+    })
+
+    const handleChange = (e) => {
+        const value = e.target.value;
+        setEgresso({ ...egresso, [e.target.name]: value });
+        console.log(egresso)
+      };
+
+      const handleChangeProfCargo = (selectedOption) => {
+        setProfissao({ ...profissao, cargoId: selectedOption.value });
+        console.log(profissao)
+      };
+
+      const handleChangeProf = (e) => {
+        const value = e.target.value;
+        setProfissao({ ...profissao, [e.target.name]: value });
+        console.log(profissao)
+      };
+
+    const addProf = () => {
+        setEgresso({...egresso, cursos: [...egresso.cursos, profissao]})
+        console.log(egresso)
+    }
+
+
+
     return(
         <div className="">
             <NavbarComponentLogin/>
@@ -20,19 +69,16 @@ function Cadastro(){
                     Cadastro
                 </div>
                 <div className='w-50'>
-                    <TextInputComponent value="Nome:"/>
-                    <TextInputComponent value="Email:"/>
-                    <TextInputComponent value="Cpf:"/>
-                    <input type="text" className="input-text mt-3" placeholder={"Resumo sobre suas habilidades"}/>
+                    <TextInputComponent value="Nome:" inputValue={egresso.nome} inputChange={(e) =>handleChange(e)} inputName="nome"/>
+                    <TextInputComponent value="Email:" inputValue={egresso.email} inputChange={(e) =>handleChange(e)} inputName="email"/>
+                    <TextInputComponent value="Cpf:" inputValue={egresso.cpf} inputChange={(e) =>handleChange(e)} inputName="cpf"/>
+                    <input name="resumo" value={egresso.resumo} onChange={(e) => handleChange(e)} type="text" className="input-text mt-3" placeholder={"Resumo sobre suas habilidades"}/>
                 </div>
                 <div  className="h3" style={{marginBottom:"50px", marginTop:"50px"}}>
                     Curso
                 </div>
                 <div className='d-flex flex-row w-70 mb-5'>
                     <SelectInput value = "Curso:" options = {[{ value: 'chocolate', label: 'Chocolate' },
-                                            { value: 'strawberry', label: 'Strawberry' },
-                                            { value: 'vanilla', label: 'Vanilla' }]}/>
-                    <SelectInput value = "Nível:" options = {[{ value: 'chocolate', label: 'Chocolate' },
                                             { value: 'strawberry', label: 'Strawberry' },
                                             { value: 'vanilla', label: 'Vanilla' }]}/>
                 </div>
@@ -42,7 +88,15 @@ function Cadastro(){
                 <div  className="h3" style={{marginBottom:"50px", marginTop:"50px"}}>
                     Cargo
                 </div>
-                    <Cargo cargo="nome" descricao="breve descrição do seu cargo"/>
+                <div className='d-flex flex-row w-70 mb-5'>
+                    <SelectInput value = "Cargo:" options = {[{ value: 1, label: 'Cargo teste' },
+                                                            {  value: 2, label: 'Chocolate' }]}
+                        inputChange={handleChangeProfCargo}/>
+                    <SelectInput value = "Faixa Salarial:" options = {[{ value: 1, label: 'Cargo teste' }]}/>
+                    <TextInputComponent value="Empresa:"/>
+                    <TextInputComponent value="Descrição do cargo:"/>
+                    <DateInput value = "Data de Registro:"/>
+                </div>
                 <div  className='mt-5' style={{width:"30%"}}>
                     <ButtonSubmitComponent value="+ adicionar"/>
                 </div>
@@ -61,8 +115,16 @@ function Cadastro(){
                 <div style={{width:"30%", marginBottom:"30px"}}>
                     <ButtonSubmitComponent value="+ adicionar"/>
                 </div>
-                <div style={{alignSelf:"end", display:"flex", flexDirection:"row", marginTop:"20px", marginBottom:"30px", marginRight:"60px"}}>
-                    <ButtonComponent nome="Cadastrar"/>
+                <div
+                    style={{
+                    alignSelf: "end",
+                    display: "flex",
+                    flexDirection: "row",
+                    marginTop: "20px",
+                    marginBottom: "30px",
+                    marginRight: "60px",
+                    }}>
+                    <ButtonComponent nome="Cadastrar" click={() => addProf()}/>
                 </div>
             </div>
             
