@@ -22,11 +22,13 @@ function Cadastro(){
             urlLogo: '',
         }],
         profissoes: [],
-        cursos: [{
-            cursoId: '',
-            dataInicio: '',
-            dataConclusao: ''
-        }]
+        cursos: [
+        //{
+            //cursoId: '',
+            //dataInicio: '',
+            //dataConclusao: ''
+        //}
+        ]
     })
 
     const [profissao, setProfissao] = useState({
@@ -43,10 +45,11 @@ function Cadastro(){
         console.log(egresso)
       };
 
-      const handleChangeProfCargo = (selectedOption) => {
-        setProfissao({ ...profissao, cargoId: selectedOption.value });
+      const handleChangeSelect = (selectedOption) => {
+        setProfissao({ ...profissao, [selectedOption.nome]: selectedOption.value });
         console.log(profissao)
       };
+
 
       const handleChangeProf = (e) => {
         const value = e.target.value;
@@ -55,7 +58,7 @@ function Cadastro(){
       };
 
     const addProf = () => {
-        setEgresso({...egresso, cursos: [...egresso.cursos, profissao]})
+        setEgresso({...egresso, profissoes: [...egresso.profissoes, profissao]})
         console.log(egresso)
     }
 
@@ -89,13 +92,14 @@ function Cadastro(){
                     Cargo
                 </div>
                 <div className='d-flex flex-row w-70 mb-5'>
-                    <SelectInput value = "Cargo:" options = {[{ value: 1, label: 'Cargo teste' },
-                                                            {  value: 2, label: 'Chocolate' }]}
-                        inputChange={handleChangeProfCargo}/>
-                    <SelectInput value = "Faixa Salarial:" options = {[{ value: 1, label: 'Cargo teste' }]}/>
-                    <TextInputComponent value="Empresa:"/>
-                    <TextInputComponent value="Descrição do cargo:"/>
-                    <DateInput value = "Data de Registro:"/>
+                    <SelectInput value = "Cargo:" options = {[{nome: "cargoId", value: 1, label: 'Cargo teste' },
+                                                            {nome: "cargoId",  value: 2, label: 'Chocolate' }]}
+                        inputChange={handleChangeSelect}/>
+                    <SelectInput value = "Faixa Salarial:" options = {[{nome: "faixaSalarioId", value: 1, label: 'Faixa Salario teste' }]}
+                        inputChange={handleChangeSelect}/>
+                    <TextInputComponent value="Empresa:" inputValue={profissao.empresa} inputChange={(e) =>handleChangeProf(e)} inputName="empresa"/>
+                    <TextInputComponent value="Descrição do cargo:" inputValue={profissao.descricao} inputChange={(e) =>handleChangeProf(e)} inputName="descricao"/>
+                    <DateInput value = "Data de Registro:" inputValue={profissao.dataRegistro} inputChange={(e) =>handleChangeProf(e)} inputName="dataRegistro"/>
                 </div>
                 <div  className='mt-5' style={{width:"30%"}}>
                     <ButtonSubmitComponent value="+ adicionar"/>
