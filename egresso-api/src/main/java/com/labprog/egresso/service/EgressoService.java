@@ -6,8 +6,12 @@ import com.labprog.egresso.service.exceptions.RegraNegocioException;
 import com.labprog.egresso.model.repositories.CursoEgressoRepository;
 import com.labprog.egresso.model.repositories.EgressoRepository;
 import com.labprog.egresso.model.repositories.ProfEgressoRepository;
+
+import org.aspectj.apache.bcel.Repository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 
@@ -24,6 +28,9 @@ public class EgressoService {
 
     @Autowired
     ContatoRepository contatoRepository;
+
+    @Autowired
+    EgressoRepository repository;
 
     @Transactional
     public Egresso salvar(Egresso egresso) {
@@ -95,5 +102,15 @@ public class EgressoService {
         if ((egresso.getUrlFoto() == null) || egresso.getUrlFoto().equals(' ')) {
             throw new RegraNegocioException("A url da foto do egresso não está preenchido corretamente");
         }
+    }
+
+
+    public boolean efetuarLogin(String email, String senha) {
+        Optional <Egresso> egresso = repository.findByEmail(email);
+        if (!egresso.isPresent())
+            throw new RegraNegocioException("Erro de autenticação. Email informado não encontrado");    
+        if (!egresso.get().getSenha().equals(senha))
+            throw new RegraNegocioException("Erro de autenticação. Senha inválida");    
+        return true;
     }
 }
