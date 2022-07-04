@@ -4,13 +4,14 @@ package com.labprog.egresso.model.dto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 
 @Data
 @AllArgsConstructor
 @Builder
-
+@NoArgsConstructor
 public class ProfEgressoDTO {
     private Long cargoId;
     private Long faixaSalarioId;
