@@ -7,13 +7,16 @@ import ButtonSubmitComponent from "../components/ButtonSubmitComponent";
 import DepoimentoTextComponent from "../components/DepoimentoTextComponent";
 import SelectInput from "../components/SelectInput";
 import DateInput from "../components/DateInput";
+import EgressoService from "../services/EgressoService";
 
 function Cadastro() {
+  const egressoService = new EgressoService()
+
   const [egresso, setEgresso] = useState({
     nome: "",
     email: "",
     cpf: "",
-    senha: "",
+    senha: "SenhaTeste",
     resumo: "",
     urlFoto: "teste",
     contatos: [],
@@ -100,6 +103,7 @@ const addCurso = () => {
     addContatos()
     addProf()
     addCurso()
+    egressoService.fazerCadastro({...egresso})
   }
 
   return (
