@@ -30,58 +30,80 @@ function Cadastro() {
     contatoGit: "",
   });
 
-  const [curso, setCurso] = useState({
+  const [curso, setCurso] = useState([{
     cursoId: "",
     dataInicio: "",
     dataConclusao: "",
-  });
+  }]);
 
-  const [profissao, setProfissao] = useState({
+  const [profissao, setProfissao] = useState([{
     cargoId: "",
     faixaSalarioId: "",
     empresa: "",
     descricao: "",
     dataRegistro: "",
-  });
+  }]);
 
   const handleChange = (e) => {
     const value = e.target.value;
     setEgresso((prevState) => ({ ...prevState, [e.target.name]: value }));
   };
 
-  const handleChangeSelectProf = (selectedOption) => {
-    setProfissao((prevState) => ({ ...prevState, [selectedOption.nome]: selectedOption.value }));
+  const handleChangeSelectProf = (selectedOption, i) => {
+    let newProf = [...profissao]
+    newProf[i][selectedOption.nome] = selectedOption.value
+    setProfissao(newProf);
   };
 
-  const handleChangeSelectCurso = (selectedOption) => {
-    setCurso((prevState) => ({
-      ...prevState,
-      [selectedOption.nome]: selectedOption.value,
-    }));
+  const handleChangeProf = (e, i) => {
+    let newProf = [...profissao]
+    newProf[i][e.target.name] = e.target.value
+    setProfissao(newProf)
   };
+
+  const addProfField = () => {
+    setProfissao([...profissao, {cargoId: "", faixaSalarioId: "", empresa: "", descricao: "", dataRegistro: ""}])
+  }
+
+  const removeProfFields = (i) => {
+    let newProf = [...profissao]
+    newProf.splice(i,1);
+    setProfissao(newProf)
+  }
+
+  const handleChangeSelectCurso = (selectedOption, i) => {
+    let newCurso = [...curso]
+    newCurso[i][selectedOption.nome] = selectedOption.value
+    setCurso(newCurso);
+  };
+
+  const handleChangeCurso = (e, i) => {
+    let newCurso = [...curso]
+    newCurso[i][e.target.name] = e.target.value
+    setCurso(newCurso)
+  };
+
+  const addCursoField = () => {
+    setCurso([...curso, {cursoId: "", dataInicio: "", dataConclusao: ""}])
+  }
+
+  const removeCursoFields = (i) => {
+    let newCurso = [...curso]
+    newCurso.splice(i,1);
+    setCurso(newCurso)
+  }
 
   const handleChangeContato = (e) => {
     const value = e.target.value;
     setContatos((prevState) => ({ ...prevState, [e.target.name]: value }));
   };
 
-  const handleChangeCurso = (e) => {
-    const value = e.target.value;
-    setCurso((prevState) => ({ ...prevState, [e.target.name]: value }));
-  };
-
-  const handleChangeProf = (e) => {
-    const value = e.target.value;
-    setProfissao((prevState) => ({ ...prevState, [e.target.name]: value }));
-  };
-
   useEffect(() => {
     console.log(egresso) 
   }, [egresso])
   
-
   useEffect(() => {
-    setEgresso((prevState) => ({ ...prevState, profissoes: [profissao] }));
+    setEgresso((prevState) => ({ ...prevState, profissoes: profissao }));
     console.log(profissao)
   }, [profissao])
 
@@ -171,76 +193,90 @@ const addCurso = () => {
         <div className="h3" style={{ marginBottom: "50px", marginTop: "50px" }}>
           Curso
         </div>
-        <div className="d-flex flex-row w-70 mb-5">
-          <SelectInput
-            value="Curso:"
-            options={[
-              { nome: "cursoId", value: 1, label: "Chocolate" },
-              { nome: "cursoId", value: 2, label: "Strawberry" },
-              { nome: "cursoId", value: 3, label: "Vanilla" },
-            ]}
-            inputChange={(e) => handleChangeSelectCurso(e)}
-          />
-          <DateInput
-            value="Data de Início:"
-            inputValue={curso.dataInicio}
-            inputChange={(e) => handleChangeCurso(e)}
-            inputName="dataInicio"
-          />
-          <DateInput
-            value="Data de Conclusão:"
-            inputValue={curso.dataConclusao}
-            inputChange={(e) => handleChangeCurso(e)}
-            inputName="dataConclusao"
-          />
-        </div>
-        <div style={{ width: "30%" }}>
-          <ButtonSubmitComponent value="+ adicionar" />
+        {curso.map((element, index) => (
+          <div className="d-flex flex-row w-70 mb-5" key={index}>
+            <SelectInput
+              value="Curso:"
+              options={[
+                { nome: "cursoId", value: 1, label: "Chocolate" },
+                { nome: "cursoId", value: 2, label: "Strawberry" },
+                { nome: "cursoId", value: 3, label: "Vanilla" },
+              ]}
+              inputChange={(selectedOption) => handleChangeSelectCurso(selectedOption, index)}
+            />
+            <DateInput
+              value="Data de Início:"
+              inputValue={element.dataInicio || ""}
+              inputChange={(e) => handleChangeCurso(e, index)}
+              inputName="dataInicio"
+            />
+            <DateInput
+              value="Data de Conclusão:"
+              inputValue={element.dataConclusao || ""}
+              inputChange={(e) => handleChangeCurso(e, index)}
+              inputName="dataConclusao"
+            />
+            {
+              index ? 
+                <button type="button"  className="button remove" onClick={() => removeCursoFields(index)}>Remover</button> 
+              : null
+            }
+          </div>
+        ))}
+        <div className="mt-5">
+          <button className="button add" type="button" onClick={() => addCursoField()}>+ adicionar</button>
         </div>
         <div className="h3" style={{ marginBottom: "50px", marginTop: "50px" }}>
           Cargo
         </div>
-        <div className="d-flex flex-row w-70 mb-5">
-          <SelectInput
-            value="Cargo:"
-            options={[
-              { nome: "cargoId", value: 1, label: "Cargo teste" },
-              { nome: "cargoId", value: 2, label: "Chocolate" },
-            ]}
-            inputChange={handleChangeSelectProf}
-          />
-          <SelectInput
-            value="Faixa Salarial:"
-            options={[
-              {
-                nome: "faixaSalarioId",
-                value: 1,
-                label: "Faixa Salario teste",
-              },
-            ]}
-            inputChange={handleChangeSelectProf}
-          />
-          <TextInputComponent
-            value="Empresa:"
-            inputValue={profissao.empresa}
-            inputChange={(e) => handleChangeProf(e)}
-            inputName="empresa"
-          />
-          <TextInputComponent
-            value="Descrição do cargo:"
-            inputValue={profissao.descricao}
-            inputChange={(e) => handleChangeProf(e)}
-            inputName="descricao"
-          />
-          <DateInput
-            value="Data de Registro:"
-            inputValue={profissao.dataRegistro}
-            inputChange={(e) => handleChangeProf(e)}
-            inputName="dataRegistro"
-          />
-        </div>
-        <div className="mt-5" style={{ width: "30%" }}>
-          <ButtonSubmitComponent value="+ adicionar" />
+        {profissao.map((element, index) => (
+          <div className="d-flex flex-row w-70 mb-5" key={index}>
+            <SelectInput
+              value="Cargo:"
+              options={[
+                { nome: "cargoId", value: 1, label: "Cargo teste" },
+                { nome: "cargoId", value: 2, label: "Chocolate" },
+              ]}
+              inputChange={(selectedOption) => handleChangeSelectProf(selectedOption, index)}
+            />
+            <SelectInput
+              value="Faixa Salarial:"
+              options={[
+                {
+                  nome: "faixaSalarioId",
+                  value: 1,
+                  label: "Faixa Salario teste",
+                },
+              ]}
+              inputChange={(selectedOption) => handleChangeSelectProf(selectedOption, index)}
+            />
+            <TextInputComponent
+              value="Empresa:"
+              inputValue={element.empresa || ""}
+              inputChange={(e) => handleChangeProf(e, index)}
+              inputName="empresa"
+            />
+            <TextInputComponent
+              value="Descrição do cargo:"
+              inputValue={element.descricao || ""}
+              inputChange={(e) => handleChangeProf(e, index)}
+              inputName="descricao"
+            />
+            <DateInput
+              value="Data de Registro:"
+              inputValue={element.dataRegistro || ""}
+              inputChange={(e) => handleChangeProf(e, index)}
+              inputName="dataRegistro"
+            />
+            {
+              index ? 
+                <button type="button"  className="button remove" onClick={() => removeProfFields(index)}>Remover</button> 
+              : null
+            }
+          </div>
+        ))}
+        <div className="mt-5">
+          <button className="button add" type="button" onClick={() => addProfField()}>+ adicionar</button>
         </div>
         <div
           className="h3 "
