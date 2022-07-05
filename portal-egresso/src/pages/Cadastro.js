@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import TextInputComponent from "../components/TextInputComponent";
 import NavbarComponentLogin from "../components/NavbarComponentLogin";
 import Footer from "../components/Footer";
@@ -47,12 +47,10 @@ function Cadastro() {
   const handleChange = (e) => {
     const value = e.target.value;
     setEgresso((prevState) => ({ ...prevState, [e.target.name]: value }));
-    console.log(egresso);
   };
 
   const handleChangeSelectProf = (selectedOption) => {
     setProfissao((prevState) => ({ ...prevState, [selectedOption.nome]: selectedOption.value }));
-    console.log(profissao);
   };
 
   const handleChangeSelectCurso = (selectedOption) => {
@@ -60,34 +58,53 @@ function Cadastro() {
       ...prevState,
       [selectedOption.nome]: selectedOption.value,
     }));
-    console.log(curso);
   };
 
   const handleChangeContato = (e) => {
     const value = e.target.value;
     setContatos((prevState) => ({ ...prevState, [e.target.name]: value }));
-    console.log(contatos);
   };
 
   const handleChangeCurso = (e) => {
     const value = e.target.value;
     setCurso((prevState) => ({ ...prevState, [e.target.name]: value }));
-    console.log(curso);
   };
 
   const handleChangeProf = (e) => {
     const value = e.target.value;
     setProfissao((prevState) => ({ ...prevState, [e.target.name]: value }));
-    console.log(profissao);
   };
 
-  const addContatos = () => {
+  useEffect(() => {
+    console.log(egresso) 
+  }, [egresso])
+  
+
+  useEffect(() => {
+    setEgresso((prevState) => ({ ...prevState, profissoes: [profissao] }));
+    console.log(profissao)
+  }, [profissao])
+
+  useEffect(() => {
+    setEgresso((prevState) => ({ ...prevState, cursos: [curso] }));
+    console.log(curso)
+  }, [curso])
+
+  useEffect(() => {
+    setEgresso((prevState) => ({ ...prevState, contatos: [{nome: "Instagram", urlLogo: contatos.contatoInsta}, 
+                                                          {nome: "Linkedin", urlLogo: contatos.contatoLinke},
+                                                          {nome: "Github", urlLogo: contatos.contatoGit},] }));
+    console.log(contatos)
+  }, [contatos])
+  
+
+  /*const addContatos = () => {
     setEgresso((prevState) => ({ ...prevState, contatos: [{nome: "Instagram", urlLogo: contatos.contatoInsta}, 
                                                           {nome: "Linkedin", urlLogo: contatos.contatoLinke},
                                                           {nome: "Github", urlLogo: contatos.contatoGit},] 
     }));
     console.log(egresso)
-};
+  };
 
 const addCurso = () => {
     setEgresso((prevState) => ({ ...prevState, cursos: [...egresso.cursos, curso] }));
@@ -97,12 +114,12 @@ const addCurso = () => {
   const addProf = () => {
     setEgresso((prevState) => ({ ...prevState, profissoes: [...egresso.profissoes, profissao] }));
     console.log(egresso)
-  };
+  };*/
 
   const handleClickCadastrar = () => {
-    addContatos()
-    addProf()
-    addCurso()
+    //addContatos()
+    //addProf()
+    //addCurso()
     egressoService.fazerCadastro({...egresso})
   }
 
