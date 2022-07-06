@@ -60,7 +60,7 @@ public class EgressoController {
         for (ContatoDTO contatoDto : dto.getContatos()) {
             Contato contato = Contato.builder()
                     .nome(contatoDto.getNome())
-                    .url_logo(contatoDto.getUrl_logo())
+                    .url_logo(contatoDto.getUrlLogo())
                     .build();
 
             egresso.getContatos().add(contato);
