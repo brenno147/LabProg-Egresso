@@ -66,6 +66,10 @@ public class EgressoService {
             cursoEgressoRepository.delete(cursos);
         }
 
+        for (Contato contato : egresso.getContatos()){
+            contatoRepository.delete(contato);
+        }
+
         egressoRepository.delete(egresso);
     }
 

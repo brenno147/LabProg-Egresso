@@ -57,6 +57,8 @@ public class CargoService {
     //quantitativo de egressos por cargo
     public List<CargoNumEgresso> quantEgressoPorCargo(){
         List<CargoNumEgresso> quantEgressosCargo = cargRep.numEgressoPorCargo();
+
+
         return quantEgressosCargo;
     }
 

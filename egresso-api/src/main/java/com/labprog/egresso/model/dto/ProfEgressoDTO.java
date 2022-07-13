@@ -14,6 +14,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 
 public class ProfEgressoDTO {
+    private Long id;
     private Long cargoId;
     private Long faixaSalarioId;
     private String empresa;

@@ -104,19 +104,19 @@ function Cadastro() {
   
   useEffect(() => {
     setEgresso((prevState) => ({ ...prevState, profissoes: profissao }));
-    console.log(profissao)
+    //console.log(profissao)
   }, [profissao])
 
   useEffect(() => {
-    setEgresso((prevState) => ({ ...prevState, cursos: [curso] }));
-    console.log(curso)
+    setEgresso((prevState) => ({ ...prevState, cursos: curso }));
+    //console.log(curso)
   }, [curso])
 
   useEffect(() => {
     setEgresso((prevState) => ({ ...prevState, contatos: [{nome: "Instagram", urlLogo: contatos.contatoInsta}, 
                                                           {nome: "Linkedin", urlLogo: contatos.contatoLinke},
                                                           {nome: "Github", urlLogo: contatos.contatoGit},] }));
-    console.log(contatos)
+    //console.log(contatos)
   }, [contatos])
   
 
@@ -270,7 +270,7 @@ const addCurso = () => {
             />
             {
               index ? 
-                <button type="button"  className="button remove" onClick={() => removeProfFields(index)}>Remover</button> 
+                <button type="button" className="button remove" onClick={() => removeProfFields(index)}>Remover</button> 
               : null
             }
           </div>

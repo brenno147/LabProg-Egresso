@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ContatoDTO {
+    private Long id;
     private String nome;
     private String urlLogo;
 }
