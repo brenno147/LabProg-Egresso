@@ -13,11 +13,11 @@ import com.labprog.egresso.service.EgressoService;
 import com.labprog.egresso.service.FaixaSalarioService;
 import com.labprog.egresso.service.exceptions.RegraNegocioException;
 
-import lombok.extern.log4j.Log4j2;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -41,6 +41,9 @@ public class EgressoController {
     @Autowired
     FaixaSalarioService faixaSalarioService;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @GetMapping
     public List<Egresso> listarEgressos(){
         return egressoRepository.findAll();
@@ -54,9 +57,10 @@ public class EgressoController {
                 .cpf(dto.getCpf())
                 .urlFoto(dto.getUrlFoto())
                 .resumo(dto.getResumo())
-                .senha(dto.getSenha())
+                .senha(passwordEncoder.encode(dto.getSenha()))
                 .build();
-        // Não está inserirndo os contatos
+
+        
         for (ContatoDTO contatoDto : dto.getContatos()) {
             Contato contato = Contato.builder()
                     .nome(contatoDto.getNome())
@@ -131,13 +135,13 @@ public class EgressoController {
         }
     }
 
-    @PostMapping("/login")
-    public ResponseEntity autenticar(@RequestBody EgressoDTO dto) {
-        try {
-            egressoService.efetuarLogin(dto.getEmail(), dto.getSenha());
-            return ResponseEntity.ok(true);
-        } catch(RegraNegocioException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
-    } 
+    // @PostMapping("/login")
+    // public ResponseEntity autenticar(@RequestBody EgressoDTO dto) {
+    //     try {
+    //         egressoService.efetuarLogin(dto.getEmail(), dto.getSenha());
+    //         return ResponseEntity.ok(true);
+    //     } catch(RegraNegocioException e) {
+    //         return ResponseEntity.badRequest().body(e.getMessage());
+    //     }
+    // } 
 }

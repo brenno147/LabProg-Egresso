@@ -5,8 +5,9 @@ const instance = axios.create({
 })
 
 class ApiService{
-    constructor(apiUrl){
+    constructor (apiUrl, apiToken) {
         this.apiUrl = apiUrl
+        instance.defaults.headers.common['Authorization'] = apiToken;
     }
 
     post(url,objeto){
