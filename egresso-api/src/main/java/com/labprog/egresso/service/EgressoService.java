@@ -1,22 +1,28 @@
 package com.labprog.egresso.service;
 
-import com.labprog.egresso.model.entities.*;
+import java.util.Collections;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.labprog.egresso.model.entities.Contato;
+import com.labprog.egresso.model.entities.CursoEgresso;
+import com.labprog.egresso.model.entities.Egresso;
+import com.labprog.egresso.model.entities.ProfEgresso;
 import com.labprog.egresso.model.repositories.ContatoRepository;
-import com.labprog.egresso.service.exceptions.RegraNegocioException;
 import com.labprog.egresso.model.repositories.CursoEgressoRepository;
 import com.labprog.egresso.model.repositories.EgressoRepository;
 import com.labprog.egresso.model.repositories.ProfEgressoRepository;
-
-import org.aspectj.apache.bcel.Repository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import java.util.Optional;
-
-import javax.transaction.Transactional;
+import com.labprog.egresso.service.exceptions.RegraNegocioException;
 
 @Service
-public class EgressoService {
+public class EgressoService implements UserDetailsService{
     @Autowired
     EgressoRepository egressoRepository;
 
@@ -31,6 +37,9 @@ public class EgressoService {
 
     @Autowired
     EgressoRepository repository;
+
+    // @Autowired
+    // private PasswordEncoder passwordEncoder;
 
     @Transactional
     public Egresso salvar(Egresso egresso) {
@@ -109,12 +118,15 @@ public class EgressoService {
     }
 
 
-    public boolean efetuarLogin(String email, String senha) {
-        Optional <Egresso> egresso = repository.findByEmail(email);
-        if (!egresso.isPresent())
-            throw new RegraNegocioException("Erro de autenticação. Email informado não encontrado");    
-        if (!egresso.get().getSenha().equals(senha))
-            throw new RegraNegocioException("Erro de autenticação. Senha inválida");    
-        return true;
+    @Override
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        Optional<Egresso> usr = repository.findByEmail(email);
+        if (!usr.isPresent())            
+            throw new UsernameNotFoundException(email);
+        Egresso a = usr.get();
+        return new User(a.getEmail(), a.getSenha(), Collections.emptyList());
     }
+
+
+    
 }

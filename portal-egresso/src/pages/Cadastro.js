@@ -8,9 +8,12 @@ import DepoimentoTextComponent from "../components/DepoimentoTextComponent";
 import SelectInput from "../components/SelectInput";
 import DateInput from "../components/DateInput";
 import EgressoService from "../services/EgressoService";
+import { Alert } from "react-bootstrap";
 
 function Cadastro() {
   const egressoService = new EgressoService()
+
+  const [invalidText, setInvalidText] = useState(false);
 
   const [egresso, setEgresso] = useState({
     nome: "",
@@ -139,15 +142,39 @@ const addCurso = () => {
   };*/
 
   const handleClickCadastrar = () => {
-    //addContatos()
-    //addProf()
-    //addCurso()
+    if (
+      egresso.nome.trim() === "" ||
+      egresso.email.trim() === "" ||
+      egresso.cpf.trim() === "" ||
+      egresso.resumo.trim() === ""
+    )  {
+      setInvalidText("Preencha corretamente as suas informações pessoais");
+    } else if (
+      (egresso.profissoes.length === 1 && egresso.profissoes[0].cargoId === '') ||
+      (egresso.cursos.length === 1 && egresso.cursos[0].cursoId === "")
+    ) {
+      setInvalidText("Insira pelo menos um curso e um cargo");
+    } else {
     egressoService.fazerCadastro({...egresso})
+  }
   }
 
   return (
     <div className="">
       <NavbarComponentLogin />
+
+      {invalidText && (
+        <div className="sticky-top">
+          <Alert
+            variant="danger"
+            onClose={() => setInvalidText(false)}
+            dismissible
+          >
+            {invalidText}
+          </Alert>
+        </div>
+      )}
+
       <div className="d-flex flex-column align-items-center">
         <div className="h1" style={{ marginBottom: "50px", marginTop: "30px" }}>
           Cadastro
@@ -171,15 +198,24 @@ const addCurso = () => {
             inputChange={(e) => handleChange(e)}
             inputName="cpf"
           />
-          <div className='mr-2' style={{alignItems: "flex-start",display: "in-line", backgroundColor: "transparent", width:"100%"}}>
+          <div
+            className="mr-2"
+            style={{
+              alignItems: "flex-start",
+              display: "in-line",
+              backgroundColor: "transparent",
+              width: "100%",
+            }}
+          >
             <label className="textInput">Senha:</label>
             <input 
               type="password" 
               className="input-text"
               placeholder="Digite sua senha" 
               value={egresso.senha} 
-              onChange={(e)=> handleChange(e)}
-              name="senha"/>
+              onChange={(e) => handleChange(e)}
+              name="senha"
+            />
           </div>
           <input
             name="resumo"
@@ -202,7 +238,9 @@ const addCurso = () => {
                 { nome: "cursoId", value: 2, label: "Strawberry" },
                 { nome: "cursoId", value: 3, label: "Vanilla" },
               ]}
-              inputChange={(selectedOption) => handleChangeSelectCurso(selectedOption, index)}
+              inputChange={(selectedOption) =>
+                handleChangeSelectCurso(selectedOption, index)
+              }
             />
             <DateInput
               value="Data de Início:"
@@ -216,15 +254,25 @@ const addCurso = () => {
               inputChange={(e) => handleChangeCurso(e, index)}
               inputName="dataConclusao"
             />
-            {
-              index ? 
-                <button type="button"  className="button remove" onClick={() => removeCursoFields(index)}>Remover</button> 
-              : null
-            }
+            {index ? (
+              <button
+                type="button"
+                className="button remove"
+                onClick={() => removeCursoFields(index)}
+              >
+                Remover
+              </button>
+            ) : null}
           </div>
         ))}
         <div className="mt-5">
-          <button className="button add" type="button" onClick={() => addCursoField()}>+ adicionar</button>
+          <button
+            className="button add"
+            type="button"
+            onClick={() => addCursoField()}
+          >
+            + adicionar
+          </button>
         </div>
         <div className="h3" style={{ marginBottom: "50px", marginTop: "50px" }}>
           Cargo
@@ -237,7 +285,9 @@ const addCurso = () => {
                 { nome: "cargoId", value: 1, label: "Cargo teste" },
                 { nome: "cargoId", value: 2, label: "Chocolate" },
               ]}
-              inputChange={(selectedOption) => handleChangeSelectProf(selectedOption, index)}
+              inputChange={(selectedOption) =>
+                handleChangeSelectProf(selectedOption, index)
+              }
             />
             <SelectInput
               value="Faixa Salarial:"
@@ -248,7 +298,9 @@ const addCurso = () => {
                   label: "Faixa Salario teste",
                 },
               ]}
-              inputChange={(selectedOption) => handleChangeSelectProf(selectedOption, index)}
+              inputChange={(selectedOption) =>
+                handleChangeSelectProf(selectedOption, index)
+              }
             />
             <TextInputComponent
               value="Empresa:"
@@ -268,15 +320,26 @@ const addCurso = () => {
               inputChange={(e) => handleChangeProf(e, index)}
               inputName="dataRegistro"
             />
-            {
-              index ? 
-                <button type="button" className="button remove" onClick={() => removeProfFields(index)}>Remover</button> 
-              : null
-            }
+
+            {index ? (
+              <button
+                type="button"
+                className="button remove"
+                onClick={() => removeProfFields(index)}
+              >
+                Remover
+              </button>
+            ) : null}
           </div>
         ))}
         <div className="mt-5">
-          <button className="button add" type="button" onClick={() => addProfField()}>+ adicionar</button>
+          <button
+            className="button add"
+            type="button"
+            onClick={() => addProfField()}
+          >
+            + adicionar
+          </button>
         </div>
         <div
           className="h3 "
@@ -289,17 +352,20 @@ const addCurso = () => {
             value="Instagram:" 
             inputValue={contatos.contatoInsta}
             inputChange={(e) => handleChangeContato(e)}
-            inputName="contatoInsta"/>
+            inputName="contatoInsta"
+          />
           <TextInputComponent 
             value="Linkedin:" 
             inputValue={contatos.contatoLinke}
             inputChange={(e) => handleChangeContato(e)}
-            inputName="contatoLinke"/>
+            inputName="contatoLinke"
+          />
           <TextInputComponent 
             value="GitHub:" 
             inputValue={contatos.contatoGit}
             inputChange={(e) => handleChangeContato(e)}
-            inputName="contatoGit"/>
+            inputName="contatoGit"
+          />
         </div>
         <div className="h3" style={{ marginBottom: "50px", marginTop: "50px" }}>
           Depoimento
