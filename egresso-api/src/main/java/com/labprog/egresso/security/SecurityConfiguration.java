@@ -30,9 +30,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
   protected void configure(HttpSecurity http) throws Exception {
     http.cors().and().csrf().disable()
       .authorizeRequests()
-      .antMatchers(HttpMethod.POST,SecurityConstants.SIGN_UP_STRING).permitAll() 
+      .antMatchers(HttpMethod.POST,SecurityConstants.SIGN_UP_URL).permitAll() 
       //URL pública
-      .antMatchers(HttpMethod.POST, "/login").permitAll()
+      .antMatchers(HttpMethod.POST,"/login").permitAll()
       .anyRequest().authenticated()
       .and()                
       //quem vai autenticar e como

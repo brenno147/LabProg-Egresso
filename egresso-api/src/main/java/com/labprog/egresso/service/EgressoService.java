@@ -1,15 +1,13 @@
 package com.labprog.egresso.service;
 
-import java.util.Collection;
+import java.util.Collections;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -116,38 +114,15 @@ public class EgressoService implements UserDetailsService{
     }
 
 
-    // public boolean efetuarLogin(String email, String senha) {
-    //     Optional <Egresso> egresso = repository.findByEmail(email);
-    //     if (!egresso.isPresent())
-    //         throw new RegraNegocioException("Erro de autenticação. Email informado não encontrado");    
-    //     if (!egresso.get().getSenha().equals(senha))
-    //         throw new RegraNegocioException("Erro de autenticação. Senha inválida");    
-    //     return true;
-    // }
-
-    // public Egresso efetuarLogin(String email, String senha) {
-        
-    //     Optional <Egresso> egresso = repository.findByEmail(email);
-    //     if (!egresso.isPresent())
-    //         throw new RegraNegocioException("Erro de autenticação. Email informado não encontrado");    
-    //     if (!passwordEncoder.matches(senha, egresso.get().getSenha()))
-    //         throw new RegraNegocioException("Erro de autenticação. Senha inválida");    
-    //     return egresso.get();
-    // }
-
-
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         Optional<Egresso> usr = repository.findByEmail(email);
         if (!usr.isPresent())            
             throw new UsernameNotFoundException(email);
         Egresso a = usr.get();
-        return new User(a.getEmail(), a.getSenha(), emptyList());
+        return new User(a.getEmail(), a.getSenha(), Collections.emptyList());
     }
 
-    private Collection<? extends GrantedAuthority> emptyList() {
-        return null;
-    }
 
     
 }
