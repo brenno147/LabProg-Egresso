@@ -29,7 +29,7 @@ function NavbarComponent(){
                     <ButtonComponent nome={'Cadastre-se'} click={() => navigate('/cadastro')}/>
                 </div>
                 <div className="button-nav">
-                    <ButtonComponent nome={'Login'}/>
+                    <ButtonComponent nome={'Login'} click={() => navigate('/login')}/>
                 </div>
                 </Navbar.Collapse>
             </Container>   

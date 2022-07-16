@@ -2,18 +2,21 @@ import React, { useState } from "react";
 import LogoComponent from "../components/LogoComponent";
 import NavbarComponentLogin from "../components/NavbarComponentLogin";
 import Footer from "../components/Footer";
-import EgressoService from "../services/EgressoService";
+// import EgressoService from "../services/EgressoService";
+import LoginService from "../services/LoginService";
 import {useNavigate} from 'react-router-dom'
-import { Axios } from "axios";
+// import { Axios } from "axios";
 
 function Login(){
     const navigate = useNavigate();
-    const service = new EgressoService()
+    // const service = new EgressoService()
+    const service = new LoginService()
 
     function cadastrarUsuario(e) {
         e.preventDefault()
-        const response = service.fazerLogin(email,senha)
-        console.log("\n\nresponse", response)
+        service.fazerLogin(email,senha)
+        navigate('/home')
+        // console.log("\n\nresponse", response)
     }
 
     const [email, setEmail] = useState('')

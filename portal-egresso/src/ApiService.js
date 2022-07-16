@@ -7,6 +7,7 @@ const instance = axios.create({
 class ApiService{
     constructor (apiUrl, apiToken) {
         this.apiUrl = apiUrl
+        console.log("Token:",apiToken)
         instance.defaults.headers.common['Authorization'] = apiToken;
     }
 
