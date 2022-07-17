@@ -1,22 +1,24 @@
 import ApiService from '../ApiService'
 
+let token = ' ';
+
 class LoginService extends ApiService{
     
     constructor() {
-        super('/login');
+        super('/login', token);
     }
 
-     async fazerLogin(email,senha){
+    async fazerLogin(email,senha){
         try {
-            const response = await this.post('', {
+            const response = await this.post('',{
                 email: email,
                 senha: senha
             });
-            console.log(response);
-            return response;
+            token = response.data;
+            return token;
         } catch (erro) {
-            console.log(erro.response);
-            // return erro.response;
+            token = erro.response.data;
+            return token;
         }
     }
 }
