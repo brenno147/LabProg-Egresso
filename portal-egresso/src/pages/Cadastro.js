@@ -112,7 +112,7 @@ function Cadastro() {
   }, [profissao])
 
   useEffect(() => {
-    setEgresso((prevState) => ({ ...prevState, cursos: [curso] }));
+    setEgresso((prevState) => ({ ...prevState, cursos: curso }));
     console.log(curso)
   }, [curso])
 
