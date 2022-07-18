@@ -13,6 +13,7 @@ import com.labprog.egresso.service.EgressoService;
 import com.labprog.egresso.service.FaixaSalarioService;
 import com.labprog.egresso.service.exceptions.RegraNegocioException;
 
+import lombok.extern.log4j.Log4j2;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,7 +22,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+@Log4j2
 @RestController
 @RequestMapping("/api/egressos")
 public class EgressoController {
@@ -51,6 +52,8 @@ public class EgressoController {
 
     @PostMapping
     public ResponseEntity salvar(@RequestBody EgressoDTO dto){
+        log.info("\n\n\nDTOEGRESSO:",dto);
+
         Egresso egresso = Egresso.builder()
                 .nome(dto.getNome())
                 .email(dto.getEmail())
@@ -60,7 +63,7 @@ public class EgressoController {
                 .senha(passwordEncoder.encode(dto.getSenha()))
                 .build();
 
-        
+        log.info("\n\n\nEGRESSO:",egresso);
         for (ContatoDTO contatoDto : dto.getContatos()) {
             Contato contato = Contato.builder()
                     .nome(contatoDto.getNome())
@@ -70,26 +73,10 @@ public class EgressoController {
             egresso.getContatos().add(contato);
         }
 
-        for (CursoEgressoDTO cursoEgressoDto : dto.getCursos()) {
-            Curso curso = cursoService.buscarPorId(cursoEgressoDto.getCursoId());
-
-            CursoEgressoPK pk = CursoEgressoPK.builder()
-                    .egresso_id(egresso.getIdEgresso())
-                    .curso_id(curso.getId_curso())
-                    .build();
-
-            CursoEgresso cursoEgresso = CursoEgresso.builder()
-                    .id(pk)
-                    .curso(curso)
-                    .data_inicio(cursoEgressoDto.getDataInicio())
-                    .data_conclusao(cursoEgressoDto.getDataConclusao())
-                    .build();
-
-            egresso.addCurso(cursoEgresso);
-        }
-
         for (ProfEgressoDTO profEgressoDto : dto.getProfissoes()) {
+
             Cargo cargo = cargoService.buscarPorId(profEgressoDto.getCargoId());
+
             FaixaSalario faixaSalario = faixaSalarioService.buscarPorId(profEgressoDto.getFaixaSalarioId());
 
             ProfEgresso profEgresso = ProfEgresso.builder()
@@ -101,6 +88,26 @@ public class EgressoController {
                     .build();
 
             egresso.addProfissao(profEgresso);
+        }
+
+        for (CursoEgressoDTO cursoEgressoDto : dto.getCursos()) {
+            
+            Curso curso = cursoService.buscarPorId(cursoEgressoDto.getCursoId());
+
+            CursoEgressoPK pk = CursoEgressoPK.builder()
+                    .egresso_id(egresso.getIdEgresso())
+                    .curso_id(cursoEgressoDto.getCursoId())
+                    .build();
+            
+
+            CursoEgresso cursoEgresso = CursoEgresso.builder()
+                    .id(pk)
+                    .curso(curso)
+                    .data_inicio(cursoEgressoDto.getDataInicio())
+                    .data_conclusao(cursoEgressoDto.getDataConclusao())
+                    .build();
+
+            egresso.addCurso(cursoEgresso);
         }
 
         try {
@@ -135,13 +142,4 @@ public class EgressoController {
         }
     }
 
-    // @PostMapping("/login")
-    // public ResponseEntity autenticar(@RequestBody EgressoDTO dto) {
-    //     try {
-    //         egressoService.efetuarLogin(dto.getEmail(), dto.getSenha());
-    //         return ResponseEntity.ok(true);
-    //     } catch(RegraNegocioException e) {
-    //         return ResponseEntity.badRequest().body(e.getMessage());
-    //     }
-    // } 
 }

@@ -21,7 +21,10 @@ import com.labprog.egresso.model.repositories.EgressoRepository;
 import com.labprog.egresso.model.repositories.ProfEgressoRepository;
 import com.labprog.egresso.service.exceptions.RegraNegocioException;
 
+import lombok.extern.log4j.Log4j2;
+
 @Service
+@Log4j2
 public class EgressoService implements UserDetailsService{
     @Autowired
     EgressoRepository egressoRepository;
@@ -37,9 +40,6 @@ public class EgressoService implements UserDetailsService{
 
     @Autowired
     EgressoRepository repository;
-
-    // @Autowired
-    // private PasswordEncoder passwordEncoder;
 
     @Transactional
     public Egresso salvar(Egresso egresso) {
@@ -120,6 +120,7 @@ public class EgressoService implements UserDetailsService{
         if (!usr.isPresent())            
             throw new UsernameNotFoundException(email);
         Egresso a = usr.get();
+        log.info("\n\nEgresso",a.getEmail());
         return new User(a.getEmail(), a.getSenha(), Collections.emptyList());
     }
 
