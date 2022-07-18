@@ -2,18 +2,26 @@ import React, { useState } from "react";
 import LogoComponent from "../components/LogoComponent";
 import NavbarComponentLogin from "../components/NavbarComponentLogin";
 import Footer from "../components/Footer";
-import EgressoService from "../services/EgressoService";
-import {useNavigate} from 'react-router-dom'
-import { Axios } from "axios";
+import LoginService from "../services/LoginService";
+import {useNavigate} from "react-router-dom";
+import constantes from "../Constantes";
+import { Alert } from "react-bootstrap";
 
 function Login(){
+    const [invalidText, setInvalidText] = useState(false);
     const navigate = useNavigate();
-    const service = new EgressoService()
-
+    const service = new LoginService();
     function cadastrarUsuario(e) {
         e.preventDefault()
-        const response = service.fazerLogin(email,senha)
-        console.log("\n\nresponse", response)
+        service.fazerLogin(email,senha).then((dados) =>{
+            console.log("Respo",dados);
+            if (dados !== ""){
+                constantes.logado = true;
+                navigate("/home");
+            }else{
+                setInvalidText("Verifique suas credenciais");
+            }
+        }) 
     }
 
     const [email, setEmail] = useState('')
@@ -22,6 +30,17 @@ function Login(){
     return(
         <div>
             <NavbarComponentLogin/>
+            {invalidText && (
+                <div className="sticky-top">
+                <Alert
+                    variant="danger"
+                    onClose={() => setInvalidText(false)}
+                    dismissible
+                >
+                    {invalidText}
+                </Alert>
+                </div>
+            )}
             <div className="d-flex flex-column align-items-center">
                 <div className="justify-align-center d-flex">
                     <LogoComponent/>

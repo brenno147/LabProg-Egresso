@@ -5,9 +5,7 @@ import DepoimentosCarousel from "./../components/DepoimentosCarousel";
 import Charts from "./../components/Charts";
 import Footer from "./../components/Footer";
 import NavbarComponent from "../components/NavbarComponent";
-import {useNavigate} from 'react-router-dom'
-
-
+import {useNavigate} from "react-router-dom";
 
 export default function Home() {
   const navigate = useNavigate();
@@ -21,7 +19,7 @@ export default function Home() {
 
   return (
     <div>
-      <NavbarComponent />
+      <NavbarComponent/>
       <div
         className="d-flex flex-column align-items-center pt-3 pb-5"
         style={{ backgroundColor: "rgba(189, 205, 236, 1)" }}

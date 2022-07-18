@@ -16,13 +16,13 @@ function Rotas() {
         <HashRouter>
             <Routes>
                 <Route path="/" element={<Home/>} exact/> 
-                <Route path="/home" element={<Home/>}/>
-                <Route path="/estatisticas" element={<Estatisticas/>}/>
-                <Route path="/egresso" element={<EgressoPage/>}/>
-                <Route path="/depoimento" element={<Depoimento/>}/>
-                <Route path="/login" element={<Login/>}/>
-                <Route path="/cadastro" element={<Cadastro/>}/>
-                <Route path="/perfil" element={<Perfil/>}/>
+                <Route path="/home" element={<Home/>} exact/>
+                <Route path="/estatisticas" element={<Estatisticas/>} exact/>
+                <Route path="/egresso" element={<EgressoPage/>} exact/>
+                <Route path="/depoimento" element={<Depoimento/>} exact/>
+                <Route path="/login" element={<Login/>} exact/>
+                <Route path="/cadastro" element={<Cadastro/>} exact/>
+                <Route path="/perfil" element={<Perfil/>} exact/>
             </Routes>
         </HashRouter>
     );

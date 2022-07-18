@@ -16,6 +16,9 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import com.labprog.egresso.service.EgressoService;
 
+import lombok.extern.log4j.Log4j2;
+
+@Log4j2
 
 @Configurable
 @EnableWebSecurity
@@ -29,8 +32,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
   @Override
   protected void configure(HttpSecurity http) throws Exception {
     http.cors().and().csrf().disable()
-      .authorizeRequests()
-      .antMatchers(HttpMethod.POST,SecurityConstants.SIGN_UP_URL).permitAll() 
+      .authorizeRequests() 
+      .antMatchers(HttpMethod.GET,SecurityConstants.CARGO_URL).permitAll()
+      .antMatchers(HttpMethod.GET,SecurityConstants.CURSO_URL).permitAll()
+      .antMatchers(HttpMethod.GET,SecurityConstants.FAIXA_SALARIO_URL).permitAll()
+      .antMatchers(HttpMethod.GET,SecurityConstants.DEPOIMENTO_URL).permitAll()
+      .antMatchers(HttpMethod.POST,SecurityConstants.SIGN_UP_URL).permitAll()
       //URL pública
       .antMatchers(HttpMethod.POST,"/login").permitAll()
       .anyRequest().authenticated()
@@ -45,7 +52,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
   @Override
   public void configure(AuthenticationManagerBuilder auth) 
-    throws Exception {        
+    throws Exception {      
     // configura o método de autenticação
     auth.userDetailsService(service)
       .passwordEncoder(passwordEncoder);    

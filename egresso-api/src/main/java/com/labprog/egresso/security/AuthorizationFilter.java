@@ -15,7 +15,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
 import io.jsonwebtoken.Jwts;
+import lombok.extern.log4j.Log4j2;
 
+@Log4j2
 public class AuthorizationFilter extends BasicAuthenticationFilter{
 
     public AuthorizationFilter(AuthenticationManager authManager) {
@@ -43,6 +45,7 @@ public class AuthorizationFilter extends BasicAuthenticationFilter{
   private UsernamePasswordAuthenticationToken authenticate(HttpServletRequest request) {
     //pega o toke
     String token = request.getHeader(SecurityConstants.HEADER_NAME);
+    log.info("\n\n\nTokenAutho:",token);
     if (token != null) {
         // faz parse do token
         String user = Jwts.parser()
