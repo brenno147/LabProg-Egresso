@@ -9,19 +9,20 @@ import SelectInput from "../components/SelectInput";
 import DateInput from "../components/DateInput";
 import EgressoService from "../services/EgressoService";
 import { Alert } from "react-bootstrap";
+import {useNavigate} from "react-router-dom";
 
 function Cadastro() {
   const egressoService = new EgressoService()
-
-   const [invalidText, setInvalidText] = useState(false);
+  const navigate = useNavigate();
+  const [invalidText, setInvalidText] = useState(false);
 
   const [egresso, setEgresso] = useState({
     nome: "",
     email: "",
     cpf: "",
-    senha: "SenhaTeste",
+    senha: "",
     resumo: "",
-    urlFoto: "teste",
+    urlFoto: "",
     contatos: [],
     profissoes: [],
     cursos: [],
@@ -65,7 +66,7 @@ function Cadastro() {
   };
 
   const addProfField = () => {
-    setProfissao([...profissao, {cargoId: "", faixaSalarioId: "", empresa: "", descricao: "", dataRegistro: ""}])
+    setProfissao([...profissao, {nome: "", faixaSalarioId: "", empresa: "", descricao: "", dataRegistro: ""}])
   }
 
   const removeProfFields = (i) => {
@@ -87,7 +88,7 @@ function Cadastro() {
   };
 
   const addCursoField = () => {
-    setCurso([...curso, {cursoId: "", dataInicio: "", dataConclusao: ""}])
+    setCurso([...curso, {cargoId: "", nivel:"", dataInicio: "", dataConclusao: ""}])
   }
 
   const removeCursoFields = (i) => {
@@ -136,7 +137,15 @@ function Cadastro() {
     ) {
       setInvalidText("Insira pelo menos um curso e um cargo");
     } else {
-      egressoService.fazerCadastro({...egresso})
+      egressoService.fazerCadastro({...egresso}).then((dados) =>{
+        console.log("Respo",dados);
+        if (dados.idEgresso > 0){
+          navigate("/login");
+        }else{
+          setInvalidText("Erro ao tentar realizar o cadastro");
+        }
+    })
+      
     }
   }
 
@@ -215,9 +224,8 @@ function Cadastro() {
             <SelectInput
               value="Curso:"
               options={[
-                { nome: "cursoId", value: 1, label: "Chocolate" },
-                { nome: "cursoId", value: 2, label: "Strawberry" },
-                { nome: "cursoId", value: 3, label: "Vanilla" },
+                { nome: "cursoId", value: 1, label: "Engenharia da Computação" },
+                { nome: "cursoId", value: 2, label: "Ciência da Computação" },
               ]}
               inputChange={(selectedOption) =>
                 handleChangeSelectCurso(selectedOption, index)
@@ -263,8 +271,12 @@ function Cadastro() {
             <SelectInput
               value="Cargo:"
               options={[
-                { nome: "cargoId", value: 1, label: "Cargo teste" },
-                { nome: "cargoId", value: 2, label: "Chocolate" },
+                { nome: "cargoId", value: 1, label: "Analista de Sistemas" },
+                { nome: "cargoId", value: 2, label: "Engenheiro de Software" },
+                { nome: "cargoId", value: 3, label: "DBA" },
+                { nome: "cargoId", value: 4, label: "Cientista de Dados" },
+                { nome: "cargoId", value: 5, label: "Professor na área de TI" },
+                { nome: "cargoId", value: 6, label: "Outro" },
               ]}
               inputChange={(selectedOption) =>
                 handleChangeSelectProf(selectedOption, index)
@@ -276,7 +288,22 @@ function Cadastro() {
                 {
                   nome: "faixaSalarioId",
                   value: 1,
-                  label: "Faixa Salario teste",
+                  label: "1.000-5.000",
+                },
+                {
+                  nome: "faixaSalarioId",
+                  value: 2,
+                  label: "6.000-12.000",
+                },
+                {
+                  nome: "faixaSalarioId",
+                  value: 3,
+                  label: "13.000-26.000",
+                },
+                {
+                  nome: "faixaSalarioId",
+                  value: 4,
+                  label: "Maior que 26.000",
                 },
               ]}
               inputChange={(selectedOption) =>
@@ -351,9 +378,9 @@ function Cadastro() {
           Depoimento
         </div>
         <DepoimentoTextComponent />
-        <div style={{ width: "30%", marginBottom: "30px" }}>
+        {/* <div style={{ width: "30%", marginBottom: "30px" }}>
           <ButtonSubmitComponent value="+ adicionar" />
-        </div>
+        </div> */}
         <div
           style={{
             alignSelf: "end",

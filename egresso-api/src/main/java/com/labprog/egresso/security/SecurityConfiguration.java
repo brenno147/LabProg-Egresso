@@ -32,10 +32,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
   @Override
   protected void configure(HttpSecurity http) throws Exception {
     http.cors().and().csrf().disable()
-      .authorizeRequests()
+      .authorizeRequests() 
       .antMatchers(HttpMethod.GET,SecurityConstants.CARGO_URL).permitAll()
-      .antMatchers(HttpMethod.POST,SecurityConstants.CARGO_URL).permitAll()
-      .antMatchers(HttpMethod.POST,SecurityConstants.SIGN_UP_URL).permitAll() 
+      .antMatchers(HttpMethod.GET,SecurityConstants.CURSO_URL).permitAll()
+      .antMatchers(HttpMethod.GET,SecurityConstants.FAIXA_SALARIO_URL).permitAll()
+      .antMatchers(HttpMethod.GET,SecurityConstants.DEPOIMENTO_URL).permitAll()
+      .antMatchers(HttpMethod.POST,SecurityConstants.SIGN_UP_URL).permitAll()
       //URL pública
       .antMatchers(HttpMethod.POST,"/login").permitAll()
       .anyRequest().authenticated()
@@ -50,8 +52,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
   @Override
   public void configure(AuthenticationManagerBuilder auth) 
-    throws Exception {    
-      log.info("\n\nConfig Dentro");    
+    throws Exception {      
     // configura o método de autenticação
     auth.userDetailsService(service)
       .passwordEncoder(passwordEncoder);    
@@ -65,7 +66,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     source
       .registerCorsConfiguration("/**", new CorsConfiguration()
       .applyPermitDefaultValues());
-    log.info("\n\nSource",source);
     return source;
   }
 }

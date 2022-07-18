@@ -5,8 +5,10 @@ import Footer from "../components/Footer";
 import LoginService from "../services/LoginService";
 import {useNavigate} from "react-router-dom";
 import constantes from "../Constantes";
+import { Alert } from "react-bootstrap";
 
 function Login(){
+    const [invalidText, setInvalidText] = useState(false);
     const navigate = useNavigate();
     const service = new LoginService();
     function cadastrarUsuario(e) {
@@ -16,6 +18,8 @@ function Login(){
             if (dados !== ""){
                 constantes.logado = true;
                 navigate("/home");
+            }else{
+                setInvalidText("Verifique suas credenciais");
             }
         }) 
     }
@@ -26,6 +30,17 @@ function Login(){
     return(
         <div>
             <NavbarComponentLogin/>
+            {invalidText && (
+                <div className="sticky-top">
+                <Alert
+                    variant="danger"
+                    onClose={() => setInvalidText(false)}
+                    dismissible
+                >
+                    {invalidText}
+                </Alert>
+                </div>
+            )}
             <div className="d-flex flex-column align-items-center">
                 <div className="justify-align-center d-flex">
                     <LogoComponent/>

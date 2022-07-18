@@ -5,7 +5,7 @@ let token = ' ';
 class LoginService extends ApiService{
     
     constructor() {
-        super('/login', token);
+        super('/login');
     }
 
     async fazerLogin(email,senha){
