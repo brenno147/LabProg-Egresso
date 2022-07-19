@@ -13,6 +13,10 @@ class ApiService{
     post(url,objeto){
         return instance.post(`${this.apiUrl}${url}`, objeto)
     }
+
+    get(url) {
+        return instance.get(`${this.apiUrl}${url}`)
+    }
 }
 
 export default ApiService
