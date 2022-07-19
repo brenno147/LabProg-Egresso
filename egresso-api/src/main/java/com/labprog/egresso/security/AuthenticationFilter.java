@@ -21,7 +21,9 @@ import com.labprog.egresso.model.dto.EgressoDTO;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import lombok.extern.log4j.Log4j2;
 
+@Log4j2
 public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
     private AuthenticationManager authenticationManager;
@@ -33,12 +35,13 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
     @Override
     public Authentication attemptAuthentication(
-                          HttpServletRequest req,
-                          HttpServletResponse res) 
+                          HttpServletRequest request,
+                          HttpServletResponse reponse) 
                 throws AuthenticationException {
         try {
+            log.info("\n\n\n Erro");
             EgressoDTO usuario = 
-                new ObjectMapper().readValue(req.getInputStream(), EgressoDTO.class);
+                new ObjectMapper().readValue(request.getInputStream(), EgressoDTO.class);
             return authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(
                             usuario.getEmail(),
@@ -51,8 +54,8 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
     }
 
     @Override
-    protected void successfulAuthentication(HttpServletRequest req, 
-                                            HttpServletResponse res, 
+    protected void successfulAuthentication(HttpServletRequest request, 
+                                            HttpServletResponse response, 
                                             FilterChain chain,
                                             Authentication auth) 
                         throws IOException, ServletException {
@@ -62,6 +65,7 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
                                        + SecurityConstants.EXPIRATION_TIME))
                         .signWith(SignatureAlgorithm.HS512,SecurityConstants.KEY)
                         .compact();
-        res.addHeader("token", JWT);
+        response.getWriter().write(JWT);
+        response.getWriter().flush();
     }
 }
