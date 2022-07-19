@@ -19,46 +19,43 @@ ChartJS.register(
   Legend
 );
 
-const options = {
-  responsive: true,
-  plugins: {
-    legend: {
-      position: "top",
-    },
-    title: {
-      display: true,
-      text: "Faixa Salarial",
-    },
-  },
-};
+export default function Charts({description, labels, chartData}) {
 
-const labels = [
-  "1k-1.5k",
-  "1.5k-2k",
-  "2k-2.5k",
-  "2.5k-3k",
-  "3k-3.5k",
-  "3.5k-4k",
-  "4k-4.5k",
-  "4.5k-5k",
-];
-const dados = [5, 10, 6, 8, 15, 7, 5, 3];
-
-const data = {
-  labels,
-  datasets: [
-    {
-      label: "Número de Egressos por Faixa Salarial",
-      data: dados,
-      backgroundColor: "rgba(108, 93, 211, 1)",
+  const options = {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: "top",
+      },
+      title: {
+        display: true,
+        text: "Faixa Salarial",
+      },
     },
-  ],
-};
+  };
 
-export default function Charts() {
+  const currentLabels = labels ?? ["Insira os valores"];
+
+  const currentChartData = chartData ?? [0];
+
+  const data = {
+    labels: currentLabels,
+    datasets: [
+      {
+        label: description,
+        data: currentChartData,
+        backgroundColor: "rgba(108, 93, 211, 1)",
+      },
+    ],
+  };
+  
   return (
     <div className="w-75">
-      <Bar options={options} data={data} />
+      {description ? (
+        <Bar options={options} data={data} />
+      ) : (
+        <h3 className="text-center">Dados não informados</h3>
+      )}
     </div>
   );
 }
