@@ -73,44 +73,45 @@ public class EgressoController {
             egresso.getContatos().add(contato);
         }
 
+        for (ProfEgressoDTO profEgressoDto : dto.getProfissoes()) {
+
+            Cargo cargo = cargoService.buscarPorId(profEgressoDto.getCargoId());
+
+            FaixaSalario faixaSalario = faixaSalarioService.buscarPorId(profEgressoDto.getFaixaSalarioId());
+
+            ProfEgresso profEgresso = ProfEgresso.builder()
+                    .cargo(cargo)
+                    .faixaSalario(faixaSalario)
+                    .empresa(profEgressoDto.getEmpresa())
+                    .descricao(profEgressoDto.getDescricao())
+                    .dataRegistro(profEgressoDto.getDataRegistro())
+                    .build();
+
+            egresso.addProfissao(profEgresso);
+        }
+
+        for (CursoEgressoDTO cursoEgressoDto : dto.getCursos()) {
+            
+            Curso curso = cursoService.buscarPorId(cursoEgressoDto.getCursoId());
+
+            CursoEgressoPK pk = CursoEgressoPK.builder()
+                    .egresso_id(egresso.getIdEgresso())
+                    .curso_id(cursoEgressoDto.getCursoId())
+                    .build();
+            
+
+            CursoEgresso cursoEgresso = CursoEgresso.builder()
+                    .id(pk)
+                    .curso(curso)
+                    .data_inicio(cursoEgressoDto.getDataInicio())
+                    .data_conclusao(cursoEgressoDto.getDataConclusao())
+                    .build();
+
+            egresso.addCurso(cursoEgresso);
+        }
+
         try {
             Egresso salvo = egressoService.salvar(egresso);
-            if(salvo != null){
-                for (CursoEgressoDTO cursoEgressoDto : dto.getCursos()) {
-                    Curso curso = cursoService.buscarPorId(cursoEgressoDto.getCursoId());
-        
-                    CursoEgressoPK pk = CursoEgressoPK.builder()
-                            .egresso_id(salvo.getIdEgresso())
-                            .curso_id(cursoEgressoDto.getCursoId())
-                            .build();
-                    
-        
-                    CursoEgresso cursoEgresso = CursoEgresso.builder()
-                            .id(pk)
-                            .curso(curso)
-                            .data_inicio(cursoEgressoDto.getDataInicio())
-                            .data_conclusao(cursoEgressoDto.getDataConclusao())
-                            .build();
-        
-                    salvo.addCurso(cursoEgresso);
-                }
-                for (ProfEgressoDTO profEgressoDto : dto.getProfissoes()) {
-                    Cargo cargo = cargoService.buscarPorId(profEgressoDto.getCargoId());
-
-                    FaixaSalario faixaSalario = faixaSalarioService.buscarPorId(profEgressoDto.getFaixaSalarioId());
-        
-                    ProfEgresso profEgresso = ProfEgresso.builder()
-                            .egresso(salvo)
-                            .cargo(cargo)
-                            .faixaSalario(faixaSalario)
-                            .empresa(profEgressoDto.getEmpresa())
-                            .descricao(profEgressoDto.getDescricao())
-                            .dataRegistro(profEgressoDto.getDataRegistro())
-                            .build();
-        
-                    salvo.addProfissao(profEgresso);
-                }
-            }
             return new ResponseEntity(salvo, HttpStatus.CREATED);
         } catch (RegraNegocioException e) {
             return ResponseEntity.badRequest().body(e.getMessage());

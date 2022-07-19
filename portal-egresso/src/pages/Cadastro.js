@@ -108,39 +108,20 @@ function Cadastro() {
   
   useEffect(() => {
     setEgresso((prevState) => ({ ...prevState, profissoes: profissao }));
-    //console.log(profissao)
+    console.log(profissao)
   }, [profissao])
 
   useEffect(() => {
     setEgresso((prevState) => ({ ...prevState, cursos: curso }));
-    //console.log(curso)
+    console.log(curso)
   }, [curso])
 
   useEffect(() => {
     setEgresso((prevState) => ({ ...prevState, contatos: [{nome: "Instagram", urlLogo: contatos.contatoInsta}, 
                                                           {nome: "Linkedin", urlLogo: contatos.contatoLinke},
                                                           {nome: "Github", urlLogo: contatos.contatoGit},] }));
-    //console.log(contatos)
+    console.log(contatos)
   }, [contatos])
-  
-
-  /*const addContatos = () => {
-    setEgresso((prevState) => ({ ...prevState, contatos: [{nome: "Instagram", urlLogo: contatos.contatoInsta}, 
-                                                          {nome: "Linkedin", urlLogo: contatos.contatoLinke},
-                                                          {nome: "Github", urlLogo: contatos.contatoGit},] 
-    }));
-    console.log(egresso)
-  };
-
-const addCurso = () => {
-    setEgresso((prevState) => ({ ...prevState, cursos: [...egresso.cursos, curso] }));
-    console.log(egresso)
-};
-
-  const addProf = () => {
-    setEgresso((prevState) => ({ ...prevState, profissoes: [...egresso.profissoes, profissao] }));
-    console.log(egresso)
-  };*/
 
   const handleClickCadastrar = () => {
     if (
@@ -217,11 +198,11 @@ const addCurso = () => {
             }}
           >
             <label className="textInput">Senha:</label>
-            <input 
-              type="password" 
+            <input
+              type="password"
               className="input-text"
-              placeholder="Digite sua senha" 
-              value={egresso.senha} 
+              placeholder="Digite sua senha"
+              value={egresso.senha}
               onChange={(e) => handleChange(e)}
               name="senha"
             />
@@ -347,7 +328,6 @@ const addCurso = () => {
               inputChange={(e) => handleChangeProf(e, index)}
               inputName="dataRegistro"
             />
-
             {index ? (
               <button
                 type="button"
@@ -375,20 +355,20 @@ const addCurso = () => {
           Contatos
         </div>
         <div className="w-50">
-          <TextInputComponent 
-            value="Instagram:" 
+          <TextInputComponent
+            value="Instagram:"
             inputValue={contatos.contatoInsta}
             inputChange={(e) => handleChangeContato(e)}
             inputName="contatoInsta"
           />
-          <TextInputComponent 
-            value="Linkedin:" 
+          <TextInputComponent
+            value="Linkedin:"
             inputValue={contatos.contatoLinke}
             inputChange={(e) => handleChangeContato(e)}
             inputName="contatoLinke"
           />
-          <TextInputComponent 
-            value="GitHub:" 
+          <TextInputComponent
+            value="GitHub:"
             inputValue={contatos.contatoGit}
             inputChange={(e) => handleChangeContato(e)}
             inputName="contatoGit"
