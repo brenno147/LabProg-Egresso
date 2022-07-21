@@ -1,9 +1,11 @@
 import ApiService from '../ApiService'
+import constantes from "../Constantes";
 
 class EgressoService extends ApiService{
     constructor() {
       super('/api/egressos');
     }
+
     async fazerCadastro({nome,email,cpf,senha,resumo,urlFoto,contatos,profissoes,cursos}) {
       try {
         const response = await this.post('/', {
@@ -24,6 +26,11 @@ class EgressoService extends ApiService{
         return erro.response.data;
       }
     }
+
+    async obterInvestimentos(nome) {
+      const response = this.get(`?nome=${nome}`);
+      console.log("GETEgresso",response);
+    } 
     
 }
 

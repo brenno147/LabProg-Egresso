@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
-import TextInputComponent from "../components/TextInputComponent";
-import NavbarComponentLogin from "../components/NavbarComponentLogin";
-import Footer from "../components/Footer";
-import ButtonComponent from "../components/ButtonComponent";
-import ButtonSubmitComponent from "../components/ButtonSubmitComponent";
-import DepoimentoTextComponent from "../components/DepoimentoTextComponent";
-import SelectInput from "../components/SelectInput";
-import DateInput from "../components/DateInput";
-import EgressoService from "../services/EgressoService";
 import { Alert } from "react-bootstrap";
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import ButtonComponent from "../components/ButtonComponent";
+import DateInput from "../components/DateInput";
+import DepoimentoTextComponent from "../components/DepoimentoTextComponent";
+import Footer from "../components/Footer";
+import NavbarComponentLogin from "../components/NavbarComponentLogin";
+import SelectInput from "../components/SelectInput";
+import TextInputComponent from "../components/TextInputComponent";
+import EgressoService from "../services/EgressoService";
+
 
 function Cadastro() {
   const egressoService = new EgressoService()
@@ -231,18 +231,22 @@ function Cadastro() {
                 handleChangeSelectCurso(selectedOption, index)
               }
             />
-            <DateInput
-              value="Data de Início:"
-              inputValue={element.dataInicio || ""}
-              inputChange={(e) => handleChangeCurso(e, index)}
-              inputName="dataInicio"
-            />
-            <DateInput
-              value="Data de Conclusão:"
-              inputValue={element.dataConclusao || ""}
-              inputChange={(e) => handleChangeCurso(e, index)}
-              inputName="dataConclusao"
-            />
+            <div style={{marginLeft:"20px",marginRight:"20px"}}>
+              <DateInput
+                value="Data de Início:"
+                inputValue={element.dataInicio || ""}
+                inputChange={(e) => handleChangeCurso(e, index)}
+                inputName="dataInicio"
+              />
+            </div>
+            <div style={{marginRight:"20px"}}>
+              <DateInput
+                value="Data de Conclusão:"
+                inputValue={element.dataConclusao || ""}
+                inputChange={(e) => handleChangeCurso(e, index)}
+                inputName="dataConclusao"
+              />
+            </div>
             {index ? (
               <button
                 type="button"

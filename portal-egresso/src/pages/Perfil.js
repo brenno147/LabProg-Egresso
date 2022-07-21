@@ -9,9 +9,22 @@ import DepoimentoTextComponent from '../components/DepoimentoTextComponent';
 import PerfilComponent from '../components/PerfilComponent';
 import Curso from '../components/Curso';
 import Cargo from '../components/Cargo';
+import EgressoService from '../services/EgressoService';
 
 
 function Perfil(){
+    const service = new EgressoService();
+    componentDidMount(){
+        service.(57)
+        .then( response => {
+            console.log(response.data)
+            this.setState( {investimentos : response.data} )
+        }).catch (erro => {
+            console.log(erro.response)
+        })
+    }
+    
+    
     return(
         <div className="">
             <NavbarComponentLogin/>

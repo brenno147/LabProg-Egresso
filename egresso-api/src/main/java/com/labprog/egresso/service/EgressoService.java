@@ -83,8 +83,9 @@ public class EgressoService implements UserDetailsService{
                 .orElseThrow(() -> new RegraNegocioException("Egresso não encontrado"));
     }
 
-    public Egresso egressoPorNome(String nome) {
-        return egressoRepository.findByNome(nome);
+    public Optional <Egresso> egressoPorEmail(String email) {
+        Optional <Egresso> egresso = egressoRepository.findByEmail(email);
+        return egresso;
     }
 
     private void verificarEgresso(Egresso egresso) {

@@ -1,4 +1,5 @@
 import axios from "axios";
+import constantes from "./Constantes";
 
 const instance = axios.create({
     baseURL: 'http://localhost:8090'
@@ -23,6 +24,7 @@ class ApiService{
     }
 
     get(url){
+        instance.headers.common['Authorization'] = constantes.token
         return instance.get(`${this.apiUrl}${url}`)
     }
 }
