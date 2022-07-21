@@ -226,6 +226,7 @@ function Cadastro() {
               options={[
                 { nome: "cursoId", value: 1, label: "Engenharia da Computação" },
                 { nome: "cursoId", value: 2, label: "Ciência da Computação" },
+                { nome: "cursoId", value: 3, label: "Sistemas de Informação" },
               ]}
               inputChange={(selectedOption) =>
                 handleChangeSelectCurso(selectedOption, index)
