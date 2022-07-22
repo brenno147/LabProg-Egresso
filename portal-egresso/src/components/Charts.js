@@ -19,7 +19,7 @@ ChartJS.register(
   Legend
 );
 
-export default function Charts({description, labels, chartData}) {
+export default function Charts({description, labels, chartData, text}) {
 
   const options = {
     responsive: true,
@@ -29,10 +29,12 @@ export default function Charts({description, labels, chartData}) {
       },
       title: {
         display: true,
-        text: "Faixa Salarial",
-      },
+        text
+      }
     },
   };
+
+  // console.log(chartData)
 
   const currentLabels = labels ?? ["Insira os valores"];
 

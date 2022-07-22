@@ -22,6 +22,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 @Log4j2
 @RestController
 @RequestMapping("/api/egressos")
@@ -52,7 +53,6 @@ public class EgressoController {
 
     @PostMapping
     public ResponseEntity salvar(@RequestBody EgressoDTO dto){
-        log.info("\n\n\nDTOEGRESSO:",dto);
 
         Egresso egresso = Egresso.builder()
                 .nome(dto.getNome())
@@ -63,7 +63,6 @@ public class EgressoController {
                 .senha(passwordEncoder.encode(dto.getSenha()))
                 .build();
 
-        log.info("\n\n\nEGRESSO:",egresso);
         for (ContatoDTO contatoDto : dto.getContatos()) {
             Contato contato = Contato.builder()
                     .nome(contatoDto.getNome())
@@ -91,7 +90,7 @@ public class EgressoController {
         }
 
         for (CursoEgressoDTO cursoEgressoDto : dto.getCursos()) {
-            
+
             Curso curso = cursoService.buscarPorId(cursoEgressoDto.getCursoId());
 
             CursoEgressoPK pk = CursoEgressoPK.builder()
@@ -209,10 +208,10 @@ public class EgressoController {
         }
     }
 
-    @GetMapping("/{nome}")
-    public ResponseEntity consultarNome(@PathVariable String nome){
+    @GetMapping("/{email}")
+    public ResponseEntity consultarNome(@PathVariable String email){
         try {
-            Egresso consultado = egressoService.egressoPorNome(nome);
+            Optional<Egresso> consultado = egressoService.egressoPorEmail(email);
             return new ResponseEntity(consultado, HttpStatus.OK);
         } catch (RegraNegocioException e) {
             return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);

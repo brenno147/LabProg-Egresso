@@ -9,9 +9,12 @@ import DepoimentoTextComponent from '../components/DepoimentoTextComponent';
 import PerfilComponent from '../components/PerfilComponent';
 import Curso from '../components/Curso';
 import Cargo from '../components/Cargo';
+import EgressoService from '../services/EgressoService';
 
 
 function Perfil(){
+    const service = new EgressoService();
+    
     return(
         <div className="">
             <NavbarComponentLogin/>
