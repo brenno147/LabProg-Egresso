@@ -9,7 +9,7 @@ function Depoimentos(){
     const [depoimentos, setDepoimentos] = useState([])
     const [loading, setLoading] = useState(false)
     const [currentPage, setCurrentPage] = useState(1);
-    const [depoimentosPerPage, setDepoimentosPerPage] = useState(6);
+    const [depoimentosPerPage, setDepoimentosPerPage] = useState(5);
 
     useEffect(() => {
         const fetchDepoimentos = async () => {

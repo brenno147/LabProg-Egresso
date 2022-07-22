@@ -24,6 +24,10 @@ class EgressoService extends ApiService{
         return erro.response.data;
       }
     }
+
+    async getEgressos() {
+      return await this.get();
+    }
     
 }
 
