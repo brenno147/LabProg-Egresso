@@ -4,6 +4,7 @@ import {Route, Routes, HashRouter} from 'react-router-dom';
 
 import Home from './pages/Home';
 import EgressoPage from './pages/EgressoPage';
+import Egresso from './pages/Egresso';
 import Estatisticas from './pages/Estatisticas';
 import Depoimento from './pages/Depoimentos';
 import Cadastro from './pages/Cadastro';
@@ -18,7 +19,7 @@ function Rotas() {
                 <Route path="/" element={<Home/>} exact/> 
                 <Route path="/home" element={<Home/>} exact/>
                 <Route path="/estatisticas" element={<Estatisticas/>} exact/>
-                <Route path="/egresso" element={<EgressoPage/>} exact/>
+                <Route path="/egresso" element={<Egresso/>} exact/>
                 <Route path="/depoimento" element={<Depoimento/>} exact/>
                 <Route path="/login" element={<Login/>} exact/>
                 <Route path="/cadastro" element={<Cadastro/>} exact/>

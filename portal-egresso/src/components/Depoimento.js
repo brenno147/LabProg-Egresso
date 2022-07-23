@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import logo from "./../imgs/thumbnail.svg";
 
-const Depoimento = () => {
+const Depoimento = (props) => {
     const [expanded, setExpanded] = React.useState(false);
 
     const handleChange = (panel) => (event, isExpanded) => {
@@ -26,15 +26,14 @@ const Depoimento = () => {
                             <img src={logo} alt="avatar" style={{height: "100px"}} />
                         </div>
                         <div className="d-flex flex-column justify-content-center">
-                            <h5 className="text-center">Depoimento Sara Archidi</h5>
+                            <h5 className="text-center">Depoimento {props.nomeEgresso}</h5>
                         </div>
                     </div>
 
                 </AccordionSummary>
                 <AccordionDetails>
                     <Typography>
-                        Nulla facilisi. Phasellus sollicitudin nulla et quam mattis feugiat.
-                        Aliquam eget maximus est, id dignissim quam.
+                        {props.depoimento}
                     </Typography>
                 </AccordionDetails>
             </Accordion>

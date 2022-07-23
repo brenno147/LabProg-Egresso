@@ -1,8 +1,12 @@
-import ApiService from '../ApiService'
+import ApiService from "../ApiService";
 
-class DepoimentoService extends ApiService{
+class DepoimentoService extends ApiService {
   constructor() {
-    super('/api/depoimentos');
+    super("/api/depoimentos");
+  }
+
+  async getDepoimentos() {
+    return await this.get();
   }
 
   async dadosPerfil(email) {
@@ -14,4 +18,4 @@ class DepoimentoService extends ApiService{
     
 }
 
-export default DepoimentoService
+export default DepoimentoService;
