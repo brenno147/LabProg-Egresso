@@ -155,4 +155,22 @@ public class EgressoRepositoryTest {
         Assertions.assertEquals(egressoBuscado.getNome(), egresso.getNome());
     }
 
+    @Test
+    public void buscarEgressoPorEmail() {
+        Egresso egresso = Egresso.builder()
+                .nome("Egresso")
+                .email("teste@teste")
+                .cpf("123456789")
+                .resumo("Resumo")
+                .urlFoto("UrlFoto")
+                .senha("123")
+                .build();
+
+        Egresso salvo = repository.save(egresso);
+
+        Optional<Egresso> egressoBuscado = repository.findByEmail(egresso.getEmail());
+        System.out.println("\n\n\nEgresso");
+        System.out.println(egressoBuscado.get().getEmail());
+    }
+
 }

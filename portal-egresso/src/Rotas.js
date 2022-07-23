@@ -9,7 +9,7 @@ import Depoimento from './pages/Depoimentos';
 import Cadastro from './pages/Cadastro';
 import Login from './pages/Login';
 import Perfil from './pages/Perfil';
-
+import EditarPerfil from './pages/EditarPerfil';
 
 function Rotas() {
     return (
@@ -23,6 +23,7 @@ function Rotas() {
                 <Route path="/login" element={<Login/>} exact/>
                 <Route path="/cadastro" element={<Cadastro/>} exact/>
                 <Route path="/perfil" element={<Perfil/>} exact/>
+                <Route path="/editarperfil" element={<EditarPerfil/>} exact/>
             </Routes>
         </HashRouter>
     );

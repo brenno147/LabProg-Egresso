@@ -27,9 +27,11 @@ class EgressoService extends ApiService{
       }
     }
 
-    async obterInvestimentos(nome) {
-      const response = this.get(`?nome=${nome}`);
+    async dadosPerfil(email) {
+      const response = this.get(`/${email}`);
       console.log("GETEgresso",response);
+      return (await response).data;
+      
     } 
     
 }

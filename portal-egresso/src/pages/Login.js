@@ -20,7 +20,7 @@ function Login(){
                 constantes.token = dados.data;
                 var objeto = JSON.parse(dados.config.data);
                 constantes.email = objeto["email"]
-                console.log("email",constantes.email);
+                console.log(constantes.email);
                 navigate("/home");
             }else{
                 setInvalidText("Verifique suas credenciais");

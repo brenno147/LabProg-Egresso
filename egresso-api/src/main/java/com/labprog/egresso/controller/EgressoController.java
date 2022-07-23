@@ -46,10 +46,10 @@ public class EgressoController {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    @GetMapping
-    public List<Egresso> listarEgressos(){
-        return egressoRepository.findAll();
-    }
+    // @GetMapping
+    // public List<Egresso> listarEgressos(){
+    //     return egressoRepository.findAll();
+    // }
 
     @PostMapping
     public ResponseEntity salvar(@RequestBody EgressoDTO dto){
@@ -134,7 +134,7 @@ public class EgressoController {
     @GetMapping("/{email}")
     public ResponseEntity consultarNome(@PathVariable String email){
         try {
-            Optional<Egresso> consultado = egressoService.egressoPorEmail(email);
+            Optional <Egresso> consultado = egressoService.egressoPorEmail(email);
             return new ResponseEntity(consultado, HttpStatus.OK);
         } catch (RegraNegocioException e) {
             return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);

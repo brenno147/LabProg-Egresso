@@ -3,7 +3,7 @@ class Constantes{
    Constantes(){
       this.logado = false;
       this.token = "";
-      this.nome = 0;
+      this.email = "";
    }
 
    getLogado(){
