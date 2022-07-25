@@ -22,6 +22,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 @Log4j2
 @RestController
 @RequestMapping("/api/egressos")
@@ -45,14 +46,13 @@ public class EgressoController {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    @GetMapping
-    public List<Egresso> listarEgressos(){
-        return egressoRepository.findAll();
-    }
+    // @GetMapping
+    // public List<Egresso> listarEgressos(){
+    //     return egressoRepository.findAll();
+    // }
 
     @PostMapping
     public ResponseEntity salvar(@RequestBody EgressoDTO dto){
-        log.info("\n\n\nDTOEGRESSO:",dto);
 
         Egresso egresso = Egresso.builder()
                 .nome(dto.getNome())
@@ -63,7 +63,6 @@ public class EgressoController {
                 .senha(passwordEncoder.encode(dto.getSenha()))
                 .build();
 
-        log.info("\n\n\nEGRESSO:",egresso);
         for (ContatoDTO contatoDto : dto.getContatos()) {
             Contato contato = Contato.builder()
                     .nome(contatoDto.getNome())
@@ -91,7 +90,7 @@ public class EgressoController {
         }
 
         for (CursoEgressoDTO cursoEgressoDto : dto.getCursos()) {
-            
+
             Curso curso = cursoService.buscarPorId(cursoEgressoDto.getCursoId());
 
             CursoEgressoPK pk = CursoEgressoPK.builder()
@@ -118,6 +117,73 @@ public class EgressoController {
         }
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity editar(@RequestBody EgressoDTO dto, @PathVariable Long id){
+        Egresso egresso = Egresso.builder()
+                .idEgresso(id)
+                .nome(dto.getNome())
+                .email(dto.getEmail())
+                .cpf(dto.getCpf())
+                .urlFoto(dto.getUrlFoto())
+                .resumo(dto.getResumo())
+                .senha(dto.getSenha())
+                .build();
+        // Não está inserirndo os contatos
+        for (ContatoDTO contatoDto : dto.getContatos()) {
+            Contato contato = Contato.builder()
+                    .id(contatoDto.getId())
+                    .nome(contatoDto.getNome())
+                    .url_logo(contatoDto.getUrlLogo())
+                    .build();
+
+            egresso.getContatos().add(contato);
+        }
+
+        for (CursoEgressoDTO cursoEgressoDto : dto.getCursos()) {
+            Curso curso = cursoService.buscarPorId(cursoEgressoDto.getCursoId());
+
+            CursoEgressoPK pk = CursoEgressoPK.builder()
+                    .egresso_id(egresso.getIdEgresso())
+                    .curso_id(curso.getId_curso())
+                    .build();
+
+            CursoEgresso cursoEgresso = CursoEgresso.builder()
+                    .id(pk)
+                    .curso(curso)
+                    .data_inicio(cursoEgressoDto.getDataInicio())
+                    .data_conclusao(cursoEgressoDto.getDataConclusao())
+                    .build();
+
+            egresso.addCurso(cursoEgresso);
+        }
+
+        for (ProfEgressoDTO profEgressoDto : dto.getProfissoes()) {
+            Cargo cargo = cargoService.buscarPorId(profEgressoDto.getCargoId());
+            FaixaSalario faixaSalario = faixaSalarioService.buscarPorId(profEgressoDto.getFaixaSalarioId());
+
+            ProfEgresso profEgresso = ProfEgresso.builder()
+                    .cargo(cargo)
+                    .faixaSalario(faixaSalario)
+                    .empresa(profEgressoDto.getEmpresa())
+                    .descricao(profEgressoDto.getDescricao())
+                    .dataRegistro(profEgressoDto.getDataRegistro())
+                    .build();
+
+            if(profEgressoDto.getId() != null){
+                profEgresso.setIdProfEgresso(profEgressoDto.getId());
+            }
+
+            egresso.addProfissao(profEgresso);
+        }
+
+        try {
+            Egresso salvo = egressoService.salvar(egresso);
+            return new ResponseEntity(salvo, HttpStatus.OK);
+        } catch (RegraNegocioException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity deletar(@PathVariable Long id){
         if (!egressoRepository.existsById(id)) {
@@ -132,10 +198,20 @@ public class EgressoController {
         }
     }
 
-    @GetMapping("/{nome}")
-    public ResponseEntity consultarNome(@PathVariable String nome){
+    @GetMapping("/{id}")
+    public ResponseEntity consultarPorId(@PathVariable Long id){
         try {
-            Egresso consultado = egressoService.egressoPorNome(nome);
+            Egresso consultado = egressoService.findById(id);
+            return new ResponseEntity(consultado, HttpStatus.OK);
+        } catch (RegraNegocioException e) {
+            return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @GetMapping("/{email}")
+    public ResponseEntity consultarNome(@PathVariable String email){
+        try {
+            Optional <Egresso> consultado = egressoService.egressoPorEmail(email);
             return new ResponseEntity(consultado, HttpStatus.OK);
         } catch (RegraNegocioException e) {
             return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);

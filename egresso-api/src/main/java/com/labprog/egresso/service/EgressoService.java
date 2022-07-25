@@ -1,6 +1,7 @@
 package com.labprog.egresso.service;
 
 import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,6 +76,10 @@ public class EgressoService implements UserDetailsService{
             cursoEgressoRepository.delete(cursos);
         }
 
+        for (Contato contato : egresso.getContatos()){
+            contatoRepository.delete(contato);
+        }
+
         egressoRepository.delete(egresso);
     }
 
@@ -83,8 +88,12 @@ public class EgressoService implements UserDetailsService{
                 .orElseThrow(() -> new RegraNegocioException("Egresso não encontrado"));
     }
 
-    public Egresso egressoPorNome(String nome) {
-        return egressoRepository.findByNome(nome);
+
+    public Optional <Egresso> egressoPorEmail(String email) {
+        
+        Optional <Egresso> egresso = egressoRepository.findByEmail(email);
+        return egresso;
+        
     }
 
     private void verificarEgresso(Egresso egresso) {

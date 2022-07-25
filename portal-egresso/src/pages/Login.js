@@ -17,6 +17,10 @@ function Login(){
             console.log("Respo",dados);
             if (dados !== ""){
                 constantes.logado = true;
+                constantes.token = dados.data;
+                var objeto = JSON.parse(dados.config.data);
+                constantes.email = objeto["email"]
+                console.log(constantes.email);
                 navigate("/home");
             }else{
                 setInvalidText("Verifique suas credenciais");

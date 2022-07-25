@@ -3,7 +3,7 @@ import logo from "./../imgs/thumbnail.svg";
 // import "admin-lte/plugins/flot/jquery.flot.js";
 // import "admin-lte/plugins/flot/plugins/jquery.flot.resize.js";
 
-export default function CardEgresso() {
+const CardEgresso = ({nome, cargo}) => {
   function toggleModal() {
     let modal = document.getElementById("modal");
     console.log(modal);
@@ -12,16 +12,17 @@ export default function CardEgresso() {
   return (
     <div
       className="d-flex justify-content-center card pt-4 pb-1 pr-5 pl-5"
-      style={{ borderRadius: "7%", cursor: "pointer" }}
+      style={{ borderRadius: "7%", cursor: "pointer", width: "20rem" }}
       onClick={toggleModal}
     >
       <img src={logo} alt="..." />
       <div className="card-body d-flex flex-column align-items-center">
         <h2 className="card-title mb-2 mt-2">
-          <b>SARA ARCHIDI</b>
+          <b>{nome}</b>
         </h2>
-        <p className="card-text">Marketing Coordinator</p>
+        <p className="card-text">{cargo}</p>
       </div>
     </div>
   );
 }
+export default CardEgresso;

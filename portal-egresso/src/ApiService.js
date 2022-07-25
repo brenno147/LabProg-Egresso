@@ -1,4 +1,5 @@
 import axios from "axios";
+import constantes from "./Constantes";
 
 const instance = axios.create({
     baseURL: 'http://localhost:8090'
@@ -7,7 +8,7 @@ const instance = axios.create({
 class ApiService{
     constructor (apiUrl) {
         this.apiUrl = apiUrl
-        // instance.defaults.headers.common['Authorization'] = apiToken;
+        instance.defaults.headers.get["Authorization"] = constantes.token;
     }
 
     post(url,objeto){
@@ -23,6 +24,7 @@ class ApiService{
     }
 
     get(url){
+        
         return instance.get(`${this.apiUrl}${url}`)
     }
 }

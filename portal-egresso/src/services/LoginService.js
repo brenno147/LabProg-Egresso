@@ -14,8 +14,9 @@ class LoginService extends ApiService{
                 email: email,
                 senha: senha
             });
+            console.log("Login",response);
             token = response.data;
-            return token;
+            return response;
         } catch (erro) {
             token = erro.response.data;
             return token;
