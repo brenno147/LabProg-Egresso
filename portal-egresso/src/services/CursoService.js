@@ -8,6 +8,10 @@ class CursoService extends ApiService {
   async quantEgressosPorCurso() {
     return await this.get("/quant-egresso-por-curso");
   }
+
+  async deletar(idEgresso,idCurso){
+    await this.delete(`/cursoEgresso/${idEgresso}/${idCurso}`)
+  }
 }
 
 export default CursoService;

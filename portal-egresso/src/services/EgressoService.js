@@ -39,10 +39,6 @@ class EgressoService extends ApiService{
     } 
 
     async editar({nome,email,cpf,senha,resumo,urlFoto,contatos,profissoes,cursos,depoimentos},id) {
-      // contatos = [];
-      profissoes = [];
-      cursos = [];
-      depoimentos = [];
       try {
         const response = await this.put(`/editar/${id}`,{
           nome,
@@ -62,6 +58,10 @@ class EgressoService extends ApiService{
         // console.log("ERRO:",erro.response);
         return erro.response.data;
       }
+    }
+
+    async deletarProfEgresso(idProfEgresso){
+      await this.delete(`/editar/profEgresso/${idProfEgresso}`)
     }
     
 }

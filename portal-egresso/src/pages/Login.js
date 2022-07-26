@@ -13,6 +13,7 @@ function Login(){
     const service = new LoginService();
     function cadastrarUsuario(e) {
         e.preventDefault()
+        constantes.senha = senha;
         service.fazerLogin(email,senha).then((dados) =>{
             console.log("Respo",dados);
             if (dados !== ""){
@@ -69,7 +70,9 @@ function Login(){
                     </form>
                 </div>
             </div>
-            <Footer/>
+            <div style={{position:"absolute", bottom:"0px", width:"100%"}}>
+                <Footer/>
+            </div>
         </div>
     );
 }

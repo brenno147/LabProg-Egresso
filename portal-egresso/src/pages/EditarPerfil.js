@@ -10,6 +10,9 @@ import SelectInput from "../components/SelectInput";
 import DateInput from "../components/DateInput";
 import DepoimentoTextComponent from "../components/DepoimentoTextComponent";
 import ButtonComponent from "../components/ButtonComponent";
+import DepoimentoServise from "../services/DepoimentoService";
+import CursoService from "../services/CursoService";
+
 
 function EditarPerfil(){
   const egressoService = new EgressoService();
@@ -17,6 +20,8 @@ function EditarPerfil(){
   const [invalidText, setInvalidText] = useState(false);
   const listaCursos = [], listaCargo = [], listaDepoimentos = [];
   const navigate = useNavigate();
+  const dep = new DepoimentoServise();
+  const curs = new CursoService(); 
 
   const [egresso, setEgresso] = useState({
     nome: "",
@@ -62,12 +67,15 @@ function EditarPerfil(){
 
   const removeCursoFields = (i) => {
     let newCurso = [...curso]
+    if(newCurso[i]["idEgresso"] !== ""){
+      curs.deletar(newCurso[i]["idEgresso"],newCurso[i]["cursoId"])
+    }
     newCurso.splice(i,1);
     setCurso(newCurso)
   }
 
   const addCursoField = () => {
-    setCurso([...curso, {cargoId: "", nivel:"", dataInicio: "", dataConclusao: ""}])
+    setCurso([...curso, {idEgresso: "", cursoId: "", dataInicio: "", dataConclusao: ""}])
   }
 
   useEffect(() => {
@@ -97,11 +105,14 @@ function EditarPerfil(){
   };
 
   const addProfField = () => {
-    setProfissao([...profissao, {nome: "", faixaSalarioId: "", empresa: "", descricao: "", dataRegistro: ""}])
+    setProfissao([...profissao, {idProfEgresso: "", nome: "", faixaSalarioId: "", empresa: "", descricao: "", dataRegistro: ""}])
   }
 
   const removeProfFields = (i) => {
     let newProf = [...profissao]
+    if(newProf[i]["idProfEgresso"] !== ""){
+      egressoService.deletarProfEgresso(newProf[i]["idProfEgresso"])
+    }
     newProf.splice(i,1);
     setProfissao(newProf)
   }
@@ -138,7 +149,7 @@ function EditarPerfil(){
 
   const [depoimento, setDepoimento] = useState([{
     texto: "",
-    // data: "",
+    data: "",
   }]);
 
   const handleChangeDepoimento = (e, i) => {
@@ -148,12 +159,15 @@ function EditarPerfil(){
   };
 
   const addDepField = () => {
-    setDepoimento([...depoimento, {texto: "",
+    setDepoimento([...depoimento, {id: "", texto: "",
     data: ""}])
   }
 
   const removeDepFields = (i) => {
     let newDepoimento = [...depoimento]
+    if(newDepoimento[i]["id"] != ""){
+      dep.deletar(newDepoimento[i]["id"]);
+    }
     newDepoimento.splice(i,1);
     setDepoimento(newDepoimento)
   }
@@ -162,6 +176,8 @@ function EditarPerfil(){
     setEgresso((prevState) => ({ ...prevState, depoimentos: depoimento }));
     // console.log(curso)
   }, [depoimento])
+
+
 
   useEffect( () => {
     async function fectchData() {
@@ -174,6 +190,7 @@ function EditarPerfil(){
           cpf: dados["cpf"],
           resumo: dados["resumo"],
           urlFoto: dados["urlFoto"],
+          senha: constantes.senha,
         }
       );
 
@@ -192,23 +209,40 @@ function EditarPerfil(){
       }
       
       for(j=0;j<dados["datasCursos"].length;j++){
-        let datas, datas2;
-        if(dados["datasCursos"][j]["data_inicio"][1].length == 2){
-          datas = dados["datasCursos"][j]["data_inicio"][1];
+        let mes="",dia="",mes2="",dia2="";
+        // mes
+        if(dados["datasCursos"][j]["data_inicio"][1] > 9){
+          mes = dados["datasCursos"][j]["data_inicio"][1];
         }else{
-          datas = "0"+dados["datasCursos"][j]["data_inicio"][1];
+          mes = "0"+dados["datasCursos"][j]["data_inicio"][1];
+        }
+        // dia
+        if(dados["datasCursos"][j]["data_inicio"][2] > 9){
+          dia = dados["datasCursos"][j]["data_inicio"][2];
+        }else{
+          dia = "0"+dados["datasCursos"][j]["data_inicio"][2];
         }
 
-        if(dados["datasCursos"][j]["data_conclusao"][1].length == 2){
-          datas2 = dados["datasCursos"][j]["data_conclusao"][1];
+        //mes
+        if(dados["datasCursos"][j]["data_conclusao"][1] > 9){
+          mes2 = dados["datasCursos"][j]["data_conclusao"][1];
         }else{
-          datas2 = "0"+dados["datasCursos"][j]["data_conclusao"][1];
+          mes2 = "0"+dados["datasCursos"][j]["data_conclusao"][1];
         }
+        //dia
+        if(dados["datasCursos"][j]["data_conclusao"][2] > 9){
+          dia2 = dados["datasCursos"][j]["data_conclusao"][2];
+        }else{
+          dia2 = "0"+dados["datasCursos"][j]["data_conclusao"][2];
+        }
+
+
         listaCursos.push(
           {
+            idEgresso: parseInt(dados["datasCursos"][j]["egresso"]),
             cursoId: parseInt(dados["datasCursos"][j]["curso"]["id_curso"]),
-            dataInicio: (dados["datasCursos"][j]["data_inicio"][0]+"-"+datas+"-"+dados["datasCursos"][j]["data_inicio"][2]).toString(),
-            dataConclusao: (dados["datasCursos"][j]["data_conclusao"][0]+"-"+datas2+"-"+dados["datasCursos"][j]["data_conclusao"][2]).toString(),
+            dataInicio: (dados["datasCursos"][j]["data_inicio"][0]+"-"+mes+"-"+dia).toString(),
+            dataConclusao: (dados["datasCursos"][j]["data_conclusao"][0]+"-"+mes2+"-"+dia2).toString(),
           }
         )
       }
@@ -218,19 +252,28 @@ function EditarPerfil(){
         listaCargo.pop();
       }
       for(j=0;j<dados["profissao"].length;j++){
-        let datas;
-        if(dados["profissao"][j]["dataRegistro"][1].length == 2){
-          datas = dados["profissao"][j]["dataRegistro"][1];
+        let mes,dia;
+
+        //mes
+        if(dados["profissao"][j]["dataRegistro"][1] > 9){
+          mes = dados["profissao"][j]["dataRegistro"][1];
         }else{
-          datas = "0"+dados["profissao"][j]["dataRegistro"][1];
+          mes = "0"+dados["profissao"][j]["dataRegistro"][1];
+        }
+        //dia
+        if(dados["profissao"][j]["dataRegistro"][2] > 9){
+          dia = dados["profissao"][j]["dataRegistro"][2];
+        }else{
+          dia = "0"+dados["profissao"][j]["dataRegistro"][2];
         }
         listaCargo.push(
           {
+            idProfEgresso: dados["profissao"][j]["idProfEgresso"],
             cargoId: 1,
             faixaSalarioId: 1,
             empresa: dados["profissao"][j]["empresa"],
             descricao: dados["profissao"][j]["descricao"],
-            dataRegistro: (dados["profissao"][j]["dataRegistro"][0]+"-"+datas+"-"+dados["profissao"][j]["dataRegistro"][2]).toString()
+            dataRegistro: (dados["profissao"][j]["dataRegistro"][0]+"-"+mes+"-"+dia).toString()
           }
         )
       }
@@ -242,13 +285,16 @@ function EditarPerfil(){
       for(j=0;j<dados["depoimento"].length;j++){
         listaDepoimentos.push(
           {
+            id: dados["depoimento"][j]["id_depoimento"],
             texto: dados["depoimento"][j]["texto"],
-            data: "",
+            data: dados["depoimento"][j]["data"][0]+"-"+dados["depoimento"][j]["data"][1]+"-"+dados["depoimento"][j]["data"][2]
           }
         )
       };
 
       setDepoimento(listaDepoimentos);
+
+      console.log("EgressoDepois:",egresso);
       
     }
     
@@ -264,13 +310,15 @@ function EditarPerfil(){
       )  {
         setInvalidText("Preencha corretamente as suas informações pessoais");
       }else {
+        console.log("Egresso",egresso);
         egressoService.editar({...egresso},constantes.id).then((dados) =>{
           console.log("Respo",dados);
-          if (dados.idEgresso > 0){
-            navigate("/perfil");
-          }else{
-            setInvalidText("Erro ao tentar guardar as alterações");
-          }
+
+          // if (dados. > 0){
+          //   navigate("/login");
+          // }else{
+          //   setInvalidText("Erro ao tentar guardar as informações");
+          // }
       })
         
       }
@@ -380,7 +428,7 @@ function EditarPerfil(){
                     inputName="dataConclusao"
                   />
                 </div>
-                {index ? (
+                  {index ? (
                   <button
                     type="button"
                     className="button remove"
