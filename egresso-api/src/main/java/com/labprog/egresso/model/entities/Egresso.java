@@ -69,4 +69,13 @@ public class Egresso {
         this.getDatasCursos().add(cursoEgresso);
     }
 
+    @Builder.Default
+    @OneToMany(mappedBy = "egresso")
+    private Set<Depoimento> depoimento = new HashSet<>();
+
+    public void addDepoimento(Depoimento depoimento){
+        depoimento.setEgresso(this);
+        this.getDepoimento().add(depoimento);
+    }
+
 }

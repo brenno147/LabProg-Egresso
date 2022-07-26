@@ -1,5 +1,7 @@
 package com.labprog.egresso.security;
 
+import java.util.Arrays;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.context.annotation.Bean;
@@ -37,6 +39,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
       .antMatchers(HttpMethod.GET,SecurityConstants.CURSO_URL).permitAll()
       .antMatchers(HttpMethod.GET,SecurityConstants.FAIXA_SALARIO_URL).permitAll()
       .antMatchers(HttpMethod.GET,SecurityConstants.DEPOIMENTO_URL).permitAll()
+      .antMatchers(HttpMethod.GET,SecurityConstants.EGRESSO_URL).permitAll()
+      .antMatchers(HttpMethod.PUT,SecurityConstants.EDIT_EGRESSO_URL).permitAll()
+      .antMatchers(HttpMethod.DELETE,SecurityConstants.EDIT_EGRESSO_URL).permitAll()
       .antMatchers(HttpMethod.POST,SecurityConstants.SIGN_UP_URL).permitAll()
       //URL pública
       .antMatchers(HttpMethod.POST,"/login").permitAll()
@@ -61,11 +66,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
   @Bean
   CorsConfigurationSource corsConfigurationSource() {
+    CorsConfiguration configuration = new CorsConfiguration();
+      configuration.setAllowedMethods(Arrays.asList("POST","PUT","OPTION","DELETE","GET"));
+      
     final UrlBasedCorsConfigurationSource source = 
       new UrlBasedCorsConfigurationSource();
     source
-      .registerCorsConfiguration("/**", new CorsConfiguration()
-      .applyPermitDefaultValues());
+      .registerCorsConfiguration("/**", configuration
+      .applyPermitDefaultValues()
+    );
     return source;
   }
 }

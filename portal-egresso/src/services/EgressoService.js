@@ -1,5 +1,4 @@
 import ApiService from '../ApiService'
-import constantes from "../Constantes";
 
 class EgressoService extends ApiService{
     constructor() {
@@ -19,21 +18,51 @@ class EgressoService extends ApiService{
           cursos,
           profissoes
         });
-        console.log("\n\nResposta:",response);
+        // console.log("\n\nResposta:",response);
         return response.data;
       } catch (erro) {
-        console.log("ERRO:",erro.response);
+        // console.log("ERRO:",erro.response);
         return erro.response.data;
       }
     }
 
-    async getEgressos() {
-      return await this.get();
-    }
-    async obterInvestimentos(nome) {
-      const response = this.get(`?nome=${nome}`);
-      console.log("GETEgresso",response);
+    async dadosPerfil(email) {
+      try{
+        const response = this.get(`/email/${email}`);
+        // console.log("GETEgresso",response);
+        return (await response).data;
+      }catch (erro) {
+        console.log("ERRO:",erro.response.data);
+        return erro.response.data;
+      }
+      
     } 
+
+    async editar({nome,email,cpf,senha,resumo,urlFoto,contatos,profissoes,cursos,depoimentos},id) {
+      // contatos = [];
+      profissoes = [];
+      cursos = [];
+      depoimentos = [];
+      try {
+        const response = await this.put(`/editar/${id}`,{
+          nome,
+          email,
+          cpf,
+          resumo,
+          urlFoto,
+          senha,
+          contatos,
+          cursos,
+          profissoes,
+          depoimentos
+        });
+        // console.log("\n\nResposta:",response);
+        return response.data;
+      } catch (erro) {
+        // console.log("ERRO:",erro.response);
+        return erro.response.data;
+      }
+    }
     
 }
 
