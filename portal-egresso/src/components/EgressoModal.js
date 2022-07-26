@@ -8,7 +8,7 @@ export default function EgressoModal() {
   return (
     <div
       className="container w-50 rounded d-flex flex-column align-items-center py-3"
-      style={{ height: "50vh", backgroundColor: "#2E3E5C" }}
+      style={{ backgroundColor: "#2E3E5C" }}
     >
       <div className="row w-100 h-100">
         <div className="col d-flex align-items-center">
