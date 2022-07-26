@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-EgressoApplication<egresso>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.labprog.egresso.EgressoApplication",
+            "projectName": "egresso",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
