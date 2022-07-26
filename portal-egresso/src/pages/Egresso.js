@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from "react";
 import CardEgresso from "../components/CardEgresso";
+import EgressoModal from "../components/EgressoModal";
 import NavbarComponent from "../components/NavbarComponent";
 import Footer from "../components/Footer";
 import Pagination from "../components/Pagination";
 
 function Egresso() {
+
+  const [egressoModal, setEgressoModal] = useState()
 
   const [egressos, setEgressos] = useState([])
   const [loading, setLoading] = useState(false)
@@ -21,7 +24,7 @@ function Egresso() {
       {"id":5, "nome":"SARAH ARCHARDI5", "cargo":"dsfsfdsfsfsfefse"},
       {"id":6, "nome":"dssfdfsf", "cargo":"dsfsfdsfsfsfefse"},
       {"id":7, "nome":"dssfdfsf", "cargo":"dsfsfdsfsfsfefse"},
-      {"id":8, "nome":"dssfdfsf", "cargo":"dsfsfdsfsfsfefse"}]//get
+      {"id":8, "nome":"dssfdfsf", "cargo":"dsfsfdsfsfsfefse"}]//await egressoService.get()
       setEgressos(res)
       setLoading(false)
     }
@@ -38,6 +41,9 @@ function Egresso() {
 
   return (
     <div>
+
+      {egressoModal && <EgressoModal egresso={egressoModal} closeModal={() => setEgressoModal()}/>}
+
       <NavbarComponent />
       <div
         className="d-flex flex-column align-items-center pt-3 pb-5"
@@ -53,7 +59,7 @@ function Egresso() {
               <ul className="list-inline mb-4">
                 {egressosAtuaisTop.map((egresso) => (
                   <li key={egresso.id} className="list-inline-item">
-                    <CardEgresso nome={egresso.nome} cargo={egresso.cargo}/>
+                    <CardEgresso nome={egresso.nome} cargo={egresso.cargo} onClick={() => setEgressoModal(egresso)}/>
                   </li>
                 ))}
               </ul>
@@ -62,7 +68,7 @@ function Egresso() {
               <ul className="list-inline mb-4">
                 {egressosAtuaisBot.map((egresso) => (
                   <li key={egresso.id} className="list-inline-item">
-                    <CardEgresso nome={egresso.nome} cargo={egresso.cargo}/>
+                    <CardEgresso nome={egresso.nome} cargo={egresso.cargo} onClick={() => setEgressoModal(egresso)}/>
                   </li>
                 ))}
               </ul>
@@ -73,20 +79,6 @@ function Egresso() {
         <div className="m-5">
           <Pagination itensPerPage={egressosPerPage} totalItens={egressos.length} paginate={paginate}/>
         </div>
-
-        {/*{<ul>
-          <div className="d-flex w-75 justify-content-between mt-3 mb-2">
-            <li><CardEgresso /></li>
-            <li><CardEgresso /></li>
-            <li><CardEgresso /></li>
-          </div>
-          <div className="d-flex w-75 justify-content-between mb-4 mt-3">
-            <li><CardEgresso /></li>
-            <li><CardEgresso /></li>
-            <li><CardEgresso /></li>
-          </div>
-        </ul>}
-        {/* <EgressoPage /> */}
       </div>
       <Footer />
     </div>

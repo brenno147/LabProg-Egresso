@@ -1,117 +1,68 @@
 import React from "react";
 import logo from "./../imgs/thumbnail.svg";
-import { ReactComponent as Facebook } from "./../imgs/facebook.svg";
+import { ReactComponent as Linkedin } from "./../imgs/linkedin.svg";
 import { ReactComponent as Instagram } from "./../imgs/instagram.svg";
 import { ReactComponent as Github } from "./../imgs/github.svg";
-import { ReactComponent as Up } from "./../imgs/chevron-up.svg";
-import { ReactComponent as Down } from "./../imgs/chevron-down.svg";
 
 export default function EgressoModal() {
   return (
     <div
-      className="d-flex justify-content-center pt-5 pb-5"
-      style={{
-        backgroundColor: "rgba(46, 62, 92, 1)",
-        borderRadius: "2%",
-        width: "60%",
-        display: "none",
-      }}
+      className="container w-50 rounded d-flex flex-column align-items-center py-3"
+      style={{ backgroundColor: "#2E3E5C" }}
     >
-      <div className="d-flex flex-column justify-content-center text-white mr-5 mb-3">
-        <img
-          className="mb-4"
-          src={logo}
-          style={{ height: "250px" }}
-          alt="..."
-        />
-        <div>
+      <div className="row w-100 h-100">
+        <div className="col d-flex align-items-center">
+          <img
+            className="mx-auto d-block"
+            src={logo}
+            style={{ height: "250px" }}
+            alt="..."
+          />
+        </div>
+        <div className="col d-flex flex-column justify-content-center">
           <p
-            className="text-center m-0"
-            style={{ fontSize: "24px", fontWeight: "500" }}
+            className="text-uppercase text-white"
+            style={{ fontSize: "1.5rem" }}
           >
-            Contatos:
+            Sara Archidi
           </p>
-          <p
-            className="text-center"
-            style={{ fontSize: "24px", fontWeight: "500" }}
+          <p style={{ fontSize: "1.2rem", color: "#BDCDEC" }}>
+            Marketing Coordinator
+          </p>
+          <p className="text-light" style={{fontSize: "1rem"}}>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque
+            similique temporibus unde aliquam voluptates, tempore nostrum.
+          </p>
+        </div>
+      </div>
+      <div className="row w-100">
+        <div className="col d-flex flex-column align-items-center">
+          <div
+            className="text-white text-center"
+            style={{ fontSize: "1.2rem", fontWeight: "700" }}
           >
-            email: sara@gmail.com
-          </p>
-
-          <div className="d-flex justify-content-between ">
+            <p>Contatos:</p>
+            <p>email:sara@gmail.com</p>
+          </div>
+          <div className="w-25 m-3 d-flex justify-content-between">
             <div
-              className="p-2 d-flex justify-content-center align-items-center"
-              style={{
-                backgroundColor: "rgba(112, 111, 229, 1)",
-                borderRadius: "50%",
-                width: "65px",
-                height: "65px",
-              }}
+              className="p-4 d-flex justify-content-center align-items-center rounded-circle"
+              style={{ backgroundColor: "#706FE5" }}
             >
               <Instagram fill="white" />
             </div>
             <div
-              className="p-2 d-flex justify-content-center align-items-center"
-              style={{
-                backgroundColor: "rgba(112, 111, 229, 1)",
-                borderRadius: "50%",
-                width: "65px",
-                height: "65px",
-              }}
+              className="p-4 d-flex justify-content-center align-items-center rounded-circle"
+              style={{ backgroundColor: "#706FE5" }}
             >
-              <Facebook fill="white" />
+              <Linkedin fill="white" />
             </div>
             <div
-              className="p-2 d-flex justify-content-center align-items-center"
-              style={{
-                backgroundColor: "rgba(112, 111, 229, 1)",
-                borderRadius: "50%",
-                width: "65px",
-                height: "65px",
-              }}
+              className="p-4 d-flex justify-content-center align-items-center rounded-circle"
+              style={{ backgroundColor: "#706FE5" }}
             >
               <Github fill="white" />
             </div>
-          </div>
-        </div>
-      </div>
-
-      <div
-        style={{ width: "50%" }}
-        className="d-flex flex-column justify-content-end text-white"
-      >
-        <div className="mt-4 mb-4">
-          <p style={{ fontSize: "24px" }} className="mb-1">
-            SARA ARCHIDI
-          </p>
-          <p style={{ fontWeight: "300", fontSize: "18px" }}>
-            Marketing Coordinator
-          </p>
-        </div>
-        <div className="d-flex bg-light  pr-2 pl-2">
-          <div className="pt-3 pb-3 mr-2">
-            <p
-              className="h3 text-center"
-              style={{ color: "rgba(91, 122, 181, 1)" }}
-            >
-              Depoimentos
-            </p>
-            <p
-              style={{ fontSize: "22px", fontWeight: "400" }}
-              className="text-center mb-0"
-            >
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry's standard dummy text
-              ever since the 1500s, when an unknown printer took a galley of
-              type and scrambled it to make a type specimen book.
-            </p>
-            <p style={{ fontSize: "22px" }} className="text-right mb-1">
-              Data: 10/06/2022
-            </p>
-          </div>
-          <div className="d-flex flex-column justify-content-between">
-            <Up fill="rgba(91, 122, 181, 1)" />
-            <Down fill="rgba(91, 122, 181, 1)" />
           </div>
         </div>
       </div>
