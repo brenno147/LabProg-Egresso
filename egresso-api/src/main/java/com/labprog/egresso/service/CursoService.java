@@ -2,7 +2,9 @@ package com.labprog.egresso.service;
 
 import com.labprog.egresso.model.dto.CursoNumEgresso;
 import com.labprog.egresso.model.entities.Curso;
+import com.labprog.egresso.model.entities.CursoEgresso;
 import com.labprog.egresso.model.entities.Egresso;
+import com.labprog.egresso.model.repositories.CursoEgressoRepository;
 import com.labprog.egresso.model.repositories.CursoRepository;
 import com.labprog.egresso.service.exceptions.RegraNegocioException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,9 @@ public class CursoService {
 
     @Autowired
     private CursoRepository cursoRepository;
+
+    @Autowired
+    private CursoEgressoRepository curEgreRep;
 
     @Autowired
     private EgressoService egressoService;
@@ -60,6 +65,11 @@ public class CursoService {
             throw new RegraNegocioException("O nome do curso não está preenchido corretamente");
         if ((curso.getNivel() == null) || (curso.getNivel().equals(' ')))
             throw new RegraNegocioException("O nível do curso não está preenchida corretamente");
+    }
+
+
+    public void deletar(CursoEgresso id){
+        curEgreRep.delete(id);
     }
 
 }

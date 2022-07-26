@@ -5,6 +5,7 @@ class Constantes{
       this.token = "";
       this.email = "";
       this.id = -1;
+      this.senha = "";
    }
 
    getLogado(){
@@ -37,6 +38,14 @@ class Constantes{
 
    setId(id){
       this.id = id;
+   }
+
+   getId(){
+      return this.senha;
+   }
+
+   setId(senha){
+      this.senha = senha;
    }
 }
 

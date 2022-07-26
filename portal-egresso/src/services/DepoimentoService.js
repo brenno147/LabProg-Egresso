@@ -15,6 +15,13 @@ class DepoimentoService extends ApiService {
     return (await response).data;
     
   }
+
+  async deletar(id) {
+    const response = this.delete(`/${id}`);
+    console.log("Delete:",response);
+    return (await response);
+    
+  }
     
 }
 
