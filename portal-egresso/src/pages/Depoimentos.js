@@ -1,10 +1,13 @@
 import React, {useState, useEffect} from "react";
 import Depoimento from "../components/Depoimento";
 import NavbarComponent from '../components/NavbarComponent';
+import DepoimentoService from "../services/DepoimentoService";
 import Footer from '../components/Footer';
 import Pagination from "../components/Pagination";
 
 function Depoimentos(){
+
+    const depService = new DepoimentoService();
 
     const [depoimentos, setDepoimentos] = useState([])
     const [loading, setLoading] = useState(false)
@@ -14,14 +17,9 @@ function Depoimentos(){
     useEffect(() => {
         const fetchDepoimentos = async () => {
             setLoading(true)
-            const res = [{"id": 1, "nome":"dssfdfsf", "depo":"dsfsfdsfsfsfefse"}, 
-            {"id":2, "nome":"dssfdfsf", "depo":"dsfsfdsfsfsfefse"}, 
-            {"id":3, "nome":"dssfdfsf", "depo":"dsfsfdsfsfsfefse"},
-            {"id":4, "nome":"dssfdfsf", "depo":"dsfsfdsfsfsfefse"},
-            {"id":5, "nome":"dssfdfsf", "depo":"dsfsfdsfsfsfefse"},
-            {"id":6, "nome":"dssfdfsf", "depo":"dsfsfdsfsfsfefse"},
-            {"id":7, "nome":"dssfdfsf", "depo":"dsfsfdsfsfsfefse"}]//get
-            setDepoimentos(res)
+            const res = await depService.getDepoimentos()
+            console.log(res.data)
+            setDepoimentos(res.data)
             setLoading(false)
         }
 
@@ -43,7 +41,7 @@ function Depoimentos(){
                     <ul className="list-group mb-4">
                         {depoimentosAtuais.map((depoimento) => (
                             <li key={depoimento.id} className="list-group-item">
-                                <Depoimento nomeEgresso={depoimento.nome} depoimento={depoimento.depo}/>
+                                <Depoimento nomeEgresso={depoimento.egresso.nome} depoimento={depoimento.texto}/>
                             </li>
                         ))}
                     </ul>

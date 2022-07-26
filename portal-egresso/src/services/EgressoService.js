@@ -5,8 +5,8 @@ class EgressoService extends ApiService{
       super('/api/egressos');
     }
 
-    async get(){
-      return await this.get();
+    async listEgresso(){
+      return await this.get('');
     }
 
     async fazerCadastro({nome,email,cpf,senha,resumo,urlFoto,contatos,profissoes,cursos}) {
@@ -22,7 +22,7 @@ class EgressoService extends ApiService{
           cursos,
           profissoes
         });
-        // console.log("\n\nResposta:",response);
+        //console.log("\n\nResposta:",response);
         return response.data;
       } catch (erro) {
         // console.log("ERRO:",erro.response);
