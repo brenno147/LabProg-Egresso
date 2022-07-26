@@ -6,6 +6,10 @@ class EgressoService extends ApiService{
       super('/api/egressos');
     }
 
+    async get(){
+      return await this.get();
+    }
+
     async fazerCadastro({nome,email,cpf,senha,resumo,urlFoto,contatos,profissoes,cursos}) {
       try {
         const response = await this.post('/', {
