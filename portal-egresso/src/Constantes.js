@@ -4,6 +4,7 @@ class Constantes{
       this.logado = false;
       this.token = "";
       this.email = "";
+      this.id = -1;
    }
 
    getLogado(){
@@ -26,8 +27,16 @@ class Constantes{
       return this.email;
    }
 
-   setNome(email){
+   setEmail(email){
       this.email = email;
+   }
+
+   getId(){
+      return this.id;
+   }
+
+   setId(id){
+      this.id = id;
    }
 }
 

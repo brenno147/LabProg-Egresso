@@ -2,6 +2,8 @@ package com.labprog.egresso.security;
 
 public class SecurityConstants {
     public static final String SIGN_UP_URL = "/api/egressos/";
+    public static final String EDIT_EGRESSO_URL = "/api/egressos/editar/**";
+    public static final String EGRESSO_URL = "/api/egressos/**";
     public static final String CARGO_URL = "/api/cargos/**";
     public static final String CURSO_URL = "/api/cursos/**";
     public static final String FAIXA_SALARIO_URL = "/api/faixasalario/**";
