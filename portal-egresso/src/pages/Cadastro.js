@@ -3,7 +3,6 @@ import { Alert } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import ButtonComponent from "../components/ButtonComponent";
 import DateInput from "../components/DateInput";
-import DepoimentoTextComponent from "../components/DepoimentoTextComponent";
 import Footer from "../components/Footer";
 import NavbarComponentLogin from "../components/NavbarComponentLogin";
 import SelectInput from "../components/SelectInput";
@@ -379,13 +378,6 @@ function Cadastro() {
             inputName="contatoGit"
           />
         </div>
-        <div className="h3" style={{ marginBottom: "50px", marginTop: "50px" }}>
-          Depoimento
-        </div>
-        <DepoimentoTextComponent />
-        {/* <div style={{ width: "30%", marginBottom: "30px" }}>
-          <ButtonSubmitComponent value="+ adicionar" />
-        </div> */}
         <div
           style={{
             alignSelf: "end",

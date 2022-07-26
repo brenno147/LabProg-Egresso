@@ -9,9 +9,9 @@ class DepoimentoService extends ApiService {
     return await this.get();
   }
 
-  async dadosPerfil(email) {
-    const response = this.get(`/${email}`);
-    console.log("GETEgresso",response);
+  async depoimentos(id) {
+    const response = this.get(`/depoimentos-por-egresso/${id}`);
+    console.log("Depoimentos:",response);
     return (await response).data;
     
   }

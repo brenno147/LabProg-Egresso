@@ -1,7 +1,6 @@
 package com.labprog.egresso.service;
 
 import java.util.Collections;
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +40,8 @@ public class EgressoService implements UserDetailsService{
 
     @Autowired
     EgressoRepository repository;
+
+    
 
     @Transactional
     public Egresso salvar(Egresso egresso) {
@@ -122,7 +123,6 @@ public class EgressoService implements UserDetailsService{
         }
     }
 
-
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         Optional<Egresso> usr = repository.findByEmail(email);
@@ -132,7 +132,6 @@ public class EgressoService implements UserDetailsService{
         log.info("\n\nEgresso",a.getEmail());
         return new User(a.getEmail(), a.getSenha(), Collections.emptyList());
     }
-
 
     
 }
