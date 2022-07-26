@@ -13,6 +13,7 @@ function NavbarComponent(){
     const navigate = useNavigate()
     function logout(){
         constantes.logado = false;
+        constantes.token = "";
         navigate("/home");
     }
     return(

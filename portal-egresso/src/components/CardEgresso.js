@@ -3,17 +3,13 @@ import logo from "./../imgs/thumbnail.svg";
 // import "admin-lte/plugins/flot/jquery.flot.js";
 // import "admin-lte/plugins/flot/plugins/jquery.flot.resize.js";
 
-const CardEgresso = ({nome, cargo}) => {
-  function toggleModal() {
-    let modal = document.getElementById("modal");
-    console.log(modal);
-  }
+const CardEgresso = ({nome, cargo, onClick}) => {
 
   return (
     <div
       className="d-flex justify-content-center card pt-4 pb-1 pr-5 pl-5"
       style={{ borderRadius: "7%", cursor: "pointer", width: "20rem" }}
-      onClick={toggleModal}
+      onClick={onClick}
     >
       <img src={logo} alt="..." />
       <div className="card-body d-flex flex-column align-items-center">

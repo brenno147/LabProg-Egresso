@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
 import Footer from '../components/Footer';
 import EgressoService from '../services/EgressoService';
+import DepoimentoService from "../services/DepoimentoService";
 import constantes from "../Constantes";
 import NavbarComponentLogin from "../components/NavbarComponentLogin";
 import Card from '@mui/material/Card';
@@ -19,16 +20,18 @@ function Perfil(){
     let [resumo, setResumo] = useState();
     let [linkedin, setLinkedin] = useState();
     let [git, setGit] = useState();
+    let [urlFoto, setUrlFoto] = useState();
     let [insta, setInsta] = useState();
     let [cursos, setCursos] = useState([]);
     let [cargos, setCargos] = useState([]);
     let [depoimentos, setDepoimentos] = useState([]);
-    let dados, depoimento;
+    let dados;
 
     useEffect( () => {
         async function fectchData() {
             dados = await service.dadosPerfil(constantes.email);
-            depoimento = await service.
+            constantes.id = dados["idEgresso"]
+            setUrlFoto(dados["urlFoto"])
             setNome(dados["nome"]);
             setEmail(dados["email"]);
             setCPF(dados["cpf"]);
@@ -38,13 +41,14 @@ function Perfil(){
             setInsta(dados["contatos"][2]["url_logo"])
             setCursos(dados["datasCursos"])
             setCargos(dados["profissao"])
+            setDepoimentos(dados["depoimento"])
         }
         fectchData();
     }, [])
 
     function cursosList(){
-        const listItems = cursos.map((curso) =>
-            <li>
+        const listItems = cursos.map((curso,index) =>
+            <li key={index}>
                 {curso["curso"]["nome"]}
                 <br/>Nível: {curso["curso"]["nivel"]}
                 <br/>Data Inicio: {curso["data_inicio"][2]}/{curso["data_inicio"][1]}/{curso["data_inicio"][0]}
@@ -56,28 +60,42 @@ function Perfil(){
             <ol>{listItems}</ol>
         );
     }
+
     function cargosList(){
-        const listItems = cargos.map((cargo) =>
-            <li>
+        const listItems = cargos.map((cargo,index) =>
+            <li key={index}>
                 {cargo["cargo"]["nome"]}
                 <br/>Descrição: {cargo["descricao"]}
                 <br/>Empresa: {cargo["empresa"]}
                 <br/>Data Registro: {cargo["dataRegistro"][2]}/{cargo["dataRegistro"][1]}/{cargo["dataRegistro"][0]}
                 <br/>Faixa Salarial: {cargo["faixaSalario"]["descricao"]}
-
             </li>
         );
         return (
             <ol>{listItems}</ol>
         );
     }
+
+    function depoimentosList(){
+        const listItems = depoimentos.map((dep,index) =>
+            <li style={{marginBottom:"10px", marginLeft:"20px"}} key={index}>
+                {dep["texto"]}
+                <br/>Data: {dep["data"][2]}/{dep["data"][1]}/{dep["data"][0]}
+            </li>
+        );
+        return (
+            <lu>{listItems}</lu>
+        );
+    }
+
+
     return(
-        <div className="">
+        <div>
             <NavbarComponentLogin/>
             <div className="d-flex flex-column align-items-center mt-5 mb-5">
                 <Card sx={{ minWidth: 275 }} style={{borderColor:"#9481ff4a",borderStyle:"solid",borderRadius:"8px",width:"60%"}}>
                     <CardContent>
-                        <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" style={{margin:"auto",width:"80px",height:"70px",marginBottom:"30px",marginTop:"30px"}}/>
+                        <Avatar alt="Perfil" src={urlFoto} style={{margin:"auto",width:"100px",height:"100px",marginBottom:"30px",marginTop:"30px"}}/>
                         <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
                             Nome: {nome}
                         </Typography>
@@ -114,8 +132,14 @@ function Perfil(){
                         <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
                             {cargosList()}
                         </Typography>
+                        <Typography variant="h6" component="div" style={{textAlign:"center", background:"#9481ff2e",borderRadius:"8px",marginBottom:"20px",marginTop:"20px"}}>
+                            Depoimentos
+                        </Typography>
+                        <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+                            {depoimentosList()}
+                        </Typography>
                     </CardContent>
-                    <div style={{align:"end", justifySelf:"end" ,marginTop:"5px", marginBottom:"10px", marginLeft:"15px", width:"8%"}}>
+                    <div style={{align:"end", justifySelf:"end" ,marginTop:"5px", marginBottom:"10px", marginLeft:"15px", width:"70px"}}>
                         <ButtonComponent nome="editar" click={() => navigate("/editarperfil")}/>
                     </div>
                 </Card>
