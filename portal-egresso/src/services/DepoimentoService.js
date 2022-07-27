@@ -7,7 +7,7 @@ class DepoimentoService extends ApiService {
   }
 
   async getDepoimentos() {
-    return await this.get('');
+    return await this.get('/depoimentos-recentes');
   }
 
   async depoimentos(id) {

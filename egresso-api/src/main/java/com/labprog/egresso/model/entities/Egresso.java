@@ -1,11 +1,9 @@
 package com.labprog.egresso.model.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.*;
 import lombok.*;
 
 import javax.persistence.*;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -69,6 +67,8 @@ public class Egresso {
         this.getDatasCursos().add(cursoEgresso);
     }
 
+    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id_depoimento")
+    @JsonIdentityReference(alwaysAsId = true)
     @Builder.Default
     @OneToMany(mappedBy = "egresso")
     private Set<Depoimento> depoimento = new HashSet<>();

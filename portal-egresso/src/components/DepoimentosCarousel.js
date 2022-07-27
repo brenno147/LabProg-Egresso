@@ -1,7 +1,9 @@
 import React from "react";
 import depoimentoPreview from "./../imgs/clientReview.svg";
 
-export default function DepoimentosCarousel() {
+export default function DepoimentosCarousel({depoimentos }) {
+  const depoimentosSize = depoimentos.length > 4 ? 4 : depoimentos.length
+
   return (
     <div
       id="carouselExampleControls"
@@ -9,27 +11,20 @@ export default function DepoimentosCarousel() {
       data-ride="carousel"
     >
       <div className="carousel-inner">
-        <div className="carousel-item active">
-          <img
-            src={depoimentoPreview}
-            className="d-block w-100"
-            alt="depoimento"
-          />
-        </div>
-        <div className="carousel-item">
-          <img
-            src={depoimentoPreview}
-            className="d-block w-100"
-            alt="depoimento"
-          />
-        </div>
-        <div className="carousel-item">
-          <img
-            src={depoimentoPreview}
-            className="d-block w-100"
-            alt="depoimento"
-          />
-        </div>
+        {depoimentos.slice(0, depoimentosSize).map((depoimento, index) => {
+          return (
+            <div
+              key={depoimentos.id_depoimento}
+              style={{ backgroundColor: "#F3F4F6" }}
+              className={`
+                carousel-item ${index === 0 && "active"} 
+                py-3 rounded
+              `}
+            >
+              <p className="text-center text-secondary">{depoimento.texto}</p>
+            </div>
+          );
+        })}
       </div>
       <button
         className="carousel-control-prev"
