@@ -41,7 +41,7 @@ function Depoimentos(){
                     <ul className="list-group mb-4">
                         {depoimentosAtuais.map((depoimento) => (
                             <li key={depoimento.id} className="list-group-item">
-                                <Depoimento nomeEgresso={depoimento.egresso.nome} depoimento={depoimento.texto}/>
+                                <Depoimento nomeEgresso={depoimento.egresso} depoimento={depoimento.texto} data={depoimento.data}/>
                             </li>
                         ))}
                     </ul>

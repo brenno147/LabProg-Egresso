@@ -33,6 +33,9 @@ const Depoimento = (props) => {
                 </AccordionSummary>
                 <AccordionDetails>
                     <Typography>
+                        {props.data[2]}/{props.data[1]}/{props.data[0]} 
+                    </Typography>
+                    <Typography>
                         {props.depoimento}
                     </Typography>
                 </AccordionDetails>
