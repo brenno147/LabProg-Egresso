@@ -1,4 +1,5 @@
 import ApiService from "../ApiService";
+import constantes from "../Constantes";
 
 class DepoimentoService extends ApiService {
   constructor() {
@@ -22,7 +23,23 @@ class DepoimentoService extends ApiService {
     return (await response);
     
   }
+
+  async salvar() {
+    const response = this.post('/',{
+      idEgresso: constantes.id,
+      texto:"depoimento",
+      data:"2022-03-03"
+    });
+    console.log("AddDep:",response);
+    return (await response);
     
+  }
+
+  async editar(depoimento){
+    console.log("dep",depoimento)
+    const response = await this.put(`/${constantes.id}`,
+    depoimento)
+  }  
 }
 
 export default DepoimentoService;

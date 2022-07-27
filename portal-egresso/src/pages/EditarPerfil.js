@@ -12,6 +12,8 @@ import DepoimentoTextComponent from "../components/DepoimentoTextComponent";
 import ButtonComponent from "../components/ButtonComponent";
 import DepoimentoServise from "../services/DepoimentoService";
 import CursoService from "../services/CursoService";
+import {faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 
 function EditarPerfil(){
@@ -48,6 +50,7 @@ function EditarPerfil(){
 
   // curso
   const [curso, setCurso] = useState([{
+    idEgresso: "",
     cursoId: "",
     dataInicio: "",
     dataConclusao: "",
@@ -85,6 +88,7 @@ function EditarPerfil(){
 
   // prof
   const [profissao, setProfissao] = useState([{
+    idProfEgresso: "",
     cargoId: "",
     faixaSalarioId: "",
     empresa: "",
@@ -148,6 +152,7 @@ function EditarPerfil(){
   // depoimentos
 
   const [depoimento, setDepoimento] = useState([{
+    id: "",
     texto: "",
     data: "",
   }]);
@@ -161,6 +166,8 @@ function EditarPerfil(){
   const addDepField = () => {
     setDepoimento([...depoimento, {id: "", texto: "",
     data: ""}])
+    dep.salvar()
+    
   }
 
   const removeDepFields = (i) => {
@@ -173,6 +180,7 @@ function EditarPerfil(){
   }
 
   useEffect(() => {
+    dados = egressoService.dadosPerfil(constantes.email);
     setEgresso((prevState) => ({ ...prevState, depoimentos: depoimento }));
     // console.log(curso)
   }, [depoimento])
@@ -182,17 +190,7 @@ function EditarPerfil(){
   useEffect( () => {
     async function fectchData() {
       dados = await egressoService.dadosPerfil(constantes.email);
-      console.log(dados)
-      setEgresso(
-        {
-          nome: dados["nome"],
-          email: dados["email"],
-          cpf: dados["cpf"],
-          resumo: dados["resumo"],
-          urlFoto: dados["urlFoto"],
-          senha: constantes.senha,
-        }
-      );
+      console.log("Dados",dados)
 
       // contatos
       setContatos(
@@ -246,7 +244,7 @@ function EditarPerfil(){
           }
         )
       }
-      setCurso(listaCursos)
+      
       
       for(j=0;j<dados["profissao"].length;j++){
         listaCargo.pop();
@@ -277,7 +275,7 @@ function EditarPerfil(){
           }
         )
       }
-      setProfissao(listaCargo)
+      
 
       for(j=0;j<dados["depoimento"].length;j++){
         listaDepoimentos.pop();
@@ -292,10 +290,21 @@ function EditarPerfil(){
         )
       };
 
-      setDepoimento(listaDepoimentos);
+      setEgresso(
+        {
+          nome: dados["nome"],
+          email: dados["email"],
+          cpf: dados["cpf"],
+          resumo: dados["resumo"],
+          urlFoto: dados["urlFoto"],
+          senha: constantes.senha,
+        }
+      );
 
+      setCurso(listaCursos)
+      setProfissao(listaCargo)
+      setDepoimento(listaDepoimentos);
       console.log("EgressoDepois:",egresso);
-      
     }
     
     fectchData();
@@ -313,12 +322,11 @@ function EditarPerfil(){
         console.log("Egresso",egresso);
         egressoService.editar({...egresso},constantes.id).then((dados) =>{
           console.log("Respo",dados);
-
-          // if (dados. > 0){
-          //   navigate("/login");
-          // }else{
-          //   setInvalidText("Erro ao tentar guardar as informações");
-          // }
+          if (dados["idEgresso"] > 0){
+            navigate("/perfil");
+          }else{
+            setInvalidText("Erro ao tentar guardar as informações");
+          }
       })
         
       }
@@ -429,19 +437,15 @@ function EditarPerfil(){
                   />
                 </div>
                   {index ? (
-                  <button
-                    type="button"
-                    className="button remove"
-                    onClick={() => removeCursoFields(index)}
-                  >
-                    Remover
-                  </button>
+                    <button class="depoimento-btn" type="button" onClick={() => removeCursoFields(index)}>
+                      <FontAwesomeIcon icon={faTrash} className="icon"/>
+                    </button>
                 ) : null}
               </div>
           ))}
           <div className="mt-5">
             <button
-              className="button add"
+              className="buttonadd"
               type="button"
               onClick={() => addCursoField()}
             >
@@ -516,19 +520,15 @@ function EditarPerfil(){
                 inputName="dataRegistro"
               />
               {index ? (
-                <button
-                  type="button"
-                  className="button remove"
-                  onClick={() => removeProfFields(index)}
-                >
-                  Remover
+                <button class="depoimento-btn" type="button" onClick={() => removeProfFields(index)}>
+                  <FontAwesomeIcon icon={faTrash} className="icon"/>
                 </button>
               ) : null}
             </div>
           ))}
           <div className="mt-5">
             <button
-              className="button add"
+              className="buttonadd"
               type="button"
               onClick={() => addProfField()}
             >
@@ -565,25 +565,21 @@ function EditarPerfil(){
             Depoimento
           </div>
           {depoimento.map((element,index) => (
-            <div className="d-flex flex-row w-70 mb-5" key={index}>
+            <div className="d-flex flex-row w-50 mb-5" key={index}>
               <DepoimentoTextComponent
                 inputName="Depoimento:"
                 inputValue={element.texto || ""}
                 inputChange = {(e) => handleChangeDepoimento(e, index)}/>
               {index ? (
-                <button
-                  type="button"
-                  className="button remove"
-                  onClick={() => removeDepFields(index)}
-                >
-                  Remover
+                <button className="depoimento-btn" type="button" onClick={() => removeDepFields(index)}>
+                  <FontAwesomeIcon icon={faTrash} className="icon"/>
                 </button>
               ) : null}
             </div>
           ))}
           <div className="mt-5">
             <button
-              className="button add"
+              className="buttonadd"
               type="button"
               onClick={() => addDepField()}
             >

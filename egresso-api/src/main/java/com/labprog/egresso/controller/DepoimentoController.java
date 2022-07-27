@@ -14,6 +14,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -35,13 +39,14 @@ public class DepoimentoController {
 
     @PostMapping
     public ResponseEntity salvar(@RequestBody DepoimentoDTO dto) {
-
+        
+        LocalDate date = LocalDate.now();
         Depoimento depoimento = Depoimento.builder()
             .egresso(egressoService.findById(dto.getIdEgresso()))
             .texto(dto.getTexto())
-            .data(dto.getData())
+            .data(date)
             .build();
-
+        
 
         try {
             Depoimento salvo = depoimentoService.salvar(depoimento);
@@ -51,18 +56,21 @@ public class DepoimentoController {
         }
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Depoimento> editar(@PathVariable Long id, @RequestBody DepoimentoDTO dto) {
-        if (!depoimentoRepository.existsById(id)) {
+    
+
+    @PutMapping("/{idEgresso}")
+    public ResponseEntity<Depoimento> editar(@PathVariable Long idEgresso, @RequestBody DepoimentoDTO dto) {
+        if (!depoimentoRepository.existsById(dto.getIdEgresso())) {
             return ResponseEntity.notFound().build();
         }
-
+        
+        LocalDate date = LocalDate.now();
         Depoimento depoimento = Depoimento.builder()
-                .id_depoimento(id)
+                .id_depoimento(dto.getIdEgresso())
                 .texto(dto.getTexto())
-                .egresso(egressoService.findById(dto.getIdEgresso()))
+                .egresso(egressoService.findById(idEgresso))
                 .texto(dto.getTexto())
-                .data(dto.getData())
+                .data(date)
                 .build();
 
         try {

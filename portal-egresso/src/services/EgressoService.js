@@ -1,4 +1,5 @@
 import ApiService from '../ApiService'
+import constantes from '../Constantes';
 
 class EgressoService extends ApiService{
     constructor() {
@@ -43,6 +44,7 @@ class EgressoService extends ApiService{
     } 
 
     async editar({nome,email,cpf,senha,resumo,urlFoto,contatos,profissoes,cursos,depoimentos},id) {
+      
       try {
         const response = await this.put(`/editar/${id}`,{
           nome,
@@ -60,7 +62,7 @@ class EgressoService extends ApiService{
         return response.data;
       } catch (erro) {
         // console.log("ERRO:",erro.response);
-        return erro.response.data;
+        return erro.response;
       }
     }
 

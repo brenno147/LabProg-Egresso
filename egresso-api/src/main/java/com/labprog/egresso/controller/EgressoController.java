@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -35,6 +36,7 @@ import com.labprog.egresso.model.entities.Depoimento;
 import com.labprog.egresso.model.entities.Egresso;
 import com.labprog.egresso.model.entities.FaixaSalario;
 import com.labprog.egresso.model.entities.ProfEgresso;
+import com.labprog.egresso.model.repositories.CursoEgressoRepository;
 import com.labprog.egresso.model.repositories.EgressoRepository;
 import com.labprog.egresso.model.repositories.ProfEgressoRepository;
 import com.labprog.egresso.service.CargoService;
@@ -150,9 +152,6 @@ public class EgressoController {
     // editar um usuário
     @PutMapping("/editar/{id}")
     public ResponseEntity editar(@PathVariable Long id, @RequestBody EgressoEditeDTO dto){
-
-        System.out.println("\n\n\n\n\nDTO:");
-        System.out.println(dto);
         Egresso egresso = Egresso.builder()
             .idEgresso(id)
             .nome(dto.getNome())
@@ -162,77 +161,56 @@ public class EgressoController {
             .resumo(dto.getResumo())
             .senha(passwordEncoder.encode(dto.getSenha()))
             .build();
+        // for (ProfEgressoDTO profEgressoDto : dto.getProfissoes()) {
 
-        for (ContatoDTO contatoDto : dto.getContatos()) {
-            Contato contato = Contato.builder()
-                .id(contatoDto.getId())
-                .nome(contatoDto.getNome())
-                .url_logo(contatoDto.getUrlLogo())
-                .build();
+        //     Cargo cargo = cargoService.buscarPorId(profEgressoDto.getCargoId());
 
-            egresso.getContatos().add(contato);
-        }
+        //     FaixaSalario faixaSalario = faixaSalarioService.buscarPorId(profEgressoDto.getFaixaSalarioId());
 
-        for (CursoEgressoDTO cursoEgressoDto : dto.getCursos()) {
-            Curso curso = cursoService.buscarPorId(cursoEgressoDto.getCursoId());
+        //     ProfEgresso profEgresso = ProfEgresso.builder()
+        //         .cargo(cargo)
+        //         .faixaSalario(faixaSalario)
+        //         .empresa(profEgressoDto.getEmpresa())
+        //         .descricao(profEgressoDto.getDescricao())
+        //         .dataRegistro(profEgressoDto.getDataRegistro())
+        //         .build();
 
-            CursoEgressoPK pk = CursoEgressoPK.builder()
-                .egresso_id(egresso.getIdEgresso())
-                .curso_id(curso.getId_curso())
-                .build();
+        //     egresso.addProfissao(profEgresso);
+        // }
+        
 
-            CursoEgresso cursoEgresso = CursoEgresso.builder()
-                .id(pk)
-                .curso(curso)
-                .data_inicio(cursoEgressoDto.getDataInicio())
-                .data_conclusao(cursoEgressoDto.getDataConclusao())
-                .build();
+        // for (CursoEgressoDTO cursoEgressoDto : dto.getCursos()) {
 
-            egresso.addCurso(cursoEgresso);
-        }
+        //     Curso curso = cursoService.buscarPorId(cursoEgressoDto.getCursoId());
 
-        for (ProfEgressoDTO profEgressoDto : dto.getProfissoes()) {
-            Cargo cargo = cargoService.buscarPorId(profEgressoDto.getCargoId());
-            FaixaSalario faixaSalario = faixaSalarioService.buscarPorId(profEgressoDto.getFaixaSalarioId());
+        //     CursoEgressoPK pk = CursoEgressoPK.builder()
+        //             .egresso_id(egresso.getIdEgresso())
+        //             .curso_id(cursoEgressoDto.getCursoId())
+        //             .build();
+            
 
-            ProfEgresso profEgresso = ProfEgresso.builder()
-                    .cargo(cargo)
-                    .faixaSalario(faixaSalario)
-                    .empresa(profEgressoDto.getEmpresa())
-                    .descricao(profEgressoDto.getDescricao())
-                    .dataRegistro(profEgressoDto.getDataRegistro())
-                    .build();
+        //     CursoEgresso cursoEgresso = CursoEgresso.builder()
+        //             .id(pk)
+        //             .curso(curso)
+        //             .data_inicio(cursoEgressoDto.getDataInicio())
+        //             .data_conclusao(cursoEgressoDto.getDataConclusao())
+        //             .build();
 
-            if(profEgressoDto.getId() != null){
-                profEgresso.setIdProfEgresso(profEgressoDto.getId());
-            }
-
-            egresso.addProfissao(profEgresso);
-        }
-
-        for (DepoimentoDTO depoimentoDto : dto.getDepoimentos()) {
-
-            LocalDate data = LocalDate.now();
-            System.out.println("\n\n\n\nData:");
-            System.out.println(data);
-            System.out.println(depoimentoDto);
-
-            if(depoimentoDto.getIdEgresso() != null){
-                depoimentoDto.setIdEgresso(depoimentoDto.getIdEgresso());
-            }else{
-                Depoimento depoimento = Depoimento.builder()
-                .egresso(egresso)
-                .texto(depoimentoDto.getTexto())
-                .data(data)
-                .build();
-
-                Depoimento depSalvo = depService.salvar(depoimento);
-                System.out.println("\n\n\n\nSalvo:");
-                System.out.println(depSalvo);
-                egresso.addDepoimento(depSalvo);
-                
-            }  
-        }
+        //     egresso.addCurso(cursoEgresso);
+        // }
+        
+        // if(dto.getDepoimentos() != null){
+        //     LocalDate data = LocalDate.now();
+        //     for (DepoimentoDTO depoimentoDto : dto.getDepoimentos()) {
+        //         Depoimento depoimento = Depoimento.builder()
+        //             .id_depoimento(depoimentoDto.getIdEgresso())
+        //             .egresso(egresso)
+        //             .texto(depoimentoDto.getTexto())
+        //             .data(data)
+        //             .build();
+        //         egresso.addDepoimento(depoimento);
+        //     }
+        // }
 
         try {
             Egresso salvar = egressoService.salvar(egresso);

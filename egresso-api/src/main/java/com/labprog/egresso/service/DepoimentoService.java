@@ -54,4 +54,13 @@ public class DepoimentoService {
         if (depoimentoId == null)
             throw new RegraNegocioException("Posicao sem id");
     }
+
+    public Depoimento editar(Depoimento depoimento){
+        depoimento.setId_depoimento(depoimento.getId_depoimento());
+        depoimento.setEgresso(depoimento.getEgresso());
+        depoimento.setData(depoimento.getData());
+        depoimento.setTexto(depoimento.getTexto());
+        return depoimentoRepository.save(depoimento);
+        
+    }
 }

@@ -19,7 +19,7 @@ public class EgressoEditeDTO {
     private String urlFoto;
     private String senha;
     private List<ContatoDTO> contatos;
-    private List<CursoEgressoDTO> cursos;
+    private List<CursoDTO> cursos;
     private List<ProfEgressoDTO> profissoes;
     private List<DepoimentoDTO> depoimentos;
 }

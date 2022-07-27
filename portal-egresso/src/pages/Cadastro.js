@@ -8,6 +8,8 @@ import NavbarComponentLogin from "../components/NavbarComponentLogin";
 import SelectInput from "../components/SelectInput";
 import TextInputComponent from "../components/TextInputComponent";
 import EgressoService from "../services/EgressoService";
+import {faTrash } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 
 function Cadastro() {
@@ -248,19 +250,15 @@ function Cadastro() {
               />
             </div>
             {index ? (
-              <button
-                type="button"
-                className="button remove"
-                onClick={() => removeCursoFields(index)}
-              >
-                Remover
-              </button>
+              <button class="depoimento-btn" type="button" onClick={() => removeCursoFields(index)}>
+              <FontAwesomeIcon icon={faTrash} className="icon"/>
+            </button>
             ) : null}
           </div>
         ))}
         <div className="mt-5">
           <button
-            className="button add"
+            className="buttonadd"
             type="button"
             onClick={() => addCursoField()}
           >
@@ -333,19 +331,15 @@ function Cadastro() {
               inputName="dataRegistro"
             />
             {index ? (
-              <button
-                type="button"
-                className="button remove"
-                onClick={() => removeProfFields(index)}
-              >
-                Remover
-              </button>
+              <button class="depoimento-btn" type="button" onClick={() => removeProfFields(index)}>
+              <FontAwesomeIcon icon={faTrash} className="icon"/>
+            </button>
             ) : null}
           </div>
         ))}
         <div className="mt-5">
           <button
-            className="button add"
+            className="buttonadd"
             type="button"
             onClick={() => addProfField()}
           >

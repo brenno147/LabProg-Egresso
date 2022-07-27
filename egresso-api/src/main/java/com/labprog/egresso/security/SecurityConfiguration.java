@@ -42,6 +42,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
       .antMatchers(HttpMethod.GET,SecurityConstants.FAIXA_SALARIO_URL).permitAll()
       .antMatchers(HttpMethod.GET,SecurityConstants.DEPOIMENTO_URL).permitAll()
       .antMatchers(HttpMethod.DELETE,SecurityConstants.DEPOIMENTO_URL).permitAll()
+      .antMatchers(HttpMethod.POST,SecurityConstants.DEPOIMENTO_URL).permitAll()
+      .antMatchers(HttpMethod.PUT,SecurityConstants.DEPOIMENTO_URL).permitAll()
       .antMatchers(HttpMethod.GET,SecurityConstants.EGRESSO_URL).permitAll()
       .antMatchers(HttpMethod.PUT,SecurityConstants.EDIT_EGRESSO_URL).permitAll()
       .antMatchers(HttpMethod.DELETE,SecurityConstants.EDIT_EGRESSO_URL).permitAll()
