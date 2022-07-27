@@ -39,8 +39,8 @@ function Estatisticas(){
         setCargoData(crgDataAux.data.map((item) => item.numEgresso));
 
         //ADICIONANDO DADOS ESTÁTICOS
-        setFsArrayLabels((prevState) => [...prevState, 3, 4])
-        setCrgArrayLabels((prevState) => [...prevState, 3, 4, 5, 6]);
+        // setFsArrayLabels((prevState) => [...prevState, 3, 4])
+        // setCrgArrayLabels((prevState) => [...prevState, 3, 4, 5, 6]);
     
       }
       fectchData()

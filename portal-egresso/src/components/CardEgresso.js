@@ -11,8 +11,7 @@ const CardEgresso = ({nome, cargo, onClick}) => {
 
   return (
     <div
-      className="d-flex justify-content-center card pt-4 pb-1 pr-5 pl-5"
-      style={{ borderRadius: "7%", cursor: "pointer", width: "20rem" }}
+      className="col-3 card rounded card pt-4 pb-1 pr-5 pl-5"
       onClick={onClick}
     >
       <img src={logo} alt="..." />

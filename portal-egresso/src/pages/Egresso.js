@@ -5,11 +5,11 @@ import NavbarComponent from "../components/NavbarComponent";
 import EgressoService from "../services/EgressoService";
 import Footer from "../components/Footer";
 import Pagination from "../components/Pagination";
+import egService from "../services/EgressoService"
 
 function Egresso() {
-
-  const egressoService = new EgressoService()
-
+  const egressoService = new egService();
+  
   const [egressoModal, setEgressoModal] = useState()
 
   const [egressos, setEgressos] = useState([])
