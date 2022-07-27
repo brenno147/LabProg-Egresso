@@ -31,15 +31,18 @@ function Egresso() {
 
   const indexEgressoFim = currentPage * egressosPerPage
   const indexEgressoInicio = indexEgressoFim - egressosPerPage
-  const egressosAtuaisTop = egressos.slice(indexEgressoInicio, (indexEgressoFim - (egressosPerPage/2)))
-  const egressosAtuaisBot = egressos.slice((indexEgressoInicio + (egressosPerPage/2)), indexEgressoFim)
+  const egressosAtuais = egressos.slice(indexEgressoInicio, indexEgressoFim);
 
   const paginate = pageNumber => setCurrentPage(pageNumber)
 
   return (
     <div>
-
-      {egressoModal && <EgressoModal egresso={egressoModal} closeModal={() => setEgressoModal()}/>}
+      {egressoModal && (
+        <EgressoModal
+          egresso={egressoModal}
+          closeModal={() => setEgressoModal()}
+        />
+      )}
 
       <NavbarComponent />
       <div
@@ -51,30 +54,29 @@ function Egresso() {
         </p>
 
         {!loading && (
-          <div>
-            <div className="d-flex justify-content-between mt-3 mb-2">
-              <ul className="list-inline mb-4">
-                {egressosAtuaisTop.map((egresso) => (
-                  <li key={egresso.id} className="list-inline-item">
-                    <CardEgresso nome={egresso.nome} cargo={egresso.profissao[0].cargo.nome} onClick={() => setEgressoModal(egresso)}/>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div className="d-flex justify-content-between mb-4 mt-3">
-              <ul className="list-inline mb-4">
-                {egressosAtuaisBot.map((egresso) => (
-                  <li key={egresso.id} className="list-inline-item">
-                    <CardEgresso nome={egresso.nome} cargo={egresso.profissao[0].cargo.nome} onClick={() => setEgressoModal(egresso)}/>
-                  </li>
-                ))}
-              </ul>
-            </div>
+          <div className="d-flex w-100 gap-3 justify-content-center row">
+              {egressosAtuais.map((egresso) => (
+                  <CardEgresso
+                    clickable
+                    key={egresso.idEgresso}
+                    nome={egresso.nome}
+                    cargo={
+                      egresso.profissao.length > 0
+                        ? egresso.profissao[0].cargo.nome
+                        : "Sem cargo"
+                    }
+                    onClick={() => setEgressoModal(egresso)}
+                  />
+              ))}
           </div>
         )}
 
         <div className="m-5">
-          <Pagination itensPerPage={egressosPerPage} totalItens={egressos.length} paginate={paginate}/>
+          <Pagination
+            itensPerPage={egressosPerPage}
+            totalItens={egressos.length}
+            paginate={paginate}
+          />
         </div>
       </div>
       <Footer />

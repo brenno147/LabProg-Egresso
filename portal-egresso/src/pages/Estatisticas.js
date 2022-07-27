@@ -15,9 +15,6 @@ function Estatisticas(){
     let [faixaSalarioData, setFaixaSalarioData] = useState([])
     let [cursoData, setCursoData] = useState([])
     let [cargoData, setCargoData] = useState([])
-    let [fsArrayLabels, setFsArrayLabels] = useState();
-    let [crsArrayLabels, setCrsArrayLabels] = useState();
-    let [crgArrayLabels, setCrgArrayLabels] = useState();
     let fsDataAux, crsDataAux, crgDataAux
     
 
@@ -28,19 +25,27 @@ function Estatisticas(){
         crgDataAux = await crgService.quantEgressosPorCargo()
 
 
-
-        setFsArrayLabels(fsDataAux.data.map((item) => item.faixaSalario))
-        setCrsArrayLabels(crsDataAux.data.map((item) => item.curso));
-        setCrgArrayLabels(crgDataAux.data.map((item) => item.cargo));
-
-
-        setFaixaSalarioData(fsDataAux.data.map((item) => item.numEgresso))
-        setCursoData(crsDataAux.data.map((item) => item.numEgresso));
-        setCargoData(crgDataAux.data.map((item) => item.numEgresso));
-
-        //ADICIONANDO DADOS ESTÁTICOS
-        // setFsArrayLabels((prevState) => [...prevState, 3, 4])
-        // setCrgArrayLabels((prevState) => [...prevState, 3, 4, 5, 6]);
+        fsDataAux.data.forEach((item) => {
+          setFaixaSalarioData((prevState) => {
+            let newValues = [...prevState]
+            newValues[item.faixaSalario - 1] = item.numEgresso
+            return newValues
+          })
+        })
+        crsDataAux.data.forEach((item) => {
+          setCursoData((prevState) => {
+            let newValues = [...prevState]
+            newValues[item.curso - 1] = item.numEgresso
+            return newValues
+          })
+        });
+        crgDataAux.data.forEach((item) => {
+          setCargoData((prevState) => {
+            let newValues = [...prevState]
+            newValues[item.cargo - 1] = item.numEgresso
+            return newValues
+          })
+        })
     
       }
       fectchData()
@@ -54,23 +59,39 @@ function Estatisticas(){
           style={{ backgroundColor: "rgba(189, 205, 236, 1)" }}
         >
           <p className="h1 mb-4">Estatísticas</p>
-          <Charts 
-            chartData={faixaSalarioData} 
-            labels={fsArrayLabels} 
+          <Charts
+            chartData={faixaSalarioData}
+            labels={[
+              "1.000-5.000",
+              "6.000-12.000",
+              "13.000-26.000",
+              "Maior que 26.000",
+            ]}
             description="Egressos por Faixa Salarial"
             text="Faixas Salariais"
-            />
+          />
 
-          <Charts 
-            chartData={cursoData} 
-            labels={crsArrayLabels} 
-            description="Egressos por Curso" 
+          <Charts
+            chartData={cursoData}
+            labels={[
+              "Engenharia da Computação",
+              "Ciência da Computação",
+              "Sistemas de Informação",
+            ]}
+            description="Egressos por Curso"
             text="Cursos"
-            />
+          />
 
-          <Charts 
-            chartData={cargoData} 
-            labels={crgArrayLabels} 
+          <Charts
+            chartData={cargoData}
+            labels={[
+              "Analista de Sistemas",
+              "Engenheiro de Software",
+              "DBA",
+              "Cientista de Dados",
+              "Professor na área de TI",
+              "Outro"
+            ]}
             description="Egressos por Cargo"
             text="Cargos"
           />

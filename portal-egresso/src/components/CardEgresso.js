@@ -3,7 +3,7 @@ import logo from "./../imgs/thumbnail.svg";
 // import "admin-lte/plugins/flot/jquery.flot.js";
 // import "admin-lte/plugins/flot/plugins/jquery.flot.resize.js";
 
-const CardEgresso = ({nome, cargo, onClick}) => {
+const CardEgresso = ({nome, cargo, onClick, clickable}) => {
 
   if(cargo === "undefined"){
     this.cargo = ""
@@ -13,6 +13,7 @@ const CardEgresso = ({nome, cargo, onClick}) => {
     <div
       className="col-3 card rounded card pt-4 pb-1 pr-5 pl-5"
       onClick={onClick}
+      style={clickable && {cursor: "pointer"}}
     >
       <img src={logo} alt="..." />
       <div className="card-body d-flex flex-column align-items-center">

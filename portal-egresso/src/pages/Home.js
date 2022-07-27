@@ -21,7 +21,7 @@ export default function Home() {
 
   const [depoimentos, setDepoimentos] = useState(false);
   const [egressos, setEgressos] = useState(false);
-  const [faixaSalario, setFaixaSalario] = useState(false);
+  const [faixaSalario, setFaixaSalario] = useState([]);
 
   const depoimentoService = new dpService();
   const egressoService = new egService();
@@ -35,7 +35,16 @@ export default function Home() {
         await faixaSalarioService.quantEgressosPorFaixaSalario();
       setDepoimentos(depoimentosResponse.data)
       setEgressos(egressosResponse.data);
-      setFaixaSalario(faixaSalarioResponse.data);
+
+      console.log(faixaSalarioResponse)
+      faixaSalarioResponse.data.forEach((item) => {
+        setFaixaSalario((prevState) => {
+          let newValues = [...prevState];
+          newValues[item.faixaSalario - 1] = item.numEgresso;
+          return newValues;
+        });
+      });
+
       console.log(egressosResponse.data)
       
     })()
@@ -43,26 +52,30 @@ export default function Home() {
 
   return (
     <div>
-      <NavbarComponent/>
+      <NavbarComponent />
       <div
         className="d-flex flex-column align-items-center pt-3 pb-5"
         style={{ backgroundColor: "rgba(189, 205, 236, 1)" }}
       >
-        <p className="h1" style={{marginTop:"30px",marginBottom:"50px"}}>Egressos</p>
+        <p className="h1" style={{ marginTop: "30px", marginBottom: "50px" }}>
+          Egressos
+        </p>
         <div className="d-flex gap-3 justify-content-center row">
-          {egressos && egressos.slice(0,6).map(egresso => {
-            return (
-              <CardEgresso 
-                key={egresso.idEgresso} 
-                nome={egresso.nome} 
-                cargo={
-                  egresso.profissao.length > 0 ? 
-                  egresso.profissao[egresso.profissao.length - 1].cargo.nome 
-                  : "Sem cargo"
-                }
-              />
-            )
-          })}
+          {egressos &&
+            egressos.slice(0, 6).map((egresso) => {
+              return (
+                <CardEgresso
+                  key={egresso.idEgresso}
+                  nome={egresso.nome}
+                  cargo={
+                    egresso.profissao.length > 0
+                      ? egresso.profissao[egresso.profissao.length - 1].cargo
+                          .nome
+                      : "Sem cargo"
+                  }
+                />
+              );
+            })}
         </div>
         <button
           type="button"
@@ -92,14 +105,19 @@ export default function Home() {
         style={{ backgroundColor: "rgba(189, 205, 236, 1)" }}
       >
         <p className="h1 mb-4">Estatísticas</p>
-        {faixaSalario && 
-          <Charts 
-            chartData={faixaSalario.map(item => item.numEgresso)}
-            labels={faixaSalario.map(item => item.faixaSalario)}
+        {faixaSalario && (
+          <Charts
+            chartData={faixaSalario}
+            labels={[
+              "1.000-5.000",
+              "6.000-12.000",
+              "13.000-26.000",
+              "Maior que 26.000",
+            ]}
             description="Egressos por Faixa Salarial"
             text="Faixas Salariais"
           />
-        }
+        )}
         <button
           type="button"
           className="pr-3 pl-3 pt-1 pb-1 text-light mt-4"

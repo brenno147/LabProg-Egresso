@@ -2,6 +2,8 @@ import React from "react";
 import depoimentoPreview from "./../imgs/clientReview.svg";
 
 export default function DepoimentosCarousel({depoimentos }) {
+  const depoimentosSize = depoimentos.length > 4 ? 4 : depoimentos.length
+
   return (
     <div
       id="carouselExampleControls"
@@ -9,7 +11,7 @@ export default function DepoimentosCarousel({depoimentos }) {
       data-ride="carousel"
     >
       <div className="carousel-inner">
-        {depoimentos.map((depoimento, index) => {
+        {depoimentos.slice(0, depoimentosSize).map((depoimento, index) => {
           return (
             <div
               key={depoimentos.id_depoimento}
@@ -23,20 +25,6 @@ export default function DepoimentosCarousel({depoimentos }) {
             </div>
           );
         })}
-        {/* <div className="carousel-item">
-          <img
-            src={depoimentoPreview}
-            className="d-block w-100"
-            alt="depoimento"
-          />
-        </div>
-        <div className="carousel-item">
-          <img
-            src={depoimentoPreview}
-            className="d-block w-100"
-            alt="depoimento"
-          />
-        </div> */}
       </div>
       <button
         className="carousel-control-prev"
