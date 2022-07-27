@@ -28,7 +28,7 @@ public class Depoimento {
 
   @ManyToOne(fetch = FetchType.LAZY, optional = false)
   @JoinColumn(name = "egresso_id")
-  @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "idEgresso")
+  @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "nome")
   @JsonIdentityReference(alwaysAsId = true)
   private Egresso egresso;
 
