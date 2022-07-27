@@ -4,6 +4,8 @@ package com.labprog.egresso.controller;
 import com.labprog.egresso.model.dto.CursoDTO;
 import com.labprog.egresso.model.dto.CursoNumEgresso;
 import com.labprog.egresso.model.entities.Curso;
+import com.labprog.egresso.model.entities.CursoEgresso;
+import com.labprog.egresso.model.entities.CursoEgressoPK;
 import com.labprog.egresso.model.repositories.CursoRepository;
 import com.labprog.egresso.service.CursoService;
 import com.labprog.egresso.service.exceptions.RegraNegocioException;
@@ -86,5 +88,19 @@ public class CursoController {
     @GetMapping("/quant-egresso-por-curso")
     public List<CursoNumEgresso> quantEgressoPorCurso(){
         return cursoService.quantEgressoPorCurso();
+    }
+
+
+    @DeleteMapping("/cursoEgresso/{idEgresso}/{idCurso}")
+    public void deletar(@PathVariable Long idEgresso, @PathVariable Long idCurso){
+        CursoEgressoPK cursoEgressoPK = CursoEgressoPK.builder()
+            .curso_id(idCurso)
+            .egresso_id(idEgresso)
+            .build();
+
+        CursoEgresso cursoEgresso = CursoEgresso.builder()
+            .id(cursoEgressoPK)
+            .build();
+        cursoService.deletar(cursoEgresso);
     }
 }

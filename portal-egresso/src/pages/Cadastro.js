@@ -87,7 +87,7 @@ function Cadastro() {
   };
 
   const addCursoField = () => {
-    setCurso([...curso, {cargoId: "", nivel:"", dataInicio: "", dataConclusao: ""}])
+    setCurso([...curso, {cursoId: "",dataInicio: "", dataConclusao: ""}])
   }
 
   const removeCursoFields = (i) => {

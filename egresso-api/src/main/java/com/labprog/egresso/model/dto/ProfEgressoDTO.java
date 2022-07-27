@@ -12,7 +12,6 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Builder
 @NoArgsConstructor
-
 public class ProfEgressoDTO {
     private Long id;
     private Long cargoId;

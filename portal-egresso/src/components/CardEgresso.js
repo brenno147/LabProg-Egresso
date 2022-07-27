@@ -5,6 +5,10 @@ import logo from "./../imgs/thumbnail.svg";
 
 const CardEgresso = ({nome, cargo, onClick}) => {
 
+  if(cargo === "undefined"){
+    this.cargo = ""
+  }
+
   return (
     <div
       className="col-3 card rounded card pt-4 pb-1 pr-5 pl-5"

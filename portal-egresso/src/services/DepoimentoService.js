@@ -6,13 +6,20 @@ class DepoimentoService extends ApiService {
   }
 
   async getDepoimentos() {
-    return await this.get('/');
+    return await this.get('');
   }
 
   async depoimentos(id) {
     const response = this.get(`/depoimentos-por-egresso/${id}`);
     console.log("Depoimentos:",response);
     return (await response).data;
+    
+  }
+
+  async deletar(id) {
+    const response = this.delete(`/${id}`);
+    console.log("Delete:",response);
+    return (await response);
     
   }
     

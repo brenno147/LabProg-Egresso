@@ -2,13 +2,14 @@ import React, { useState, useEffect } from "react";
 import CardEgresso from "../components/CardEgresso";
 import EgressoModal from "../components/EgressoModal";
 import NavbarComponent from "../components/NavbarComponent";
+import EgressoService from "../services/EgressoService";
 import Footer from "../components/Footer";
 import Pagination from "../components/Pagination";
 import egService from "../services/EgressoService"
 
 function Egresso() {
   const egressoService = new egService();
-
+  
   const [egressoModal, setEgressoModal] = useState()
 
   const [egressos, setEgressos] = useState([])
@@ -19,18 +20,9 @@ function Egresso() {
   useEffect(() => {
     const fetchEgressos = async () => {
       setLoading(true)
-      const res = [{"id": 1, "nome":"SARAH ARCHARDI1", "cargo":"dsfsfdsfsfsfefse"}, 
-      {"id":2, "nome":"SARAH ARCHARDI2", "cargo":"dsfsfdsfsfsfefse"}, 
-      {"id":3, "nome":"dssfdfsf", "cargo":"dsfsfdsfsfsfefse"},
-      {"id":4, "nome":"dssfdfsf", "cargo":"dsfsfdsfsfsfefse"},
-      {"id":5, "nome":"SARAH ARCHARDI5", "cargo":"dsfsfdsfsfsfefse"},
-      {"id":6, "nome":"dssfdfsf", "cargo":"dsfsfdsfsfsfefse"},
-      {"id":7, "nome":"dssfdfsf", "cargo":"dsfsfdsfsfsfefse"},
-      {"id":8, "nome":"dssfdfsf", "cargo":"dsfsfdsfsfsfefse"}]
-     
-      const response = await egressoService.listEgresso()
-      console.log(response)
-      setEgressos(res)
+      const res = await egressoService.listEgresso()
+      console.log(res.data)
+      setEgressos(res.data)
       setLoading(false)
     }
 
@@ -64,7 +56,7 @@ function Egresso() {
               <ul className="list-inline mb-4">
                 {egressosAtuaisTop.map((egresso) => (
                   <li key={egresso.id} className="list-inline-item">
-                    <CardEgresso nome={egresso.nome} cargo={egresso.cargo} onClick={() => setEgressoModal(egresso)}/>
+                    <CardEgresso nome={egresso.nome} cargo={egresso.profissao[0].cargo.nome} onClick={() => setEgressoModal(egresso)}/>
                   </li>
                 ))}
               </ul>
@@ -73,7 +65,7 @@ function Egresso() {
               <ul className="list-inline mb-4">
                 {egressosAtuaisBot.map((egresso) => (
                   <li key={egresso.id} className="list-inline-item">
-                    <CardEgresso nome={egresso.nome} cargo={egresso.cargo} onClick={() => setEgressoModal(egresso)}/>
+                    <CardEgresso nome={egresso.nome} cargo={egresso.profissao[0].cargo.nome} onClick={() => setEgressoModal(egresso)}/>
                   </li>
                 ))}
               </ul>

@@ -36,6 +36,7 @@ import com.labprog.egresso.model.entities.Egresso;
 import com.labprog.egresso.model.entities.FaixaSalario;
 import com.labprog.egresso.model.entities.ProfEgresso;
 import com.labprog.egresso.model.repositories.EgressoRepository;
+import com.labprog.egresso.model.repositories.ProfEgressoRepository;
 import com.labprog.egresso.service.CargoService;
 import com.labprog.egresso.service.CursoService;
 import com.labprog.egresso.service.DepoimentoService;
@@ -69,6 +70,9 @@ public class EgressoController {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private ProfEgressoRepository profEgressoRepository;
 
 
     @GetMapping
@@ -146,6 +150,9 @@ public class EgressoController {
     // editar um usuário
     @PutMapping("/editar/{id}")
     public ResponseEntity editar(@PathVariable Long id, @RequestBody EgressoEditeDTO dto){
+
+        System.out.println("\n\n\n\n\nDTO:");
+        System.out.println(dto);
         Egresso egresso = Egresso.builder()
             .idEgresso(id)
             .nome(dto.getNome())
@@ -206,18 +213,25 @@ public class EgressoController {
         for (DepoimentoDTO depoimentoDto : dto.getDepoimentos()) {
 
             LocalDate data = LocalDate.now();
-            System.out.println("Data:");
+            System.out.println("\n\n\n\nData:");
             System.out.println(data);
-            Depoimento depoimento = Depoimento.builder()
+            System.out.println(depoimentoDto);
+
+            if(depoimentoDto.getIdEgresso() != null){
+                depoimentoDto.setIdEgresso(depoimentoDto.getIdEgresso());
+            }else{
+                Depoimento depoimento = Depoimento.builder()
+                .egresso(egresso)
                 .texto(depoimentoDto.getTexto())
                 .data(data)
                 .build();
 
-            if(depoimentoDto.getIdEgresso() != null){
-                depoimentoDto.setIdEgresso(depoimentoDto.getIdEgresso());
-            }
-
-            egresso.addDepoimento(depoimento);
+                Depoimento depSalvo = depService.salvar(depoimento);
+                System.out.println("\n\n\n\nSalvo:");
+                System.out.println(depSalvo);
+                egresso.addDepoimento(depSalvo);
+                
+            }  
         }
 
         try {
@@ -250,6 +264,14 @@ public class EgressoController {
         } catch (RegraNegocioException e) {
             return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
+    }
+
+    @DeleteMapping("/editar/profEgresso/{idProfEgresso}")
+    public void deletarProfEgresso(@PathVariable Long idProfEgresso){
+        ProfEgresso profEgresso = ProfEgresso.builder()
+            .idProfEgresso(idProfEgresso)
+            .build();
+        profEgressoRepository.delete(profEgresso);
     }
 
 }

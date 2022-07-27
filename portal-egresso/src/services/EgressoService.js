@@ -6,7 +6,7 @@ class EgressoService extends ApiService{
     }
 
     async listEgresso(){
-      return await this.get("/");
+      return await this.get('');
     }
 
     async fazerCadastro({nome,email,cpf,senha,resumo,urlFoto,contatos,profissoes,cursos}) {
@@ -22,7 +22,7 @@ class EgressoService extends ApiService{
           cursos,
           profissoes
         });
-        // console.log("\n\nResposta:",response);
+        //console.log("\n\nResposta:",response);
         return response.data;
       } catch (erro) {
         // console.log("ERRO:",erro.response);
@@ -43,10 +43,6 @@ class EgressoService extends ApiService{
     } 
 
     async editar({nome,email,cpf,senha,resumo,urlFoto,contatos,profissoes,cursos,depoimentos},id) {
-      // contatos = [];
-      profissoes = [];
-      cursos = [];
-      depoimentos = [];
       try {
         const response = await this.put(`/editar/${id}`,{
           nome,
@@ -66,6 +62,10 @@ class EgressoService extends ApiService{
         // console.log("ERRO:",erro.response);
         return erro.response.data;
       }
+    }
+
+    async deletarProfEgresso(idProfEgresso){
+      await this.delete(`/editar/profEgresso/${idProfEgresso}`)
     }
     
 }
