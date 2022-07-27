@@ -4,8 +4,10 @@ import EgressoModal from "../components/EgressoModal";
 import NavbarComponent from "../components/NavbarComponent";
 import Footer from "../components/Footer";
 import Pagination from "../components/Pagination";
+import egService from "../services/EgressoService"
 
 function Egresso() {
+  const egressoService = new egService();
 
   const [egressoModal, setEgressoModal] = useState()
 
@@ -24,7 +26,10 @@ function Egresso() {
       {"id":5, "nome":"SARAH ARCHARDI5", "cargo":"dsfsfdsfsfsfefse"},
       {"id":6, "nome":"dssfdfsf", "cargo":"dsfsfdsfsfsfefse"},
       {"id":7, "nome":"dssfdfsf", "cargo":"dsfsfdsfsfsfefse"},
-      {"id":8, "nome":"dssfdfsf", "cargo":"dsfsfdsfsfsfefse"}]//await egressoService.get()
+      {"id":8, "nome":"dssfdfsf", "cargo":"dsfsfdsfsfsfefse"}]
+     
+      const response = await egressoService.listEgresso()
+      console.log(response)
       setEgressos(res)
       setLoading(false)
     }
